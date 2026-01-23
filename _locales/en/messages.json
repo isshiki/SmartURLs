@@ -25,7 +25,8 @@
   "smart_auto":     { "message": "Smart (auto-detect)" },
   "url_only":       { "message": "URL Only" },
   "json_lines":     { "message": "JSON Data" },
-  "opt_custom":     { "message": "Custom template…" },
+  "opt_custom1":    { "message": "Custom template [1]" },
+  "opt_custom2":    { "message": "Custom template [2]" },
 
   "custom_tpl_label":      { "message": "Custom template" },
   "custom_tpl_tokens":     { "message": "Tokens: $$title, $$url, $$domain, $$path, $$basename, $$idx, $$date, $$time, $$nl (newline), …" },
@@ -68,7 +69,6 @@
   "shortcut_note":         { "message": "Note: When using a keyboard shortcut, a confirmation notification is shown if the number of URLs exceeds the value set above (N). If you don't see it, check your notification settings and Focus mode." },
   "shortcut_note_link":    { "message": "See FAQ." },
   "commands_copy_all_tabs":       { "message": "Copy All Tabs" },
-  "commands_copy_all_tabs_2":     { "message": "Copy All Tabs [2]" },
   "commands_copy_current_tab":    { "message": "Copy Current Tab" },
   "commands_copy_current_tab_2":  { "message": "Copy Current Tab [2]" },
   "commands_open_from_clipboard": { "message": "Open URLs from clipboard" },
@@ -95,7 +95,5 @@
   "show_extra_copy_buttons": { "message": "Show extra copy buttons" },
 
   "extra_copy_tab1_title": { "message": "Scope: Current tab only (Format 1)" },
-  "extra_copy_tab2_title": { "message": "Scope: Current tab only (Format 2)" },
-  "opt_custom1": { "message": "Custom template [1]" },
-  "opt_custom2": { "message": "Custom template [2]" }
+  "extra_copy_tab2_title": { "message": "Scope: Current tab only (Format 2)" }
 }

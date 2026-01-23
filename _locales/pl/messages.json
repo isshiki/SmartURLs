@@ -25,7 +25,6 @@
   "smart_auto":     { "message": "Inteligentny (automatyczne wykrywanie)" },
   "url_only":       { "message": "Tylko URL" },
   "json_lines":     { "message": "Dane JSON" },
-  "opt_custom":     { "message": "Niestandardowy szablon…" },
   "opt_custom1":    { "message": "Niestandardowy szablon [1]" },
   "opt_custom2":    { "message": "Niestandardowy szablon [2]" },
 
@@ -64,7 +63,6 @@
   "advanced":          { "message": "Zaawansowane" },
 
   "commands_copy_all_tabs":       { "message": "Kopiuj wszystkie karty" },
-  "commands_copy_all_tabs_2":     { "message": "Kopiuj wszystkie karty [2]" },
   "commands_copy_current_tab":    { "message": "Kopiuj bieżącą kartę" },
   "commands_copy_current_tab_2":  { "message": "Kopiuj bieżącą kartę [2]" },
   "commands_open_from_clipboard": { "message": "Otwórz adresy URL ze schowka" },
@@ -77,8 +75,6 @@
   "shortcuts_config_hint": { "message": "Otwórz ustawienia skrótów Chrome" },
   "shortcut_note":         { "message": "Uwaga: Podczas używania skrótu klawiszowego pojawia się powiadomienie z potwierdzeniem, jeśli liczba adresów URL przekracza wartość ustawioną powyżej (N). Jeśli go nie widzisz, sprawdź ustawienia powiadomień i tryb skupienia." },
   "shortcut_note_link":    { "message": "Zobacz FAQ." },
-  "commands_copy_from_tabs":      { "message": "Kopiuj URL z kart" },
-  "commands_open_from_clipboard": { "message": "Otwórz URL ze schowka" },
 
   "lang_label":     { "message": "Wykryj automatycznie lub wybierz język" },
   "lang_auto":      { "message": "Auto (Automatyczny)" },
@@ -101,7 +97,5 @@
   "extra_section_title": { "message": "Dodatkowe formaty kopiowania i skróty klawiaturowe" },
   "show_extra_copy_buttons": { "message": "Pokaż dodatkowe przyciski kopiowania" },
   "extra_copy_tab1_title": { "message": "Zakres: Tylko bieżąca karta (Format 1)" },
-  "extra_copy_tab2_title": { "message": "Zakres: Tylko bieżąca karta (Format 2)" },
-  "opt_custom1": { "message": "Niestandardowy szablon [1]" },
-  "opt_custom2": { "message": "Niestandardowy szablon [2]" }
+  "extra_copy_tab2_title": { "message": "Zakres: Tylko bieżąca karta (Format 2)" }
 }

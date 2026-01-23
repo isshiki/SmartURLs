@@ -25,7 +25,6 @@
   "smart_auto":     { "message": "Inteligente (auto-detectar)" },
   "url_only":       { "message": "Apenas URL" },
   "json_lines":     { "message": "Dados JSON" },
-  "opt_custom":     { "message": "Modelo personalizado…" },
   "opt_custom1":    { "message": "Modelo personalizado [1]" },
   "opt_custom2":    { "message": "Modelo personalizado [2]" },
 
@@ -46,7 +45,7 @@
 
   "sort_label":     { "message": "Ordenar por" },
   "sort_natural":   { "message": "Ordem atual" },
-  "sort_desc":      { "message": "Desc" },
+  "sort_desc":      { "message": "Decrescente" },
 
   "confirm_label":  { "message": "Confirmar se mais de N abas" },
   "textarea_label": { "message": "Colar texto" },
@@ -64,7 +63,6 @@
   "advanced":          { "message": "Avançado" },
 
   "commands_copy_all_tabs":       { "message": "Copiar todas as abas" },
-  "commands_copy_all_tabs_2":     { "message": "Copiar todas as abas [2]" },
   "commands_copy_current_tab":    { "message": "Copiar aba atual" },
   "commands_copy_current_tab_2":  { "message": "Copiar aba atual [2]" },
   "commands_open_from_clipboard": { "message": "Abrir URLs da área de transferência" },
@@ -77,8 +75,6 @@
   "shortcuts_config_hint": { "message": "Abre as configurações de atalhos do Chrome" },
   "shortcut_note":         { "message": "Nota: Ao usar um atalho de teclado, é exibida uma notificação de confirmação se o número de URLs exceder o valor definido acima (N). Se você não a vir, verifique as configurações de notificações e o modo Foco." },
   "shortcut_note_link":    { "message": "Ver FAQ." },
-  "commands_copy_from_tabs":      { "message": "Copiar URLs das abas" },
-  "commands_open_from_clipboard": { "message": "Abrir URLs da área de transferência" },
 
   "lang_label":     { "message": "Detectar automaticamente ou selecionar idioma" },
   "lang_auto":      { "message": "Auto (Automático)" },
@@ -101,7 +97,5 @@
   "extra_section_title": { "message": "Formatos de cópia adicionais e atalhos de teclado" },
   "show_extra_copy_buttons": { "message": "Mostrar botões de cópia adicionais" },
   "extra_copy_tab1_title": { "message": "Escopo: Apenas aba atual (Formato 1)" },
-  "extra_copy_tab2_title": { "message": "Escopo: Apenas aba atual (Formato 2)" },
-  "opt_custom1": { "message": "Modelo personalizado [1]" },
-  "opt_custom2": { "message": "Modelo personalizado [2]" }
+  "extra_copy_tab2_title": { "message": "Escopo: Apenas aba atual (Formato 2)" }
 }

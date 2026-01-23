@@ -25,7 +25,6 @@
   "smart_auto":     { "message": "Intelligent (auto-détection)" },
   "url_only":       { "message": "URL seulement" },
   "json_lines":     { "message": "Données JSON" },
-  "opt_custom":     { "message": "Modèle personnalisé…" },
   "opt_custom1":    { "message": "Modèle personnalisé [1]" },
   "opt_custom2":    { "message": "Modèle personnalisé [2]" },
 
@@ -46,7 +45,7 @@
 
   "sort_label":     { "message": "Trier par" },
   "sort_natural":   { "message": "Ordre actuel" },
-  "sort_desc":      { "message": "Desc" },
+  "sort_desc":      { "message": "Décroissant" },
 
   "confirm_label":  { "message": "Confirmer si plus de N onglets" },
   "textarea_label": { "message": "Coller le texte" },
@@ -64,7 +63,6 @@
   "advanced":          { "message": "Avancé" },
 
   "commands_copy_all_tabs":       { "message": "Copier tous les onglets" },
-  "commands_copy_all_tabs_2":     { "message": "Copier tous les onglets [2]" },
   "commands_copy_current_tab":    { "message": "Copier l'onglet actuel" },
   "commands_copy_current_tab_2":  { "message": "Copier l'onglet actuel [2]" },
   "commands_open_from_clipboard": { "message": "Ouvrir les URLs depuis le presse-papiers" },
@@ -77,8 +75,6 @@
   "shortcuts_config_hint": { "message": "Ouvre les paramètres des raccourcis Chrome" },
   "shortcut_note":         { "message": "Remarque : Lors de l’utilisation d’un raccourci clavier, une notification de confirmation s’affiche si le nombre d’URL dépasse la valeur définie ci-dessus (N). Si vous ne la voyez pas, vérifiez les paramètres de notifications et le mode Concentration." },
   "shortcut_note_link":    { "message": "Voir la FAQ." },
-  "commands_copy_from_tabs":      { "message": "Copier les URL des onglets" },
-  "commands_open_from_clipboard": { "message": "Ouvrir les URL du presse-papiers" },
 
   "lang_label":     { "message": "Detecter automatiquement ou choisir la langue" },
   "lang_auto":      { "message": "Auto (Automatique)" },
@@ -101,7 +97,5 @@
   "extra_section_title": { "message": "Formats de copie supplémentaires et raccourcis clavier" },
   "show_extra_copy_buttons": { "message": "Afficher les boutons de copie supplémentaires" },
   "extra_copy_tab1_title": { "message": "Portée: Onglet actuel uniquement (Format 1)" },
-  "extra_copy_tab2_title": { "message": "Portée: Onglet actuel uniquement (Format 2)" },
-  "opt_custom1": { "message": "Modèle personnalisé [1]" },
-  "opt_custom2": { "message": "Modèle personnalisé [2]" }
+  "extra_copy_tab2_title": { "message": "Portée: Onglet actuel uniquement (Format 2)" }
 }

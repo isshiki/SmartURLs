@@ -24,8 +24,7 @@
   "open_format":    { "message": "Openingsformaat" },
   "smart_auto":     { "message": "Slim (automatisch detecteren)" },
   "url_only":       { "message": "Alleen URL's" },
-  "json_lines":     { "message": "JSON gegevens" },
-  "opt_custom":     { "message": "Aangepaste sjabloon…" },  "opt_custom1":    { "message": "Aangepaste sjabloon [1]" },
+  "json_lines":     { "message": "JSON gegevens" },  "opt_custom1":    { "message": "Aangepaste sjabloon [1]" },
   "opt_custom2":    { "message": "Aangepaste sjabloon [2]" },
   "custom_tpl_label":      { "message": "Aangepaste sjabloon" },
   "custom_tpl_tokens":     { "message": "Tokens: $$title, $$url, $$domain, $$path, $$basename, $$idx, $$date, $$time, $$nl (nieuwe regel), …" },
@@ -60,7 +59,6 @@
   "advanced":          { "message": "Geavanceerd" },
 
   "commands_copy_all_tabs":       { "message": "Alle tabbladen kopiëren" },
-  "commands_copy_all_tabs_2":     { "message": "Alle tabbladen kopiëren [2]" },
   "commands_copy_current_tab":    { "message": "Huidig tabblad kopiëren" },
   "commands_copy_current_tab_2":  { "message": "Huidig tabblad kopiëren [2]" },
   "commands_open_from_clipboard": { "message": "URL's openen vanuit klembord" },
@@ -73,8 +71,6 @@
   "shortcuts_config_hint": { "message": "Open Chrome sneltoetsen-instellingen" },
   "shortcut_note":         { "message": "Opmerking: Bij gebruik van een sneltoets wordt een bevestigingsmelding getoond als het aantal URL's de hierboven ingestelde waarde (N) overschrijdt. Als je die niet ziet, controleer dan de meldingsinstellingen en de focusmodus." },
   "shortcut_note_link":    { "message": "Bekijk FAQ." },
-  "commands_copy_from_tabs":      { "message": "URL's van tabbladen kopiëren" },
-  "commands_open_from_clipboard": { "message": "URL's van klembord openen" },
 
   "lang_label":     { "message": "Taal automatisch detecteren of kiezen" },
   "lang_auto":      { "message": "Auto (Automatisch)" },
@@ -97,7 +93,5 @@
   "extra_section_title": { "message": "Extra kopieerformaten en sneltoetsen" },
   "show_extra_copy_buttons": { "message": "Extra kopieerknoppen weergeven" },
   "extra_copy_tab1_title": { "message": "Bereik: Alleen huidige tabblad (Formaat 1)" },
-  "extra_copy_tab2_title": { "message": "Bereik: Alleen huidige tabblad (Formaat 2)" },
-  "opt_custom1": { "message": "Aangepaste sjabloon [1]" },
-  "opt_custom2": { "message": "Aangepaste sjabloon [2]" }
+  "extra_copy_tab2_title": { "message": "Bereik: Alleen huidige tabblad (Formaat 2)" }
 }

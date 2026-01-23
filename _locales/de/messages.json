@@ -25,7 +25,6 @@
   "smart_auto":     { "message": "Intelligent (automatisch erkennen)" },
   "url_only":       { "message": "Nur URL" },
   "json_lines":     { "message": "JSON-Daten" },
-  "opt_custom":     { "message": "Benutzerdefinierte Vorlage…" },
   "opt_custom1":    { "message": "Benutzerdefinierte Vorlage [1]" },
   "opt_custom2":    { "message": "Benutzerdefinierte Vorlage [2]" },
 
@@ -64,7 +63,6 @@
   "advanced":          { "message": "Erweitert" },
 
   "commands_copy_all_tabs":       { "message": "Alle Tabs kopieren" },
-  "commands_copy_all_tabs_2":     { "message": "Alle Tabs kopieren [2]" },
   "commands_copy_current_tab":    { "message": "Aktuellen Tab kopieren" },
   "commands_copy_current_tab_2":  { "message": "Aktuellen Tab kopieren [2]" },
   "commands_open_from_clipboard": { "message": "URLs aus Zwischenablage öffnen" },
@@ -77,8 +75,6 @@
   "shortcuts_config_hint": { "message": "Öffnet die Chrome-Tastenkombinationseinstellungen" },
   "shortcut_note":         { "message": "Hinweis: Bei Verwendung eines Tastenkürzels wird eine Bestätigungsbenachrichtigung angezeigt, wenn die Anzahl der URLs den oben festgelegten Wert (N) überschreitet. Wenn Sie sie nicht sehen, prüfen Sie die Benachrichtigungseinstellungen und den Fokusmodus." },
   "shortcut_note_link":    { "message": "FAQ ansehen." },
-  "commands_copy_from_tabs":      { "message": "URLs aus Tabs kopieren" },
-  "commands_open_from_clipboard": { "message": "URLs aus Zwischenablage öffnen" },
 
   "lang_label":     { "message": "Sprache automatisch erkennen oder auswählen" },
   "lang_auto":      { "message": "Auto (Automatisch)" },
@@ -101,7 +97,5 @@
   "extra_section_title": { "message": "Zusätzliche Kopierformate und Tastaturkürzel" },
   "show_extra_copy_buttons": { "message": "Zusätzliche Kopierschaltflächen anzeigen" },
   "extra_copy_tab1_title": { "message": "Bereich: Nur aktueller Tab (Format 1)" },
-  "extra_copy_tab2_title": { "message": "Bereich: Nur aktueller Tab (Format 2)" },
-  "opt_custom1": { "message": "Benutzerdefinierte Vorlage [1]" },
-  "opt_custom2": { "message": "Benutzerdefinierte Vorlage [2]" }
+  "extra_copy_tab2_title": { "message": "Bereich: Nur aktueller Tab (Format 2)" }
 }

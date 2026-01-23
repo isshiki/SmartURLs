@@ -25,7 +25,6 @@
   "smart_auto":     { "message": "Smart (rilevamento automatico)" },
   "url_only":       { "message": "Solo URL" },
   "json_lines":     { "message": "Dati JSON" },
-  "opt_custom":     { "message": "Modello personalizzato…" },
   "opt_custom1":    { "message": "Modello personalizzato [1]" },
   "opt_custom2":    { "message": "Modello personalizzato [2]" },
 
@@ -63,7 +62,6 @@
 
   "advanced":          { "message": "Avanzate" },
   "commands_copy_all_tabs":       { "message": "Copia tutte le schede" },
-  "commands_copy_all_tabs_2":     { "message": "Copia tutte le schede [2]" },
   "commands_copy_current_tab":    { "message": "Copia scheda corrente" },
   "commands_copy_current_tab_2":  { "message": "Copia scheda corrente [2]" },
   "commands_open_from_clipboard": { "message": "Apri URL dagli appunti" },
@@ -75,8 +73,6 @@
   "shortcuts_config_hint": { "message": "Apri impostazioni scorciatoie Chrome" },
   "shortcut_note":         { "message": "Nota: Quando si usa una scorciatoia da tastiera, viene mostrata una notifica di conferma se il numero di URL supera il valore impostato sopra (N). Se non la vedi, controlla le impostazioni delle notifiche e la modalità Focus." },
   "shortcut_note_link":    { "message": "Vedi FAQ." },
-  "commands_copy_from_tabs":      { "message": "Copia URL dalle schede" },
-  "commands_open_from_clipboard": { "message": "Apri URL dagli appunti" },
 
   "lang_label":     { "message": "Rileva automaticamente o seleziona la lingua" },
   "lang_auto":      { "message": "Auto (Automatico)" },
@@ -99,7 +95,5 @@
   "extra_section_title": { "message": "Formati di copia aggiuntivi e scorciatoie da tastiera" },
   "show_extra_copy_buttons": { "message": "Mostra pulsanti di copia aggiuntivi" },
   "extra_copy_tab1_title": { "message": "Ambito: Solo scheda corrente (Formato 1)" },
-  "extra_copy_tab2_title": { "message": "Ambito: Solo scheda corrente (Formato 2)" },
-  "opt_custom1": { "message": "Modello personalizzato [1]" },
-  "opt_custom2": { "message": "Modello personalizzato [2]" }
+  "extra_copy_tab2_title": { "message": "Ambito: Solo scheda corrente (Formato 2)" }
 }

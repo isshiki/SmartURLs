@@ -25,7 +25,8 @@
   "smart_auto":     { "message": "スマート（自動検出）" },
   "url_only":       { "message": "URLのみ" },
   "json_lines":     { "message": "JSONデータ" },
-  "opt_custom":     { "message": "カスタムテンプレート…" },
+  "opt_custom1":    { "message": "カスタムテンプレート [1]" },
+  "opt_custom2":    { "message": "カスタムテンプレート [2]" },
 
   "custom_tpl_label":      { "message": "カスタムテンプレート" },
   "custom_tpl_tokens":     { "message": "トークン: $$title, $$url, $$domain, $$path, $$basename, $$idx, $$date, $$time, $$nl (改行), …" },
@@ -70,7 +71,6 @@
   "shortcut_note":         { "message": "注: ショートカットキーを使用する場合、URL数が上で設定した値（N）を超えると確認通知が表示されます。表示されない場合は、通知設定と集中モードを確認してください。" },
   "shortcut_note_link":    { "message": "FAQを見る。" },
   "commands_copy_all_tabs":       { "message": "全タブをコピー" },
-  "commands_copy_all_tabs_2":     { "message": "全タブをコピー [2]" },
   "commands_copy_current_tab":    { "message": "現在のタブをコピー" },
   "commands_copy_current_tab_2":  { "message": "現在のタブをコピー [2]" },
   "commands_open_from_clipboard": { "message": "クリップボードからURLを開く" },
@@ -96,7 +96,5 @@
   "extra_section_title": { "message": "追加のコピー形式とキーボードショートカット" },
   "show_extra_copy_buttons": { "message": "追加のコピーボタンを表示する" },
   "extra_copy_tab1_title": { "message": "対象：現在のタブのみ（形式1）" },
-  "extra_copy_tab2_title": { "message": "対象：現在のタブのみ（形式2）" },
-  "opt_custom1": { "message": "カスタムテンプレート [1]" },
-  "opt_custom2": { "message": "カスタムテンプレート [2]" }
+  "extra_copy_tab2_title": { "message": "対象：現在のタブのみ（形式2）" }
 }

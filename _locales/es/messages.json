@@ -25,7 +25,6 @@
   "smart_auto":     { "message": "Inteligente (auto-detectar)" },
   "url_only":       { "message": "Solo URL" },
   "json_lines":     { "message": "Datos JSON" },
-  "opt_custom":     { "message": "Plantilla personalizada…" },
   "opt_custom1":    { "message": "Plantilla personalizada [1]" },
   "opt_custom2":    { "message": "Plantilla personalizada [2]" },
 
@@ -46,7 +45,7 @@
 
   "sort_label":     { "message": "Ordenar por" },
   "sort_natural":   { "message": "Orden actual" },
-  "sort_desc":      { "message": "Desc" },
+  "sort_desc":      { "message": "Descendente" },
 
   "confirm_label":  { "message": "Confirmar si hay más de N pestañas" },
   "textarea_label": { "message": "Pegar texto" },
@@ -64,7 +63,6 @@
   "advanced":          { "message": "Avanzado" },
 
   "commands_copy_all_tabs":       { "message": "Copiar todas las pestañas" },
-  "commands_copy_all_tabs_2":     { "message": "Copiar todas las pestañas [2]" },
   "commands_copy_current_tab":    { "message": "Copiar pestaña actual" },
   "commands_copy_current_tab_2":  { "message": "Copiar pestaña actual [2]" },
   "commands_open_from_clipboard": { "message": "Abrir URLs desde el portapapeles" },
@@ -77,8 +75,6 @@
   "shortcuts_config_hint": { "message": "Abre la configuración de atajos de Chrome" },
   "shortcut_note":         { "message": "Nota: Al usar un atajo de teclado, se muestra una notificación de confirmación si el número de URL supera el valor establecido arriba (N). Si no la ves, revisa la configuración de notificaciones y el modo de concentración." },
   "shortcut_note_link":    { "message": "Ver FAQ." },
-  "commands_copy_from_tabs":      { "message": "Copiar URLs de pestañas" },
-  "commands_open_from_clipboard": { "message": "Abrir URLs desde portapapeles" },
 
   "lang_label":     { "message": "Detectar automáticamente o seleccionar idioma" },
   "lang_auto":      { "message": "Auto (Automático)" },
@@ -101,7 +97,5 @@
   "extra_section_title": { "message": "Formatos de copia adicionales y atajos de teclado" },
   "show_extra_copy_buttons": { "message": "Mostrar botones de copia adicionales" },
   "extra_copy_tab1_title": { "message": "Ámbito: Solo pestaña actual (Formato 1)" },
-  "extra_copy_tab2_title": { "message": "Ámbito: Solo pestaña actual (Formato 2)" },
-  "opt_custom1": { "message": "Plantilla personalizada [1]" },
-  "opt_custom2": { "message": "Plantilla personalizada [2]" }
+  "extra_copy_tab2_title": { "message": "Ámbito: Solo pestaña actual (Formato 2)" }
 }

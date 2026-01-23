@@ -24,8 +24,7 @@
   "open_format":    { "message": "열기 형식" },
   "smart_auto":     { "message": "스마트(자동 감지)" },
   "url_only":       { "message": "URL만" },
-  "json_lines":     { "message": "JSON 데이터" },
-  "opt_custom":     { "message": "사용자 정의 템플릿…" },  "opt_custom1":    { "message": "사용자 지정 템플릿 [1]" },
+  "json_lines":     { "message": "JSON 데이터" },  "opt_custom1":    { "message": "사용자 지정 템플릿 [1]" },
   "opt_custom2":    { "message": "사용자 지정 템플릿 [2]" },
   "custom_tpl_label":      { "message": "사용자 정의 템플릿" },
   "custom_tpl_tokens":     { "message": "토큰: $$title, $$url, $$domain, $$path, $$basename, $$idx, $$date, $$time, $$nl (줄바꿈), …" },
@@ -60,7 +59,6 @@
   "advanced":          { "message": "고급" },
 
   "commands_copy_all_tabs":       { "message": "모든 탭 복사" },
-  "commands_copy_all_tabs_2":     { "message": "모든 탭 복사 [2]" },
   "commands_copy_current_tab":    { "message": "현재 탭 복사" },
   "commands_copy_current_tab_2":  { "message": "현재 탭 복사 [2]" },
   "commands_open_from_clipboard": { "message": "클립보드에서 URL 열기" },
@@ -73,8 +71,6 @@
   "shortcuts_config_hint": { "message": "Chrome 단축키 설정 열기" },
   "shortcut_note":         { "message": "참고: 키보드 바로가기를 사용할 때 URL 개수가 위에서 설정한 값(N)을 초과하면 확인 알림이 표시됩니다. 표시되지 않으면 알림 설정과 집중 모드를 확인하세요." },
   "shortcut_note_link":    { "message": "FAQ 보기." },
-  "commands_copy_from_tabs":      { "message": "탭에서 URL 복사" },
-  "commands_open_from_clipboard": { "message": "클립보드에서 URL 열기" },
 
   "lang_label":     { "message": "언어를 자동 감지하거나 선택" },
   "lang_auto":      { "message": "Auto (자동)" },
@@ -97,7 +93,5 @@
   "extra_section_title": { "message": "추가 복사 형식 및 키보드 단축키" },
   "show_extra_copy_buttons": { "message": "추가 복사 버튼 표시" },
   "extra_copy_tab1_title": { "message": "범위: 현재 탭만 (형식 1)" },
-  "extra_copy_tab2_title": { "message": "범위: 현재 탭만 (형식 2)" },
-  "opt_custom1": { "message": "사용자 지정 템플릿 [1]" },
-  "opt_custom2": { "message": "사용자 지정 템플릿 [2]" }
+  "extra_copy_tab2_title": { "message": "범위: 현재 탭만 (형식 2)" }
 }

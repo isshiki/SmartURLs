@@ -25,7 +25,6 @@
   "smart_auto":     { "message": "Akıllı (otomatik algılama)" },
   "url_only":       { "message": "Sadece URL" },
   "json_lines":     { "message": "JSON verileri" },
-  "opt_custom":     { "message": "Özel şablon…" },
   "opt_custom1":    { "message": "Özel şablon [1]" },
   "opt_custom2":    { "message": "Özel şablon [2]" },
 
@@ -64,7 +63,6 @@
   "advanced":          { "message": "Gelişmiş" },
 
   "commands_copy_all_tabs":       { "message": "Tüm sekmeleri kopyala" },
-  "commands_copy_all_tabs_2":     { "message": "Tüm sekmeleri kopyala [2]" },
   "commands_copy_current_tab":    { "message": "Geçerli sekmeyi kopyala" },
   "commands_copy_current_tab_2":  { "message": "Geçerli sekmeyi kopyala [2]" },
   "commands_open_from_clipboard": { "message": "Panodan URL'leri aç" },
@@ -77,8 +75,6 @@
   "shortcuts_config_hint": { "message": "Chrome kısayol ayarlarını aç" },
   "shortcut_note":         { "message": "Not: Klavye kısayolu kullanıldığında, URL sayısı yukarıda ayarlanan değeri (N) aşarsa onay bildirimi gösterilir. Görmüyorsanız, bildirim ayarlarını ve Odak modunu kontrol edin." },
   "shortcut_note_link":    { "message": "SSS'ye bakın." },
-  "commands_copy_from_tabs":      { "message": "Sekmelerden URL kopyala" },
-  "commands_open_from_clipboard": { "message": "Panodan URL aç" },
 
   "lang_label":     { "message": "Dili otomatik algila veya sec" },
   "lang_auto":      { "message": "Auto (Otomatik)" },
@@ -101,7 +97,5 @@
   "extra_section_title": { "message": "Ek Kopyalama Biçimleri ve Klavye Kısayolları" },
   "show_extra_copy_buttons": { "message": "Ek Kopyalama Düğmelerini Göster" },
   "extra_copy_tab1_title": { "message": "Kapsam: Yalnızca geçerli sekme (Biçim 1)" },
-  "extra_copy_tab2_title": { "message": "Kapsam: Yalnızca geçerli sekme (Biçim 2)" },
-  "opt_custom1": { "message": "Özel Şablon [1]" },
-  "opt_custom2": { "message": "Özel Şablon [2]" }
+  "extra_copy_tab2_title": { "message": "Kapsam: Yalnızca geçerli sekme (Biçim 2)" }
 }

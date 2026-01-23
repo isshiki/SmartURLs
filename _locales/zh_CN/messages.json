@@ -24,8 +24,7 @@
   "open_format":    { "message": "打开格式" },
   "smart_auto":     { "message": "智能（自动检测）" },
   "url_only":       { "message": "仅 URL" },
-  "json_lines":     { "message": "JSON 数据" },
-  "opt_custom":     { "message": "自定义模板…" },  "opt_custom1":    { "message": "自定义模板 [1]" },
+  "json_lines":     { "message": "JSON 数据" },  "opt_custom1":    { "message": "自定义模板 [1]" },
   "opt_custom2":    { "message": "自定义模板 [2]" },
   "custom_tpl_label":      { "message": "自定义模板" },
   "custom_tpl_tokens":     { "message": "令牌：$$title, $$url, $$domain, $$path, $$basename, $$idx, $$date, $$time, $$nl (换行), …" },
@@ -62,7 +61,6 @@
   "advanced":          { "message": "高级" },
 
   "commands_copy_all_tabs":       { "message": "复制所有标签页" },
-  "commands_copy_all_tabs_2":     { "message": "复制所有标签页 [2]" },
   "commands_copy_current_tab":    { "message": "复制当前标签页" },
   "commands_copy_current_tab_2":  { "message": "复制当前标签页 [2]" },
   "commands_open_from_clipboard": { "message": "从剪贴板打开URL" },
@@ -75,8 +73,6 @@
   "shortcuts_config_hint": { "message": "打开 Chrome 快捷键设置" },
   "shortcut_note":         { "message": "注意：使用键盘快捷键时，如果 URL 数量超过上方设置的值（N），会显示确认通知。如果没有看到，请检查通知设置和专注模式。" },
   "shortcut_note_link":    { "message": "查看 FAQ。" },
-  "commands_copy_from_tabs":      { "message": "从标签页复制 URL" },
-  "commands_open_from_clipboard": { "message": "从剪贴板打开 URL" },
 
   "lang_label":     { "message": "自动检测或选择语言" },
   "lang_auto":      { "message": "Auto (自动)" },
@@ -99,7 +95,5 @@
   "extra_section_title": { "message": "额外复制格式和键盘快捷键" },
   "show_extra_copy_buttons": { "message": "显示额外复制按钮" },
   "extra_copy_tab1_title": { "message": "范围：仅当前标签页（格式1）" },
-  "extra_copy_tab2_title": { "message": "范围：仅当前标签页（格式2）" },
-  "opt_custom1": { "message": "自定义模板 [1]" },
-  "opt_custom2": { "message": "自定义模板 [2]" }
+  "extra_copy_tab2_title": { "message": "范围：仅当前标签页（格式2）" }
 }

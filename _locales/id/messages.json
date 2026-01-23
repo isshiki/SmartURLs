@@ -24,8 +24,7 @@
   "open_format":    { "message": "Format buka" },
   "smart_auto":     { "message": "Pintar (deteksi otomatis)" },
   "url_only":       { "message": "Hanya URL" },
-  "json_lines":     { "message": "Data JSON" },
-  "opt_custom":     { "message": "Template kustom…" },  "opt_custom1":    { "message": "Template kustom [1]" },
+  "json_lines":     { "message": "Data JSON" },  "opt_custom1":    { "message": "Template kustom [1]" },
   "opt_custom2":    { "message": "Template kustom [2]" },
   "custom_tpl_label":      { "message": "Template kustom" },
   "custom_tpl_tokens":     { "message": "Token: $$title, $$url, $$domain, $$path, $$basename, $$idx, $$date, $$time, $$nl (baris baru), …" },
@@ -62,7 +61,6 @@
   "advanced":          { "message": "Lanjutan" },
 
   "commands_copy_all_tabs":       { "message": "Salin semua tab" },
-  "commands_copy_all_tabs_2":     { "message": "Salin semua tab [2]" },
   "commands_copy_current_tab":    { "message": "Salin tab saat ini" },
   "commands_copy_current_tab_2":  { "message": "Salin tab saat ini [2]" },
   "commands_open_from_clipboard": { "message": "Buka URL dari clipboard" },
@@ -75,8 +73,6 @@
   "shortcuts_config_hint": { "message": "Buka pengaturan pintasan Chrome" },
   "shortcut_note":         { "message": "Catatan: Saat menggunakan pintasan keyboard, notifikasi konfirmasi ditampilkan jika jumlah URL melebihi nilai yang diatur di atas (N). Jika tidak terlihat, periksa pengaturan notifikasi dan mode Fokus." },
   "shortcut_note_link":    { "message": "Lihat FAQ." },
-  "commands_copy_from_tabs":      { "message": "Salin URL dari tab" },
-  "commands_open_from_clipboard": { "message": "Buka URL dari clipboard" },
 
   "lang_label":     { "message": "Deteksi otomatis atau pilih bahasa" },
   "lang_auto":      { "message": "Auto (Otomatis)" },
@@ -99,7 +95,5 @@
   "extra_section_title": { "message": "Format Salin Tambahan dan Pintasan Keyboard" },
   "show_extra_copy_buttons": { "message": "Tampilkan Tombol Salin Tambahan" },
   "extra_copy_tab1_title": { "message": "Cakupan: Hanya tab saat ini (Format 1)" },
-  "extra_copy_tab2_title": { "message": "Cakupan: Hanya tab saat ini (Format 2)" },
-  "opt_custom1": { "message": "Template Kustom [1]" },
-  "opt_custom2": { "message": "Template Kustom [2]" }
+  "extra_copy_tab2_title": { "message": "Cakupan: Hanya tab saat ini (Format 2)" }
 }

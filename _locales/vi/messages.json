@@ -24,8 +24,7 @@
   "open_format":    { "message": "Định dạng mở" },
   "smart_auto":     { "message": "Thông minh (tự động phát hiện)" },
   "url_only":       { "message": "Chỉ URL" },
-  "json_lines":     { "message": "Dữ liệu JSON" },
-  "opt_custom":     { "message": "Mẫu tùy chỉnh…" },  "opt_custom1":    { "message": "Mẫu tùy chỉnh [1]" },
+  "json_lines":     { "message": "Dữ liệu JSON" },  "opt_custom1":    { "message": "Mẫu tùy chỉnh [1]" },
   "opt_custom2":    { "message": "Mẫu tùy chỉnh [2]" },
   "custom_tpl_label":      { "message": "Mẫu tùy chỉnh" },
   "custom_tpl_tokens":     { "message": "Token: $$title, $$url, $$domain, $$path, $$basename, $$idx, $$date, $$time, $$nl (xuống dòng), …" },
@@ -62,7 +61,6 @@
   "advanced":          { "message": "Nâng cao" },
 
   "commands_copy_all_tabs":       { "message": "Sao chép tất cả các tab" },
-  "commands_copy_all_tabs_2":     { "message": "Sao chép tất cả các tab [2]" },
   "commands_copy_current_tab":    { "message": "Sao chép tab hiện tại" },
   "commands_copy_current_tab_2":  { "message": "Sao chép tab hiện tại [2]" },
   "commands_open_from_clipboard": { "message": "Mở URL từ clipboard" },
@@ -75,8 +73,6 @@
   "shortcuts_config_hint": { "message": "Mở cài đặt phím tắt Chrome" },
   "shortcut_note":         { "message": "Lưu ý: Khi dùng phím tắt, thông báo xác nhận sẽ hiển thị nếu số lượng URL vượt quá giá trị được đặt ở trên (N). Nếu bạn không thấy, hãy kiểm tra cài đặt thông báo và chế độ Tập trung." },
   "shortcut_note_link":    { "message": "Xem FAQ." },
-  "commands_copy_from_tabs":      { "message": "Sao chép URL từ tab" },
-  "commands_open_from_clipboard": { "message": "Mở URL từ clipboard" },
 
   "lang_label":     { "message": "Tự động phát hiện hoặc ngôn ngữ" },
   "lang_auto":      { "message": "Auto (Tự động)" },
@@ -99,7 +95,5 @@
   "extra_section_title": { "message": "Định dạng sao chép bổ sung và phím tắt" },
   "show_extra_copy_buttons": { "message": "Hiển thị nút sao chép bổ sung" },
   "extra_copy_tab1_title": { "message": "Phạm vi: Chỉ tab hiện tại (Định dạng 1)" },
-  "extra_copy_tab2_title": { "message": "Phạm vi: Chỉ tab hiện tại (Định dạng 2)" },
-  "opt_custom1": { "message": "Mẫu tùy chỉnh [1]" },
-  "opt_custom2": { "message": "Mẫu tùy chỉnh [2]" }
+  "extra_copy_tab2_title": { "message": "Phạm vi: Chỉ tab hiện tại (Định dạng 2)" }
 }
