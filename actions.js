@@ -191,6 +191,8 @@ function formatLine(tab, cfg, idx) {
   else if (cfg.fmt === "html") tpl = '<a href="' + escapeHtml(url) + '">' + escapeHtml(title) + '</a>';
   else if (cfg.fmt === "jsonl") tpl = JSON.stringify({ title, url });
   else if (cfg.fmt === "custom") tpl = cfg.tpl;
+  else if (cfg.fmt === "custom1") tpl = cfg.tpl;
+  else if (cfg.fmt === "custom2") tpl = cfg.tpl2 || cfg.tpl;
 
   try {
     const u = new URL(url);
@@ -356,7 +358,7 @@ function extractByFormat(fmt, text, tpl) {
       } catch {}
     });
 
-  } else if (fmt === "custom") {
+  } else if (fmt === "custom" || fmt === "custom1" || fmt === "custom2") {
     const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const safeTpl = String(tpl || "- [$title]($url)").slice(0, LIMITS.customMaxTemplate);
     let pat = esc(safeTpl);
@@ -437,7 +439,8 @@ async function prepareOpenUrls(text, config = null) {
   const cfg = config || Object.assign({}, defaults, await chrome.storage.sync.get(Object.keys(defaults)));
 
   // Parse URLs
-  const urls0 = extractByFormat(cfg.openFmt, text, cfg.openTpl);
+  const openTpl = (cfg.openFmt === "custom2") ? (cfg.openTpl2 || cfg.openTpl) : cfg.openTpl;
+  const urls0 = extractByFormat(cfg.openFmt, text, openTpl);
   let urls = urls0;
   let skippedByProtocol = 0;
 
