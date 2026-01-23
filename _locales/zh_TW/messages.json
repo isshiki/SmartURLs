@@ -25,8 +25,8 @@
   "smart_auto":     { "message": "智慧（自動偵測）" },
   "url_only":       { "message": "僅 URL" },
   "json_lines":     { "message": "JSON 資料" },
-  "opt_custom":     { "message": "自訂範本…" },
-
+  "opt_custom":     { "message": "自訂範本…" },  "opt_custom1":    { "message": "自訂範本 [1]" },
+  "opt_custom2":    { "message": "自訂範本 [2]" },
   "custom_tpl_label":      { "message": "自訂範本" },
   "custom_tpl_tokens":     { "message": "權杖：$$title, $$url, $$domain, $$path, $$basename, $$idx, $$date, $$time, $$nl (換行), …" },
   "custom_tpl_tokens_link":{ "message": "查看完整清單。" },
@@ -50,6 +50,8 @@
   "textarea_label": { "message": "貼上文字" },
 
   "copied_n":       { "message": "已複製 " },
+  "copied_current_tab_fmt1": { "message": "已複製目前分頁（格式1）" },
+  "copied_current_tab_fmt2": { "message": "已複製目前分頁（格式2）" },
   "copy_failed":    { "message": "複製失敗" },
   "opened_n":       { "message": "已開啟 " },
   "open_failed":    { "message": "開啟失敗" },
@@ -58,6 +60,12 @@
   "confirm_many":   { "message": "開啟許多分頁？" },
 
   "advanced":          { "message": "進階" },
+
+  "commands_copy_all_tabs":       { "message": "複製所有分頁" },
+  "commands_copy_all_tabs_2":     { "message": "複製所有分頁 [2]" },
+  "commands_copy_current_tab":    { "message": "複製目前分頁" },
+  "commands_copy_current_tab_2":  { "message": "複製目前分頁 [2]" },
+  "commands_open_from_clipboard": { "message": "從剪貼簿開啟URL" },
 
   "shortcuts_title":       { "message": "鍵盤快速鍵" },
   "shortcuts_copy_suffix": { "message": "複製網址" },
@@ -86,5 +94,12 @@
   "protocol_skipped_suffix":      { "message": " (已跳過: {count} / 協議過濾)" },
   "protocol_skipped_with_proto_suffix": { "message": " (已跳過: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (失敗: {count})" },
-  "protocol_failed_with_proto_suffix": { "message": " (失敗: {count} / {protocols})" }
+  "protocol_failed_with_proto_suffix": { "message": "（失敗：{count} / {protocols}）" },
+
+  "extra_section_title": { "message": "額外複製格式和鍵盤快捷鍵" },
+  "show_extra_copy_buttons": { "message": "顯示額外複製按鈕" },
+  "extra_copy_tab1_title": { "message": "範圍：僅目前分頁（格式1）" },
+  "extra_copy_tab2_title": { "message": "範圍：僅目前分頁（格式2）" },
+  "opt_custom1": { "message": "自訂範本 [1]" },
+  "opt_custom2": { "message": "自訂範本 [2]" }
 }

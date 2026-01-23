@@ -26,6 +26,8 @@
   "url_only":       { "message": "Sadece URL" },
   "json_lines":     { "message": "JSON verileri" },
   "opt_custom":     { "message": "Özel şablon…" },
+  "opt_custom1":    { "message": "Özel şablon [1]" },
+  "opt_custom2":    { "message": "Özel şablon [2]" },
 
   "custom_tpl_label":      { "message": "Özel şablon" },
   "custom_tpl_tokens":     { "message": "Tokenler: $$title, $$url, $$domain, $$path, $$basename, $$idx, $$date, $$time, $$nl (yeni satır), …" },
@@ -50,6 +52,8 @@
   "textarea_label": { "message": "Metin yapıştır" },
 
   "copied_n":       { "message": "Kopyalandı " },
+  "copied_current_tab_fmt1": { "message": "Geçerli sekme kopyalandı (Format 1)" },
+  "copied_current_tab_fmt2": { "message": "Geçerli sekme kopyalandı (Format 2)" },
   "copy_failed":    { "message": "Kopyalama başarısız" },
   "opened_n":       { "message": "Açıldı " },
   "open_failed":    { "message": "Açma başarısız" },
@@ -58,6 +62,12 @@
   "confirm_many":   { "message": "Çok fazla sekme aç?" },
 
   "advanced":          { "message": "Gelişmiş" },
+
+  "commands_copy_all_tabs":       { "message": "Tüm sekmeleri kopyala" },
+  "commands_copy_all_tabs_2":     { "message": "Tüm sekmeleri kopyala [2]" },
+  "commands_copy_current_tab":    { "message": "Geçerli sekmeyi kopyala" },
+  "commands_copy_current_tab_2":  { "message": "Geçerli sekmeyi kopyala [2]" },
+  "commands_open_from_clipboard": { "message": "Panodan URL'leri aç" },
 
   "shortcuts_title":       { "message": "Klavye kısayolları" },
   "shortcuts_copy_suffix": { "message": "URL'leri Kopyala" },
@@ -86,5 +96,12 @@
   "protocol_skipped_suffix":      { "message": " (Atlanan: {count} / protokol filtresi)" },
   "protocol_skipped_with_proto_suffix": { "message": " (Atlanan: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (Başarısız: {count})" },
-  "protocol_failed_with_proto_suffix": { "message": " (Başarısız: {count} / {protocols})" }
+  "protocol_failed_with_proto_suffix": { "message": " (Başarısız: {count} / {protocols})" },
+
+  "extra_section_title": { "message": "Ek Kopyalama Biçimleri ve Klavye Kısayolları" },
+  "show_extra_copy_buttons": { "message": "Ek Kopyalama Düğmelerini Göster" },
+  "extra_copy_tab1_title": { "message": "Kapsam: Yalnızca geçerli sekme (Biçim 1)" },
+  "extra_copy_tab2_title": { "message": "Kapsam: Yalnızca geçerli sekme (Biçim 2)" },
+  "opt_custom1": { "message": "Özel Şablon [1]" },
+  "opt_custom2": { "message": "Özel Şablon [2]" }
 }

@@ -26,6 +26,8 @@
   "url_only":       { "message": "Nur URL" },
   "json_lines":     { "message": "JSON-Daten" },
   "opt_custom":     { "message": "Benutzerdefinierte Vorlage…" },
+  "opt_custom1":    { "message": "Benutzerdefinierte Vorlage [1]" },
+  "opt_custom2":    { "message": "Benutzerdefinierte Vorlage [2]" },
 
   "custom_tpl_label":      { "message": "Benutzerdefinierte Vorlage" },
   "custom_tpl_tokens":     { "message": "Tokens: $$title, $$url, $$domain, $$path, $$basename, $$idx, $$date, $$time, $$nl (Zeilenumbruch), …" },
@@ -50,6 +52,8 @@
   "textarea_label": { "message": "Text einfügen" },
 
   "copied_n":       { "message": "Kopiert " },
+  "copied_current_tab_fmt1": { "message": "Aktuellen Tab kopiert (Format 1)" },
+  "copied_current_tab_fmt2": { "message": "Aktuellen Tab kopiert (Format 2)" },
   "copy_failed":    { "message": "Kopieren fehlgeschlagen" },
   "opened_n":       { "message": "Geöffnet " },
   "open_failed":    { "message": "Öffnen fehlgeschlagen" },
@@ -58,6 +62,12 @@
   "confirm_many":   { "message": "Viele Tabs öffnen?" },
 
   "advanced":          { "message": "Erweitert" },
+
+  "commands_copy_all_tabs":       { "message": "Alle Tabs kopieren" },
+  "commands_copy_all_tabs_2":     { "message": "Alle Tabs kopieren [2]" },
+  "commands_copy_current_tab":    { "message": "Aktuellen Tab kopieren" },
+  "commands_copy_current_tab_2":  { "message": "Aktuellen Tab kopieren [2]" },
+  "commands_open_from_clipboard": { "message": "URLs aus Zwischenablage öffnen" },
 
   "shortcuts_title":       { "message": "Tastenkombinationen" },
   "shortcuts_copy_suffix": { "message": "URLs kopieren" },
@@ -86,5 +96,12 @@
   "protocol_skipped_suffix":      { "message": " (Übersprungen: {count} / Protokollfilterung)" },
   "protocol_skipped_with_proto_suffix": { "message": " (Übersprungen: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (Fehlgeschlagen: {count})" },
-  "protocol_failed_with_proto_suffix": { "message": " (Fehler: {count} / {protocols})" }
+  "protocol_failed_with_proto_suffix": { "message": " (Fehler: {count} / {protocols})" },
+
+  "extra_section_title": { "message": "Zusätzliche Kopierformate und Tastaturkürzel" },
+  "show_extra_copy_buttons": { "message": "Zusätzliche Kopierschaltflächen anzeigen" },
+  "extra_copy_tab1_title": { "message": "Bereich: Nur aktueller Tab (Format 1)" },
+  "extra_copy_tab2_title": { "message": "Bereich: Nur aktueller Tab (Format 2)" },
+  "opt_custom1": { "message": "Benutzerdefinierte Vorlage [1]" },
+  "opt_custom2": { "message": "Benutzerdefinierte Vorlage [2]" }
 }

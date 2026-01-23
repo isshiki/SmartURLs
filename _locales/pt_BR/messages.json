@@ -26,6 +26,8 @@
   "url_only":       { "message": "Apenas URL" },
   "json_lines":     { "message": "Dados JSON" },
   "opt_custom":     { "message": "Modelo personalizado…" },
+  "opt_custom1":    { "message": "Modelo personalizado [1]" },
+  "opt_custom2":    { "message": "Modelo personalizado [2]" },
 
   "custom_tpl_label":      { "message": "Modelo personalizado" },
   "custom_tpl_tokens":     { "message": "Tokens: $$title, $$url, $$domain, $$path, $$basename, $$idx, $$date, $$time, $$nl (nova linha), …" },
@@ -50,6 +52,8 @@
   "textarea_label": { "message": "Colar texto" },
 
   "copied_n":       { "message": "Copiado " },
+  "copied_current_tab_fmt1": { "message": "Aba atual copiada (Formato 1)" },
+  "copied_current_tab_fmt2": { "message": "Aba atual copiada (Formato 2)" },
   "copy_failed":    { "message": "Cópia falhou" },
   "opened_n":       { "message": "Aberto " },
   "open_failed":    { "message": "Abertura falhou" },
@@ -58,6 +62,12 @@
   "confirm_many":   { "message": "Abrir muitas abas?" },
 
   "advanced":          { "message": "Avançado" },
+
+  "commands_copy_all_tabs":       { "message": "Copiar todas as abas" },
+  "commands_copy_all_tabs_2":     { "message": "Copiar todas as abas [2]" },
+  "commands_copy_current_tab":    { "message": "Copiar aba atual" },
+  "commands_copy_current_tab_2":  { "message": "Copiar aba atual [2]" },
+  "commands_open_from_clipboard": { "message": "Abrir URLs da área de transferência" },
 
   "shortcuts_title":       { "message": "Atalhos de teclado" },
   "shortcuts_copy_suffix": { "message": "Copiar URLs" },
@@ -86,5 +96,12 @@
   "protocol_skipped_suffix":      { "message": " (Ignorados: {count} / filtro de protocolo)" },
   "protocol_skipped_with_proto_suffix": { "message": " (Ignorados: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (Falharam: {count})" },
-  "protocol_failed_with_proto_suffix": { "message": " (Falha: {count} / {protocols})" }
+  "protocol_failed_with_proto_suffix": { "message": " (Falha: {count} / {protocols})" },
+
+  "extra_section_title": { "message": "Formatos de cópia adicionais e atalhos de teclado" },
+  "show_extra_copy_buttons": { "message": "Mostrar botões de cópia adicionais" },
+  "extra_copy_tab1_title": { "message": "Escopo: Apenas aba atual (Formato 1)" },
+  "extra_copy_tab2_title": { "message": "Escopo: Apenas aba atual (Formato 2)" },
+  "opt_custom1": { "message": "Modelo personalizado [1]" },
+  "opt_custom2": { "message": "Modelo personalizado [2]" }
 }

@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "__MSG_app_name__",
   "short_name": "SmartURLs",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "__MSG_app_desc__",
   "default_locale": "en",
   "action": {
@@ -16,7 +16,21 @@
         "default": "Ctrl+Shift+U",
         "mac": "Command+Shift+U"
       },
-      "description": "__MSG_commands_copy_from_tabs__"
+      "description": "__MSG_commands_copy_all_tabs__"
+    },
+    "copy-tab1": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
+      },
+      "description": "__MSG_commands_copy_current_tab__"
+    },
+    "copy-tab2": {
+      "suggested_key": {
+        "default": "Alt+Shift+Y",
+        "mac": "Alt+Shift+Y"
+      },
+      "description": "__MSG_commands_copy_current_tab_2__"
     },
     "open-smart-url": {
       "suggested_key": {

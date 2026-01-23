@@ -30,8 +30,14 @@ function escapeHtml(str) {
 const defaults = {
   fmt: "md",
   tpl: "- [$title]($url)",
+  tpl2: "* [$title]($url)",
+
+  fmtTab1: "md",
+  fmtTab2: "md",
+  showExtraCopyBtns: true,
   openFmt: "smart",
   openTpl: "- [$title]($url)",
+  openTpl2: "* [$title]($url)",
   source: "clipboard",
   scope: "current",
   dedup: true,

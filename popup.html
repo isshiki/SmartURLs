@@ -45,7 +45,13 @@
     <!-- Left: Copy column -->
     <div class="col">
       <section class="block">
-        <p class="block-title">Copy</p>
+        <div class="block-title-row">
+          <p class="block-title">Copy</p>
+          <div class="extra-copy-buttons" id="extraCopyButtons" style="display: none;">
+            <button type="button" class="extra-copy-btn" id="btnTab1" title="Target: Current tab only (Copy 1)">📑₁</button>
+            <button type="button" class="extra-copy-btn" id="btnTab2" title="Target: Current tab only (Copy 2)">📑₂</button>
+          </div>
+        </div>
 
         <!-- Scope (first row) -->
         <div class="field">
@@ -66,18 +72,25 @@
             <option value="tsv">TSV: title\turl</option>
             <option value="html">HTML &lt;a href&gt;</option>
             <option value="jsonl" data-i18n="json_lines">JSON Lines</option>
-            <option value="custom" data-i18n="opt_custom">Custom template…</option>
+            <option value="custom1" data-i18n="opt_custom1">Custom template [1]</option>
+            <option value="custom2" data-i18n="opt_custom2">Custom template [2]</option>
           </select>
         </div>
       </section>
 
       <!-- Copy: advanced options -->
-      <details class="block">
+      <details class="block advanced-stack">
         <summary data-i18n="advanced">Advanced</summary>
 
+        <div class="advanced-card">
         <div class="field">
           <label class="label">
-            <span data-i18n="custom_tpl_label">Custom template</span><span id="tpl-warning"></span>
+            <span data-i18n="custom_tpl_label">Custom template</span>
+            <div class="template-toggle">
+              <button type="button" class="toggle-btn active" data-tpl-id="1">1</button>
+              <button type="button" class="toggle-btn" data-tpl-id="2">2</button>
+            </div>
+            <span id="tpl-warning"></span>
           </label>
           <input id="tpl" type="text" maxlength="2000" placeholder="- [$title]($url)" />
           <p class="hint">
@@ -154,6 +167,67 @@
                     title="Opens Chrome's keyboard shortcut settings">Configure in Chrome</button>
           </div>
         </div>
+        </div>
+
+        <!-- Extra Section -->
+        <div class="extra-section">
+          <h3 class="extra-heading" data-i18n="extra_section_title">追加のコピー形式とキーボードショートカット</h3>
+
+          <!-- Show extra copy buttons checkbox -->
+          <div class="field">
+            <label class="row">
+              <input type="checkbox" id="chkShowExtraCopyBtns" />
+              <span data-i18n="show_extra_copy_buttons">Show extra copy buttons</span>
+              - 📑₁📑₂
+            </label>
+          </div>
+
+          <!-- Extra Copy 1: Tab Copy 1 -->
+          <div class="extra-copy-item">
+            <h5 class="extra-copy-title" data-i18n="extra_copy_tab1_title">Target: Current tab only (Copy 1)</h5>
+            <div class="field">
+              <select id="fmtTab1" aria-label="Tab1 format">
+                <option value="md">Markdown [title](url)</option>
+                <option value="url" data-i18n="url_only">URL Only</option>
+                <option value="tsv">TSV: title\turl</option>
+                <option value="html">HTML &lt;a href&gt;</option>
+                <option value="jsonl" data-i18n="json_lines">JSON Lines</option>
+                <option value="custom1" data-i18n="opt_custom1">Custom template [1]</option>
+                <option value="custom2" data-i18n="opt_custom2">Custom template [2]</option>
+              </select>
+            </div>
+            <div class="shortcut-controls">
+              <span class="shortcut-pill" id="tab1ShortcutDisplay">-</span>
+              <button type="button" class="shortcut-config-btn" id="tab1ShortcutConfigure"
+                      data-i18n="shortcuts_config"
+                      data-i18n-title="shortcuts_config_hint"
+                      title="Opens Chrome's keyboard shortcut settings">Configure</button>
+            </div>
+          </div>
+
+          <!-- Extra Copy 3: Tab Copy 2 -->
+          <div class="extra-copy-item">
+            <h5 class="extra-copy-title" data-i18n="extra_copy_tab2_title">Target: Current tab only (Copy 2)</h5>
+            <div class="field">
+              <select id="fmtTab2" aria-label="Tab2 format">
+                <option value="md">Markdown [title](url)</option>
+                <option value="url" data-i18n="url_only">URL Only</option>
+                <option value="tsv">TSV: title\turl</option>
+                <option value="html">HTML &lt;a href&gt;</option>
+                <option value="jsonl" data-i18n="json_lines">JSON Lines</option>
+                <option value="custom1" data-i18n="opt_custom1">Custom template [1]</option>
+                <option value="custom2" data-i18n="opt_custom2">Custom template [2]</option>
+              </select>
+            </div>
+            <div class="shortcut-controls">
+              <span class="shortcut-pill" id="tab2ShortcutDisplay">-</span>
+              <button type="button" class="shortcut-config-btn" id="tab2ShortcutConfigure"
+                      data-i18n="shortcuts_config"
+                      data-i18n-title="shortcuts_config_hint"
+                      title="Opens Chrome's keyboard shortcut settings">Configure</button>
+            </div>
+          </div>
+        </div>
       </details>
     </div>
 
@@ -188,7 +262,8 @@
             <option value="tsv">TSV: title\turl</option>
             <option value="html">HTML &lt;a href&gt;</option>
             <option value="jsonl" data-i18n="json_lines">JSON Lines</option>
-            <option value="custom" data-i18n="opt_custom">Custom template…</option>
+            <option value="custom1" data-i18n="opt_custom1">Custom template [1]</option>
+            <option value="custom2" data-i18n="opt_custom2">Custom template [2]</option>
           </select>
         </div>
 
@@ -208,7 +283,12 @@
 
         <div class="field">
           <label class="label">
-            <span data-i18n="open_tpl_label">Open custom template</span><span id="openTpl-warning"></span>
+            <span data-i18n="open_tpl_label">Open custom template</span>
+            <div class="template-toggle">
+              <button type="button" class="toggle-btn active" data-open-tpl-id="1">1</button>
+              <button type="button" class="toggle-btn" data-open-tpl-id="2">2</button>
+            </div>
+            <span id="openTpl-warning"></span>
           </label>
           <input id="openTpl" type="text" maxlength="1000" placeholder="- [$title]($url)" />
           <p class="hint" data-i18n="same_tokens_hint">

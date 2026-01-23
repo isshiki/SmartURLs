@@ -25,8 +25,8 @@
   "smart_auto":     { "message": "智能（自动检测）" },
   "url_only":       { "message": "仅 URL" },
   "json_lines":     { "message": "JSON 数据" },
-  "opt_custom":     { "message": "自定义模板…" },
-
+  "opt_custom":     { "message": "自定义模板…" },  "opt_custom1":    { "message": "自定义模板 [1]" },
+  "opt_custom2":    { "message": "自定义模板 [2]" },
   "custom_tpl_label":      { "message": "自定义模板" },
   "custom_tpl_tokens":     { "message": "令牌：$$title, $$url, $$domain, $$path, $$basename, $$idx, $$date, $$time, $$nl (换行), …" },
   "custom_tpl_tokens_link":{ "message": "查看完整列表。" },
@@ -50,6 +50,8 @@
   "textarea_label": { "message": "粘贴文本" },
 
   "copied_n":       { "message": "已复制 " },
+  "copied_current_tab_fmt1": { "message": "已复制当前标签页（格式1）" },
+  "copied_current_tab_fmt2": { "message": "已复制当前标签页（格式2）" },
   "copy_failed":    { "message": "复制失败" },
   "opened_n":       { "message": "已打开 " },
   "open_failed":    { "message": "打开失败" },
@@ -58,6 +60,12 @@
   "confirm_many":   { "message": "打开许多标签页？" },
 
   "advanced":          { "message": "高级" },
+
+  "commands_copy_all_tabs":       { "message": "复制所有标签页" },
+  "commands_copy_all_tabs_2":     { "message": "复制所有标签页 [2]" },
+  "commands_copy_current_tab":    { "message": "复制当前标签页" },
+  "commands_copy_current_tab_2":  { "message": "复制当前标签页 [2]" },
+  "commands_open_from_clipboard": { "message": "从剪贴板打开URL" },
 
   "shortcuts_title":       { "message": "键盘快捷键" },
   "shortcuts_copy_suffix": { "message": "复制网址" },
@@ -86,5 +94,12 @@
   "protocol_skipped_suffix":      { "message": " (已跳过: {count} / 协议过滤)" },
   "protocol_skipped_with_proto_suffix": { "message": " (已跳过: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (失败: {count})" },
-  "protocol_failed_with_proto_suffix": { "message": " (失败: {count} / {protocols})" }
+  "protocol_failed_with_proto_suffix": { "message": "（失败: {count} / {protocols}）" },
+
+  "extra_section_title": { "message": "额外复制格式和键盘快捷键" },
+  "show_extra_copy_buttons": { "message": "显示额外复制按钮" },
+  "extra_copy_tab1_title": { "message": "范围：仅当前标签页（格式1）" },
+  "extra_copy_tab2_title": { "message": "范围：仅当前标签页（格式2）" },
+  "opt_custom1": { "message": "自定义模板 [1]" },
+  "opt_custom2": { "message": "自定义模板 [2]" }
 }

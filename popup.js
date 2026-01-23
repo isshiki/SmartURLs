@@ -1,9 +1,24 @@
-/*!
- * SmartURLs Popup Script (popup.js)
+/*!  * SmartURLs Popup Script (popup.js)
+/*!  * SmartURLs Popup Script (popup.js)
  * Purpose: Popup UI logic for Chrome extension (Manifest V3)
  * Note: Behavior intentionally preserved; comments minimized.
  */
 "use strict";
+
+/* ===================== UI State (in-memory) ===================== */
+let uiState = {
+  template1: "- [$title]($url)",    // テンプレ1のテキスト
+  template2: "[$title]($url)",      // テンプレ2のテキスト
+  activeTemplateId: 1,              // 現在編集中: 1 or 2
+  
+  openTemplate1: "- [$title]($url)",  // Openテンプレ1のテキスト
+  openTemplate2: "* [$title]($url)",  // Openテンプレ2のテキスト
+  activeOpenTemplateId: 1,            // Open現在編集中: 1 or 2
+  
+  // 2系統のformat設定
+  formatTab1: "md",                 // Tab①用
+  formatTab2: "md"                  // Tab②用
+};
 
 /* ===================== i18n ===================== */
 let currentLang = "AutoLang";
@@ -186,10 +201,25 @@ async function load() {
   // copy
   $("#fmt").value = cfg.fmt;
   $("#tpl").value = cfg.tpl;
+  
+  // Initialize copy template UI state
+  uiState.template1 = cfg.tpl || "- [$title]($url)";
+  uiState.template2 = cfg.tpl2 || "[$title]($url)";
+  uiState.activeTemplateId = 1;
+  
+  // extra copy formats
+  $("#fmtTab1").value = cfg.fmtTab1 || "md";
+  $("#fmtTab2").value = cfg.fmtTab2 || "md";
+  $("#chkShowExtraCopyBtns").checked = cfg.showExtraCopyBtns || false;
 
   // open
   $("#openFmt").value = cfg.openFmt;
   $("#openTpl").value = cfg.openTpl;
+  
+  // Initialize open template UI state
+  uiState.openTemplate1 = cfg.openTpl || "- [$title]($url)";
+  uiState.openTemplate2 = cfg.openTpl2 || "* [$title]($url)";
+  uiState.activeOpenTemplateId = 1;
 
   // source (radio <-> hidden select)
   $("#source").value = cfg.source;
@@ -301,7 +331,7 @@ async function init() {
   updateFaqLink(); // Set FAQ link URL based on current language
 
   // 4) bindings
-  ["fmt","tpl","sort","openFmt","openTpl"].forEach(id => {
+  ["fmt","sort","openFmt"].forEach(id => {
     $("#" + id).addEventListener("change", e => save({[id]: e.target.value}));
   });
 
@@ -459,7 +489,8 @@ async function init() {
 
   [["chkDedup","dedup"],["chkNoPinned","noPinned"],["desc","desc"],
    ["chkCopyProtocolRestrict","copyProtocolRestrict"],
-   ["chkOpenProtocolRestrict","openProtocolRestrict"]]
+   ["chkOpenProtocolRestrict","openProtocolRestrict"],
+   ["chkShowExtraCopyBtns","showExtraCopyBtns"]]
     .forEach(([id,key]) => $("#" + id).addEventListener("change", e => save({[key]: e.target.checked})));
   ["excludeList","copyProtocolAllowed","openProtocolAllowed"].forEach(id => $("#" + id).addEventListener("change", e => save({[id]: e.target.value})));
 
@@ -538,27 +569,214 @@ async function init() {
     });
   }
 
+  // Add click handlers for extra shortcut configure buttons
+  const tab1ConfigureBtn = $("#tab1ShortcutConfigure");
+  const tab2ConfigureBtn = $("#tab2ShortcutConfigure");
+
+  if (tab1ConfigureBtn) {
+    tab1ConfigureBtn.addEventListener("click", () => {
+      chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
+    });
+  }
+
+  if (tab2ConfigureBtn) {
+    tab2ConfigureBtn.addEventListener("click", () => {
+      chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
+    });
+  }
+
+  // Add change handlers for extra format dropdowns
+  ["fmtTab1", "fmtTab2"].forEach(id => {
+    const el = $("#" + id);
+    if (el) {
+      el.addEventListener("change", e => save({[id]: e.target.value}));
+    }
+  });
+
+  // Initialize extra copy buttons
+  initExtraCopyButtons();
+
   updatePasteBox();
   initPasteBoxDefault();
+  
+  // Initialize format shortcuts and template toggle
+  initFormatShortcuts();
+}
+
+/* ===================== Format Shortcuts & Template Toggle ===================== */
+
+/**
+ * Initialize format shortcut dropdowns and template toggle
+ */
+function initFormatShortcuts() {
+  const isMac = navigator.platform.toLowerCase().includes("mac");
+  
+  // ショートカットキー表示を更新
+  const keys = {
+    tab1: isMac ? "⌘ + ⇧ + Y" : "Ctrl+Shift+Y",
+    tab2: isMac ? "⌥ + ⇧ + Y" : "Alt+Shift+Y"
+  };
+  
+  const rows = document.querySelectorAll('.shortcut-format-row');
+  rows.forEach((row, idx) => {
+    const scKeySpan = row.querySelector('.sc-key');
+    if (scKeySpan) {
+      scKeySpan.textContent = [keys.tab1, keys.tab2][idx];
+    }
+  });
+  
+  // 各dropdownのイベントリスナー
+  const formatDropdowns = [
+    { sel: "#fmt", key: "formatWindow1" },
+    { sel: "#fmtTab1", key: "formatTab1" },
+    { sel: "#fmtTab2", key: "formatTab2" }
+  ];
+  
+  formatDropdowns.forEach(({ sel, key }) => {
+    const dropdown = $(sel);
+    if (!dropdown) return;
+    
+    dropdown.addEventListener("change", (e) => {
+      const value = e.target.value;
+      
+      // format選択→テンプレトグル自動同期
+      if (value === "custom1") {
+        switchTemplateEditor(1);
+      } else if (value === "custom2") {
+        switchTemplateEditor(2);
+      }
+      
+      // state更新
+      uiState[key] = value;
+    });
+  });
+  
+  // テンプレトグルボタン (Copy)
+  document.querySelectorAll('.toggle-btn[data-tpl-id]').forEach(btn => {
+    btn.addEventListener("click", () => {
+      const tplId = parseInt(btn.dataset.tplId, 10);
+      switchTemplateEditor(tplId);
+    });
+  });
+  
+  // テンプレトグルボタン (Open)
+  document.querySelectorAll('.toggle-btn[data-open-tpl-id]').forEach(btn => {
+    btn.addEventListener("click", () => {
+      const tplId = parseInt(btn.dataset.openTplId, 10);
+      switchOpenTemplateEditor(tplId);
+    });
+  });
+  
+  // テンプレ入力欄の内容変更 (Copy)
+  const tplInput = $("#tpl");
+  if (tplInput) {
+    tplInput.addEventListener("input", () => {
+      if (uiState.activeTemplateId === 1) {
+        uiState.template1 = tplInput.value;
+      } else {
+        uiState.template2 = tplInput.value;
+      }
+    });
+    
+    // Save to storage on change (blur or Enter key)
+    tplInput.addEventListener("change", () => {
+      if (uiState.activeTemplateId === 1) {
+        save({ tpl: tplInput.value });
+      } else {
+        save({ tpl2: tplInput.value });
+      }
+    });
+  }
+  
+  // テンプレ入力欄の内容変更 (Open)
+  const openTplInput = $("#openTpl");
+  if (openTplInput) {
+    openTplInput.addEventListener("input", () => {
+      if (uiState.activeOpenTemplateId === 1) {
+        uiState.openTemplate1 = openTplInput.value;
+      } else {
+        uiState.openTemplate2 = openTplInput.value;
+      }
+    });
+    
+    // Save to storage on change (blur or Enter key)
+    openTplInput.addEventListener("change", () => {
+      if (uiState.activeOpenTemplateId === 1) {
+        save({ openTpl: openTplInput.value });
+      } else {
+        save({ openTpl2: openTplInput.value });
+      }
+    });
+  }
 }
 
 /**
- * Display current keyboard shortcuts from chrome.commands API
- * Populates the Copy and Open shortcut displays separately
- * Also updates the shortcut hints on the main action buttons
+ * Switch template editor between template 1 and 2 (Copy)
+ * @param {number} tplId - 1 or 2
  */
+function switchTemplateEditor(tplId) {
+  if (uiState.activeTemplateId === tplId) return;
+  
+  uiState.activeTemplateId = tplId;
+  
+  // トグルボタンのactive状態更新
+  document.querySelectorAll('.toggle-btn[data-tpl-id]').forEach(btn => {
+    if (parseInt(btn.dataset.tplId, 10) === tplId) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+  
+  // 入力欄の内容を切り替え
+  const tplInput = $("#tpl");
+  if (tplInput) {
+    tplInput.value = (tplId === 1) ? uiState.template1 : uiState.template2;
+  }
+}
+
+/**
+ * Switch template editor between template 1 and 2 (Open)
+ * @param {number} tplId - 1 or 2
+ */
+function switchOpenTemplateEditor(tplId) {
+  if (uiState.activeOpenTemplateId === tplId) return;
+  
+  uiState.activeOpenTemplateId = tplId;
+  
+  // トグルボタンのactive状態更新
+  document.querySelectorAll('.toggle-btn[data-open-tpl-id]').forEach(btn => {
+    if (parseInt(btn.dataset.openTplId, 10) === tplId) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+  
+  // 入力欄の内容を切り替え
+  const openTplInput = $("#openTpl");
+  if (openTplInput) {
+    openTplInput.value = (tplId === 1) ? uiState.openTemplate1 : uiState.openTemplate2;
+  }
+}
+
+/* ===================== Shortcut Display ===================== */
 async function displayCurrentShortcuts() {
   const copyDisplay = $("#copyShortcutDisplay");
   const openDisplay = $("#openShortcutDisplay");
+  const tab1Display = $("#tab1ShortcutDisplay");
+  const tab2Display = $("#tab2ShortcutDisplay");
 
   if (!copyDisplay || !openDisplay) return;
 
   try {
     const commands = await chrome.commands.getAll();
 
-    // Find Copy and Open commands
+    // Find commands
     const copyCmd = commands.find(c => c.name === 'copy-smart-url');
     const openCmd = commands.find(c => c.name === 'open-smart-url');
+    const tab1Cmd = commands.find(c => c.name === 'copy-tab1');
+    const tab2Cmd = commands.find(c => c.name === 'copy-tab2');
 
     // Get i18n "Not set" text (fallback to English)
     const notSetText = t('shortcut_not_set', 'Not set');
@@ -566,6 +784,9 @@ async function displayCurrentShortcuts() {
     // Update displays in advanced section
     copyDisplay.textContent = copyCmd?.shortcut || notSetText;
     openDisplay.textContent = openCmd?.shortcut || notSetText;
+    
+    if (tab1Display) tab1Display.textContent = tab1Cmd?.shortcut || notSetText;
+    if (tab2Display) tab2Display.textContent = tab2Cmd?.shortcut || notSetText;
 
     // Update shortcut hints on main action buttons
     const copyHint = $("#copyShortcutHint");
@@ -579,11 +800,120 @@ async function displayCurrentShortcuts() {
       openHint.textContent = openCmd?.shortcut || '';
     }
 
+    // Update tooltips for extra copy buttons
+    updateExtraCopyButtonTooltips(tab1Cmd, tab2Cmd);
+
   } catch (err) {
     console.warn('[popup] Failed to load shortcuts:', err);
     copyDisplay.textContent = '-';
     openDisplay.textContent = '-';
+    if (tab1Display) tab1Display.textContent = '-';
+    if (tab2Display) tab2Display.textContent = '-';
   }
+}
+
+/* ===================== Extra Copy Buttons ===================== */
+
+function updateExtraCopyButtonTooltips(tab1Cmd, tab2Cmd) {
+  const btnTab1 = $("#btnTab1");
+  const btnTab2 = $("#btnTab2");
+
+  if (btnTab1) {
+    const title = t('extra_copy_tab1_title', 'Target: Current tab only (Copy 1)');
+    const shortcut = tab1Cmd?.shortcut || '';
+    btnTab1.title = shortcut ? `${title}\n${shortcut}` : title;
+  }
+
+  if (btnTab2) {
+    const title = t('extra_copy_tab2_title', 'Target: Current tab only (Copy 2)');
+    const shortcut = tab2Cmd?.shortcut || '';
+    btnTab2.title = shortcut ? `${title}\n${shortcut}` : title;
+  }
+}
+
+function initExtraCopyButtons() {
+  const checkbox = $("#chkShowExtraCopyBtns");
+  const buttonsContainer = $("#extraCopyButtons");
+  const btnTab1 = $("#btnTab1");
+  const btnTab2 = $("#btnTab2");
+
+  if (!checkbox || !buttonsContainer) return;
+
+  // Toggle visibility based on checkbox
+  const toggleButtons = () => {
+    if (checkbox.checked) {
+      buttonsContainer.style.display = "flex";
+    } else {
+      buttonsContainer.style.display = "none";
+    }
+  };
+
+  checkbox.addEventListener("change", toggleButtons);
+  toggleButtons(); // Initial state
+
+  // Add click handlers for copy buttons
+  if (btnTab1) {
+    btnTab1.addEventListener("click", async () => {
+      await performExtraCopy("tab1", "fmtTab1");
+    });
+  }
+
+  if (btnTab2) {
+    btnTab2.addEventListener("click", async () => {
+      await performExtraCopy("tab2", "fmtTab2");
+    });
+  }
+}
+
+async function performExtraCopy(type, formatId) {
+  try {
+    const cfg = Object.assign({}, defaults, await chrome.storage.sync.get(Object.keys(defaults)));
+    
+    // Override the format with the extra copy format
+    const originalFmt = cfg.fmt;
+    cfg.fmt = $("#" + formatId).value;
+    
+    // Get only current active tab
+    let tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    // Apply filters using existing logic
+    if (cfg.dedup) tabs = uniqueByUrl(tabs);
+    
+    // Apply exclusion patterns
+    const ex = (cfg.excludeList || "").trim();
+    if (ex) tabs = tabs.filter(t => !excludeFilter(t.url, ex));
+    
+    // Sort
+    tabs = sortTabs(tabs, cfg.sort, cfg.desc);
+
+    // Format tabs using existing formatLine function
+    const lines = tabs.map((t, i) => formatLine(t, cfg, i));
+    const text = lines.join("\n");
+    
+    await navigator.clipboard.writeText(text);
+    
+    // Show user-friendly message
+    const msgKey = type === "tab1" ? "copied_current_tab_fmt1" : "copied_current_tab_fmt2";
+    const fallback = type === "tab1" ? "Copied current tab (Format 1)" : "Copied current tab (Format 2)";
+    toast(t(msgKey, fallback));
+    
+    // Restore original format
+    cfg.fmt = originalFmt;
+  } catch (e) {
+    console.error(e);
+    toast(t("copy_failed", "Copy failed"), false);
+  }
+}
+
+// Helper function to parse allowed protocols
+function parseAllowedProtocols(value) {
+  const set = new Set();
+  if (!value) return set;
+  value.split(",").forEach(p => {
+    const trimmed = p.trim().toLowerCase();
+    if (trimmed) set.add(trimmed);
+  });
+  return set;
 }
 
 document.addEventListener("DOMContentLoaded", init);

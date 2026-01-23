@@ -24,7 +24,8 @@ Copy all tab URLs in multiple formats, or open URLs directly from text or your c
 
 * Export tab URLs as **Markdown**, **HTML**, **TSV**, **JSON**, or **custom templates**
 * Include **page titles** for better readability
-* Choose scope: **current window** or **all windows**
+* Choose scope: **current window**, **all windows**, or **current tab only**
+* **Copy current tab**: Quickly copy just the active tab with dedicated buttons and shortcuts
 * Filter options: remove duplicates, protocol restrictions, skip pinned tabs
 * Exclude URLs using **wildcard patterns**
 * **Protocol allowlist**: Control which URL schemes to include (https, http, file, etc.)
@@ -41,8 +42,9 @@ Copy all tab URLs in multiple formats, or open URLs directly from text or your c
 ### ⌨️ Keyboard Shortcuts
 
 * **System-wide shortcuts** that work even when the popup is closed
-* **Copy URLs** from tabs with a single keystroke (default: Ctrl+Shift+U / Cmd+Shift+U on Mac)
-* **Open URLs** from clipboard with a single keystroke (default: Ctrl+Shift+V / Cmd+Shift+V on Mac)
+* **Copy all tabs** from current/all windows with a single keystroke (default: Ctrl+Shift+U / Cmd+Shift+U on macOS)
+* **Copy current tab** with a single keystroke (default: Ctrl+Shift+Y / Cmd+Shift+Y, Alt+Shift+Y / Option+Shift+Y on macOS)
+* **Open URLs** from clipboard with a single keystroke (default: Ctrl+Shift+V / Cmd+Shift+V on macOS)
 * Configure custom shortcuts via `chrome://extensions/shortcuts`
 * Shortcuts displayed in popup for easy reference
 
@@ -90,6 +92,7 @@ SmartURLs has multi-language documentation for both the **Custom Template System
 
 | Version | Date       | Notes                  |
 | ------- | ---------- | ---------------------- |
+| 1.6.0   | 2026-01-24 | Added current tab copy with keyboard shortcuts |
 | 1.5.1   | 2025-12-22 | Shortcut open confirmations via notifications |
 | 1.5.0   | 2025-12-19 | Protocol restrictions for copy/open with detailed status feedback |
 | 1.4.0   | 2025-12-11 | Custom Template System enhancements |

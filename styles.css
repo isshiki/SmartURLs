@@ -178,6 +178,46 @@ body{
   margin:0 0 8px; color:var(--muted); font-size:12px;
   text-transform:uppercase; letter-spacing:.04em;
 }
+
+.block-title-row {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.block-title-row .block-title {
+  margin: 0;
+}
+
+.extra-copy-buttons {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  gap: 6px;
+}
+
+.extra-copy-btn {
+  font-size: 16px;
+  padding: 4px 8px;
+  background: var(--btn1-bg);
+  color: var(--btn1-fg);
+  border: 1px solid var(--btn1-bg);
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+.extra-copy-btn:hover {
+  opacity: 1;
+  filter: brightness(calc(1 + var(--btn-hov)));
+  transform: translateY(-1px);
+}
+
+.extra-copy-btn:active {
+  transform: translateY(0);
+}
 .field{ margin:10px 0; }
 .label{ display:block; margin-bottom:6px; font-weight:600; }
 
@@ -222,10 +262,45 @@ details.block > summary{
 }
 details.block > summary::-webkit-details-marker{ display:none; }
 details.block > summary::after{
-  content:"▼"; position:absolute; right:2px; top:0;
+  content:"▼"; position:absolute; right:2px; top:50%;
   color:var(--muted); font-size:12px; line-height:1;
+  transform:translateY(-50%);
+}
+/* Copy column: nudge caret left without affecting Open column */
+.cols > .col:first-child details.block > summary::after{
+  right:14px;
 }
 details.block[open] > summary::after{ content:"▲"; }
+
+/* Advanced (Copy) section: split into two peer cards under one accordion */
+details.advanced-stack{
+  background:transparent;
+  border:none;
+  padding:0;
+}
+details.advanced-stack > summary{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-bottom:none;
+  border-radius:12px 12px 0 0;
+  padding:12px;
+  margin:0;
+}
+details.advanced-stack:not([open]) > summary{
+  border-bottom:1px solid var(--border);
+  border-radius:12px;
+}
+details.advanced-stack > .advanced-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-top:none;
+  border-radius:0 0 12px 12px;
+  padding:0 12px 12px;
+  margin:0;
+}
+details.advanced-stack > .advanced-card > .field:first-child{
+  margin-top:0;
+}
 
 #pasteBox textarea{ display:block; }
 
@@ -491,4 +566,101 @@ html[data-theme="light"] input[type="radio"]:focus-visible{
   background: var(--bg);
   border-color: var(--focus);
   color: var(--fg);
+}
+
+/* ===================== Shortcut Formats & Template Toggle ===================== */
+
+/* ショートカット形式選択行 */
+.shortcut-formats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shortcut-format-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shortcut-format-label {
+  min-width: 180px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.fmt-dropdown {
+  flex: 1;
+  min-width: 0;
+}
+
+/* テンプレートトグル */
+.template-toggle {
+  display: inline-flex;
+  gap: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.toggle-btn {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--fg);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+
+.toggle-btn:hover {
+  background: var(--btn2-bg);
+  color: var(--btn2-fg);
+}
+
+.toggle-btn.active {
+  background: var(--btn1-bg);
+  color: var(--btn1-fg);
+  border-color: var(--btn1-bg);
+}
+
+/* ===================== Extra Section ===================== */
+.extra-section {
+  margin: 0;
+  padding: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.extra-heading {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  color: var(--fg);
+}
+
+.extra-copy-item {
+  margin-bottom: 16px;
+}
+
+.extra-copy-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 6px 0;
+  color: var(--fg);
+}
+
+.extra-copy-item .field {
+  margin-bottom: 10px;
+}
+
+.extra-copy-item select {
+  width: 100%;
+}
+
+.extra-copy-item .shortcut-controls {
+  margin-top: 8px;
 }

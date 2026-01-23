@@ -50,6 +50,8 @@
   "textarea_label": { "message": "テキストを貼り付け" },
 
   "copied_n":       { "message": "コピーしました: " },
+  "copied_current_tab_fmt1": { "message": "現在のタブをコピーしました（形式1）" },
+  "copied_current_tab_fmt2": { "message": "現在のタブをコピーしました（形式2）" },
   "copy_failed":    { "message": "コピーに失敗しました" },
   "opened_n":       { "message": "オープンしました: " },
   "open_failed":    { "message": "オープンに失敗しました" },
@@ -67,7 +69,10 @@
   "shortcuts_config_hint": { "message": "Chromeのショートカット設定画面を開きます" },
   "shortcut_note":         { "message": "注: ショートカットキーを使用する場合、URL数が上で設定した値（N）を超えると確認通知が表示されます。表示されない場合は、通知設定と集中モードを確認してください。" },
   "shortcut_note_link":    { "message": "FAQを見る。" },
-  "commands_copy_from_tabs":      { "message": "タブのURLをコピー" },
+  "commands_copy_all_tabs":       { "message": "全タブをコピー" },
+  "commands_copy_all_tabs_2":     { "message": "全タブをコピー [2]" },
+  "commands_copy_current_tab":    { "message": "現在のタブをコピー" },
+  "commands_copy_current_tab_2":  { "message": "現在のタブをコピー [2]" },
   "commands_open_from_clipboard": { "message": "クリップボードからURLを開く" },
 
   "lang_label":     { "message": "自動判定または言語を選択" },
@@ -86,5 +91,12 @@
   "protocol_skipped_suffix":      { "message": "（スキップ: {count} / プロトコル対象外）" },
   "protocol_skipped_with_proto_suffix": { "message": "（スキップ: {count} / {protocols}）" },
   "protocol_failed_suffix":       { "message": "（失敗: {count}）" },
-  "protocol_failed_with_proto_suffix": { "message": "（失敗: {count} / {protocols}）" }
+  "protocol_failed_with_proto_suffix": { "message": "（失敗: {count} / {protocols}）" },
+
+  "extra_section_title": { "message": "追加のコピー形式とキーボードショートカット" },
+  "show_extra_copy_buttons": { "message": "追加のコピーボタンを表示する" },
+  "extra_copy_tab1_title": { "message": "対象：現在のタブのみ（形式1）" },
+  "extra_copy_tab2_title": { "message": "対象：現在のタブのみ（形式2）" },
+  "opt_custom1": { "message": "カスタムテンプレート [1]" },
+  "opt_custom2": { "message": "カスタムテンプレート [2]" }
 }

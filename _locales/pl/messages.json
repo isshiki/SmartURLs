@@ -26,6 +26,8 @@
   "url_only":       { "message": "Tylko URL" },
   "json_lines":     { "message": "Dane JSON" },
   "opt_custom":     { "message": "Niestandardowy szablon…" },
+  "opt_custom1":    { "message": "Niestandardowy szablon [1]" },
+  "opt_custom2":    { "message": "Niestandardowy szablon [2]" },
 
   "custom_tpl_label":      { "message": "Niestandardowy szablon" },
   "custom_tpl_tokens":     { "message": "Tokeny: $$title, $$url, $$domain, $$path, $$basename, $$idx, $$date, $$time, $$nl (nowa linia), …" },
@@ -50,6 +52,8 @@
   "textarea_label": { "message": "Wklej tekst" },
 
   "copied_n":       { "message": "Skopiowano " },
+  "copied_current_tab_fmt1": { "message": "Skopiowano bieżącą kartę (Format 1)" },
+  "copied_current_tab_fmt2": { "message": "Skopiowano bieżącą kartę (Format 2)" },
   "copy_failed":    { "message": "Kopiowanie nie powiodło się" },
   "opened_n":       { "message": "Otwarto " },
   "open_failed":    { "message": "Otwieranie nie powiodło się" },
@@ -58,6 +62,12 @@
   "confirm_many":   { "message": "Otworzyć wiele kart?" },
 
   "advanced":          { "message": "Zaawansowane" },
+
+  "commands_copy_all_tabs":       { "message": "Kopiuj wszystkie karty" },
+  "commands_copy_all_tabs_2":     { "message": "Kopiuj wszystkie karty [2]" },
+  "commands_copy_current_tab":    { "message": "Kopiuj bieżącą kartę" },
+  "commands_copy_current_tab_2":  { "message": "Kopiuj bieżącą kartę [2]" },
+  "commands_open_from_clipboard": { "message": "Otwórz adresy URL ze schowka" },
 
   "shortcuts_title":       { "message": "Skróty klawiszowe" },
   "shortcuts_copy_suffix": { "message": "Kopiuj URL" },
@@ -86,5 +96,12 @@
   "protocol_skipped_suffix":      { "message": " (Pominięto: {count} / filtrowanie protokołu)" },
   "protocol_skipped_with_proto_suffix": { "message": " (Pominięto: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (Nie udało się: {count})" },
-  "protocol_failed_with_proto_suffix": { "message": " (Niepowodzenie: {count} / {protocols})" }
+  "protocol_failed_with_proto_suffix": { "message": " (Niepowodzenie: {count} / {protocols})" },
+
+  "extra_section_title": { "message": "Dodatkowe formaty kopiowania i skróty klawiaturowe" },
+  "show_extra_copy_buttons": { "message": "Pokaż dodatkowe przyciski kopiowania" },
+  "extra_copy_tab1_title": { "message": "Zakres: Tylko bieżąca karta (Format 1)" },
+  "extra_copy_tab2_title": { "message": "Zakres: Tylko bieżąca karta (Format 2)" },
+  "opt_custom1": { "message": "Niestandardowy szablon [1]" },
+  "opt_custom2": { "message": "Niestandardowy szablon [2]" }
 }

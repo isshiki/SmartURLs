@@ -270,6 +270,10 @@ chrome.commands.onCommand.addListener(async (command) => {
 
   if (command === 'copy-smart-url') {
     await handleCopyCommand();
+  } else if (command === 'copy-tab1') {
+    await handleCopyTab1Command();
+  } else if (command === 'copy-tab2') {
+    await handleCopyTab2Command();
   } else if (command === 'open-smart-url') {
     await handleOpenCommand();
   } else {
@@ -342,6 +346,112 @@ async function handleCopyCommand() {
       iconUrl: 'icons/icon128.png',
       title: 'SmartURLs - Copy Failed',
       message: err.message || 'Failed to copy URLs',
+      priority: 2
+    });
+  }
+}
+
+/**
+ * Handle Copy Current Tab command (Ctrl+Shift+Y)
+ * Uses format from fmtTab1 setting
+ */
+async function handleCopyTab1Command() {
+  try {
+    const cfg = Object.assign({}, defaults, await chrome.storage.sync.get(Object.keys(defaults)));
+    
+    // Override format with Tab1 format
+    cfg.fmt = cfg.fmtTab1 || 'md';
+    cfg.scope = 'current';
+    
+    // Get only current active tab
+    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    
+    if (tabs.length === 0) {
+      throw new Error('No active tab found');
+    }
+    
+    // Apply exclusion filter
+    const ex = (cfg.excludeList || "").trim();
+    const filteredTabs = ex ? tabs.filter(t => !excludeFilter(t.url, ex)) : tabs;
+    
+    if (filteredTabs.length === 0) {
+      throw new Error('Tab URL excluded by filter');
+    }
+    
+    // Format the single tab
+    const text = formatLine(filteredTabs[0], cfg, 0);
+    await copyToClipboard(text);
+
+    await chrome.notifications.create('copy-tab1-success', {
+      type: 'basic',
+      iconUrl: 'icons/icon128.png',
+      title: 'SmartURLs - Copy Current',
+      message: 'Copied 1 URL to clipboard',
+      priority: 1
+    });
+
+    console.log('[SW] Copy Tab1 succeeded: 1 URL');
+  } catch (err) {
+    console.error('[SW] Copy Tab1 failed:', err);
+
+    await chrome.notifications.create('copy-tab1-error', {
+      type: 'basic',
+      iconUrl: 'icons/icon128.png',
+      title: 'SmartURLs - Copy Current Failed',
+      message: err.message || 'Failed to copy URL',
+      priority: 2
+    });
+  }
+}
+
+/**
+ * Handle Copy Current Tab [2] command (Alt+Shift+Y)
+ * Uses format from fmtTab2 setting
+ */
+async function handleCopyTab2Command() {
+  try {
+    const cfg = Object.assign({}, defaults, await chrome.storage.sync.get(Object.keys(defaults)));
+    
+    // Override format with Tab2 format
+    cfg.fmt = cfg.fmtTab2 || 'md';
+    cfg.scope = 'current';
+    
+    // Get only current active tab
+    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    
+    if (tabs.length === 0) {
+      throw new Error('No active tab found');
+    }
+    
+    // Apply exclusion filter
+    const ex = (cfg.excludeList || "").trim();
+    const filteredTabs = ex ? tabs.filter(t => !excludeFilter(t.url, ex)) : tabs;
+    
+    if (filteredTabs.length === 0) {
+      throw new Error('Tab URL excluded by filter');
+    }
+    
+    // Format the single tab
+    const text = formatLine(filteredTabs[0], cfg, 0);
+    await copyToClipboard(text);
+
+    await chrome.notifications.create('copy-tab2-success', {
+      type: 'basic',
+      iconUrl: 'icons/icon128.png',
+      title: 'SmartURLs - Copy Current [2]',
+      message: 'Copied 1 URL to clipboard',
+      priority: 1
+    });
+
+    console.log('[SW] Copy Tab2 succeeded: 1 URL');
+  } catch (err) {
+    console.error('[SW] Copy Tab2 failed:', err);
+
+    await chrome.notifications.create('copy-tab2-error', {
+      type: 'basic',
+      iconUrl: 'icons/icon128.png',
+      title: 'SmartURLs - Copy Current [2] Failed',
+      message: err.message || 'Failed to copy URL',
       priority: 2
     });
   }

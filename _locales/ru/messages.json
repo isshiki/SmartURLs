@@ -26,6 +26,8 @@
   "url_only":       { "message": "Только URL" },
   "json_lines":     { "message": "JSON данные" },
   "opt_custom":     { "message": "Пользовательский шаблон…" },
+  "opt_custom1":    { "message": "Пользовательский шаблон [1]" },
+  "opt_custom2":    { "message": "Пользовательский шаблон [2]" },
 
   "custom_tpl_label":      { "message": "Пользовательский шаблон" },
   "custom_tpl_tokens":     { "message": "Токены: $$title, $$url, $$domain, $$path, $$basename, $$idx, $$date, $$time, $$nl (новая строка), …" },
@@ -50,6 +52,8 @@
   "textarea_label": { "message": "Вставить текст" },
 
   "copied_n":       { "message": "Скопировано " },
+  "copied_current_tab_fmt1": { "message": "Текущая вкладка скопирована (Формат 1)" },
+  "copied_current_tab_fmt2": { "message": "Текущая вкладка скопирована (Формат 2)" },
   "copy_failed":    { "message": "Не удалось скопировать" },
   "opened_n":       { "message": "Открыто " },
   "open_failed":    { "message": "Не удалось открыть" },
@@ -58,6 +62,12 @@
   "confirm_many":   { "message": "Открыть много вкладок?" },
 
   "advanced":          { "message": "Расширенные" },
+
+  "commands_copy_all_tabs":       { "message": "Копировать все вкладки" },
+  "commands_copy_all_tabs_2":     { "message": "Копировать все вкладки [2]" },
+  "commands_copy_current_tab":    { "message": "Копировать текущую вкладку" },
+  "commands_copy_current_tab_2":  { "message": "Копировать текущую вкладку [2]" },
+  "commands_open_from_clipboard": { "message": "Открыть URL из буфера обмена" },
 
   "shortcuts_title":       { "message": "Сочетания клавиш" },
   "shortcuts_copy_suffix": { "message": "Копировать URL" },
@@ -86,5 +96,12 @@
   "protocol_skipped_suffix":      { "message": " (Пропущено: {count} / фильтрация протокола)" },
   "protocol_skipped_with_proto_suffix": { "message": " (Пропущено: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (Не удалось: {count})" },
-  "protocol_failed_with_proto_suffix": { "message": " (Не удалось: {count} / {protocols})" }
+  "protocol_failed_with_proto_suffix": { "message": " (Неудача: {count} / {protocols})" },
+
+  "extra_section_title": { "message": "Дополнительные форматы копирования и горячие клавиши" },
+  "show_extra_copy_buttons": { "message": "Показать дополнительные кнопки копирования" },
+  "extra_copy_tab1_title": { "message": "Область: Только текущая вкладка (Формат 1)" },
+  "extra_copy_tab2_title": { "message": "Область: Только текущая вкладка (Формат 2)" },
+  "opt_custom1": { "message": "Пользовательский шаблон [1]" },
+  "opt_custom2": { "message": "Пользовательский шаблон [2]" }
 }
