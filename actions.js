@@ -33,7 +33,7 @@ const defaults = {
   tpl2: "* [$title]($url)",
 
   fmtTab1: "md",
-  fmtTab2: "md",
+  fmtTab2: "url",
   showExtraCopyBtns: true,
   openFmt: "smart",
   openTpl: "- [$title]($url)",
