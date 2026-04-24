@@ -71,8 +71,8 @@ Before publishing to the Chrome Web Store:
 1. User triggers via popup button or keyboard shortcut (Ctrl+Shift+U / Cmd+Shift+U on Mac)
 2. `prepareCopyData()` in actions.js:
    - Fetches tabs via chrome.tabs API based on scope (current window / all windows)
-   - Applies filters (HTTP-only, no pinned tabs, deduplication, exclusion patterns)
-   - Sorts tabs (natural order, by domain, by URL, by title)
+   - Applies filters (protocol allowlist, no pinned tabs, deduplication, exclusion patterns)
+   - Sorts tabs using the selected order (natural order, URL, or title in the popup UI)
    - Formats each tab using `formatLine()` with the selected template
 3. Clipboard write:
    - Popup: Uses `navigator.clipboard.writeText()` directly (has document focus)
@@ -83,15 +83,15 @@ Before publishing to the Chrome Web Store:
 2. Text source determined: clipboard or manual textarea input
 3. `prepareOpenUrls()` in actions.js:
    - Parses text using `extractByFormat()` based on selected format (smart auto-detect, Markdown, HTML, TSV, JSON Lines, or custom template)
-   - Applies filters (HTTP-only, deduplication, exclusion patterns)
+   - Applies filters (protocol allowlist, deduplication, exclusion patterns)
 4. Service worker's `openUrlsInTabs()` creates tabs:
-   - Validates URLs (http/https only, rejects javascript:, data:, etc.)
-   - Enforces hard limit (MAX_OPEN_TABS = 30)
+   - Validates URLs against the configured protocol allowlist when protocol restriction is enabled
+   - Enforces a defensive hard cap (MAX_OPEN_TABS = 999)
    - Opens tabs in background with throttling delay (60ms) to avoid browser rate limiting
 
 ### Template System
 
-**Token Expansion (actions.js:100-171)**
+**Token Expansion (`formatLine()` in actions.js)**
 
 The custom template system processes tokens in three phases:
 1. **Phase 1**: Process conditional blocks `{{q=param1,param2: content with $param1 and $param2}}`
@@ -108,7 +108,7 @@ The custom template system processes tokens in three phases:
 
 ### Internationalization (i18n)
 
-**Two-mode system** (popup.js:9-67):
+**Two-mode system** (`loadDict()` / `t()` / `applyI18n()` in popup.js):
 - **AutoLang mode**: Uses Chrome's built-in `chrome.i18n.getMessage()` API, respects browser language
 - **Manual mode**: Fetches and parses `_locales/{lang}/messages.json` directly, allows instant language switching without browser restart
 
@@ -116,16 +116,18 @@ All 16 languages share the same message keys. The popup dynamically loads dictio
 
 ### Security Considerations
 
-**URL Validation** (sw.js:31-38):
-- All URLs opened in tabs are validated with `isSafeHttpUrl()` to prevent scheme abuse (javascript:, data:, file:, etc.)
-- Only http: and https: protocols are allowed
+**URL Validation**:
+- `prepareOpenUrls()` filters parsed URLs through the configured protocol allowlist when `openProtocolRestrict` is enabled
+- `openUrlsInTabs()` applies the same allowlist-aware security boundary before calling `chrome.tabs.create()`
+- If protocol restriction is disabled, SmartURLs attempts to open parsed URLs and lets Chrome's tab/security boundary reject protocols it cannot open
 
 **Message Sender Validation**:
-- Both service worker (sw.js:100) and offscreen document (offscreen.js:25) verify `sender.id === chrome.runtime.id` to reject messages from external sources
+- Both service worker and offscreen document message handlers verify `sender.id === chrome.runtime.id` to reject messages from external sources
 - Prevents potential abuse from malicious extensions or web pages
 
-**Tab Opening Limits** (sw.js:24-28):
-- Hard cap of 30 tabs enforced in service worker regardless of user settings
+**Tab Opening Limits**:
+- Hard cap of 999 tabs enforced in service worker regardless of user settings
+- `openLimit` is only the user-facing confirmation threshold before opening many tabs
 - 60ms throttling delay between tab creation to reduce browser load
 
 ### Storage
@@ -133,21 +135,29 @@ All 16 languages share the same message keys. The popup dynamically loads dictio
 Uses `chrome.storage.sync` API for all settings. The `defaults` object in actions.js defines the complete schema:
 ```javascript
 {
-  fmt: "md",              // Copy format: md, url, tsv, html, jsonl, custom
-  tpl: "- [$title]($url)", // Copy custom template
-  openFmt: "smart",       // Open format: smart, md, url, tsv, html, jsonl, custom
-  openTpl: "- [$title]($url)", // Open custom template
-  source: "clipboard",    // Open source: clipboard, textarea
-  scope: "current",       // Copy scope: current, all
-  dedup: true,           // Remove duplicate URLs
-  httpOnly: true,        // Only include HTTP/HTTPS URLs
-  noPinned: false,       // Exclude pinned tabs
-  excludeList: "",       // Newline-separated wildcard patterns
-  sort: "natural",       // Sort order: natural, domain, url, title
-  desc: false,          // Sort descending
-  openLimit: 30,        // Confirmation threshold for opening many tabs
-  theme: "system",      // Theme: system, dark, light
-  lang: "AutoLang"      // Language: AutoLang, en, ja, ko, etc.
+  fmt: "md",                         // Copy format: md, url, tsv, html, jsonl, custom1, custom2
+  tpl: "- [$title]($url)",           // Copy custom template 1
+  tpl2: "* [$title]($url)",          // Copy custom template 2
+  fmtTab1: "md",                     // Current-tab copy shortcut/button format 1
+  fmtTab2: "url",                    // Current-tab copy shortcut/button format 2
+  showExtraCopyBtns: true,           // Show current-tab copy buttons in the popup
+  openFmt: "smart",                  // Open format: smart, md, url, tsv, html, jsonl, custom1, custom2
+  openTpl: "- [$title]($url)",       // Open custom template 1
+  openTpl2: "* [$title]($url)",      // Open custom template 2
+  source: "clipboard",               // Open source: clipboard, textarea
+  scope: "current",                  // Copy scope: current, all
+  dedup: true,                       // Remove duplicate URLs
+  copyProtocolRestrict: true,        // Filter copied URLs by protocol allowlist
+  copyProtocolAllowed: "http,https,file",
+  openProtocolRestrict: true,        // Filter opened URLs by protocol allowlist
+  openProtocolAllowed: "http,https,file",
+  noPinned: false,                   // Exclude pinned tabs
+  excludeList: "",                   // Newline-separated wildcard patterns
+  sort: "natural",                   // Sort order exposed in UI: natural, url, title
+  desc: false,                       // Sort descending
+  openLimit: 30,                     // Confirmation threshold for opening many tabs
+  theme: "system",                   // Theme: system, dark, light
+  lang: "AutoLang"                   // Language: AutoLang, en, ja, ko, etc.
 }
 ```
 
@@ -158,7 +168,7 @@ Uses `chrome.storage.sync` API for all settings. The `defaults` object in action
 - **Localization**: `_locales/{lang}/messages.json` (16 languages)
 - **Configuration**: `manifest.json`
 - **Build**: `build.ps1` (PowerShell), `build.bat` (wrapper)
-- **Documentation**: `README.md`, `docs/` (multi-language custom template guides)
+- **Documentation**: `README.md`, `docs/` (multi-language custom template guides and FAQ)
 
 ## Common Development Tasks
 
@@ -166,22 +176,22 @@ Uses `chrome.storage.sync` API for all settings. The `defaults` object in action
 
 1. Create `_locales/{lang_code}/messages.json` with all required keys (copy from `en/messages.json` as template)
 2. Translate all message values while keeping keys unchanged
-3. Add entry to `HELP_URLS` object in popup.js (lines 70-87) pointing to documentation
-4. Create `docs/custom-templates.{lang_code}.md` if providing translated documentation
+3. Add entries to `HELP_URLS` and `FAQ_URLS` in `popup.js` pointing to documentation
+4. Create `docs/custom-templates.{lang_code}.md` and `docs/faq.{lang_code}.md` if providing translated documentation
 5. Run `.\validate-locales.ps1` to verify all keys are present
 6. Test by selecting the new language in the popup's language dropdown
 
 **Locale File Requirements:**
 - Must be valid UTF-8 encoded JSON
-- Must contain all 62 keys from English locale (no more, no fewer)
+- Must contain the same keys as the English locale (currently 81 keys; run `.\validate-locales.ps1` for the authoritative count)
 - Each key must have a `message` property with non-empty string value
 - Use `$$` to represent a literal `$` character (Chrome i18n escaping convention)
 
 ### Modifying Template Tokens
 
-Template token expansion happens in `actions.js:formatLine()` (lines 100-171). To add a new token:
+Template token expansion happens in `formatLine()` in `actions.js`. To add a new token:
 1. Add the token replacement logic in Phase 3 (after standard tokens)
-2. Update `extractByFormat()` for Open templates if the token should be supported (lines 252-254)
+2. Update `extractByFormat()` for Open templates if the token should be supported
 3. Update documentation in all supported languages
 
 ### Changing Storage Schema
@@ -214,8 +224,8 @@ When making changes, verify:
 - [ ] Open URLs works from popup and keyboard shortcut with both clipboard and textarea sources
 - [ ] All 5 preset formats work correctly (Markdown, URL, TSV, HTML, JSON Lines)
 - [ ] Custom templates work for both Copy and Open
-- [ ] Filters work: deduplication, HTTP-only, exclude patterns, no pinned tabs
-- [ ] Sorting works: natural, domain, URL, title (ascending and descending)
+- [ ] Filters work: deduplication, protocol allowlists, exclude patterns, no pinned tabs
+- [ ] Sorting works: natural, URL, title (ascending and descending)
 - [ ] Language switching updates all UI elements immediately
 - [ ] Theme switching works (system, dark, light)
 - [ ] Settings persist across browser restart
