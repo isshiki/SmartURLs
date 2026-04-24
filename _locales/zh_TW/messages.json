@@ -91,6 +91,7 @@
   "protocol_skipped_with_proto_suffix": { "message": " (已跳過: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (失敗: {count})" },
   "protocol_failed_with_proto_suffix": { "message": "（失敗：{count} / {protocols}）" },
+  "file_access_denied_suffix": { "message": "（不允許存取檔案: {count}）" },
 
   "extra_section_title": { "message": "額外複製格式和鍵盤快捷鍵" },
   "show_extra_copy_buttons": { "message": "顯示額外複製按鈕" },

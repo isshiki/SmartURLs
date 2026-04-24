@@ -916,6 +916,32 @@ function parseAllowedProtocols(value) {
   return set;
 }
 
+function fileAccessDeniedSuffix(count) {
+  return t("file_access_denied_suffix", ` (File access not allowed: ${count})`)
+    .replace("{count}", count);
+}
+
+async function filterFileUrlsWithPermissionRequest(urls) {
+  const fileUrls = urls.filter(isFileUrl);
+  if (fileUrls.length === 0) {
+    return { urls, rejectedByFileAccess: 0 };
+  }
+
+  if (await isFileSchemeAccessAllowed()) {
+    return { urls, rejectedByFileAccess: 0 };
+  }
+
+  const granted = await requestFileSchemeAccess();
+  if (granted) {
+    return { urls, rejectedByFileAccess: 0 };
+  }
+
+  return {
+    urls: urls.filter(u => !isFileUrl(u)),
+    rejectedByFileAccess: fileUrls.length
+  };
+}
+
 document.addEventListener("DOMContentLoaded", init);
 
 /* ===================== Copy Button ===================== */
@@ -994,12 +1020,18 @@ $("#btnOpen").addEventListener("click", async () => {
       if (!confirm(`${t("confirm_many","Open many tabs?")} ${count}`)) return;
     }
 
+    const fileAccess = await filterFileUrlsWithPermissionRequest(urls);
+    if (fileAccess.urls.length === 0) {
+      toast(t("opened_n","Opened ") + "0" + fileAccessDeniedSuffix(fileAccess.rejectedByFileAccess), false);
+      return;
+    }
+
     // Delegate to background service worker
     chrome.runtime.sendMessage(
       {
         type: "OPEN_URLS",
-        urls,
-        limit: urls.length,
+        urls: fileAccess.urls,
+        limit: fileAccess.urls.length,
         allowedProtocols: allowedProtocols ? Array.from(allowedProtocols) : null
       },
       (res) => {
@@ -1007,6 +1039,11 @@ $("#btnOpen").addEventListener("click", async () => {
           toast(t("open_failed","Open failed") + ": " + chrome.runtime.lastError.message, false);
         } else if (res?.ok) {
           let message = t("opened_n","Opened ") + `${res.opened}`;
+
+          const rejectedByFileAccess = fileAccess.rejectedByFileAccess + (res.rejectedByFileAccess || 0);
+          if (rejectedByFileAccess > 0) {
+            message += fileAccessDeniedSuffix(rejectedByFileAccess);
+          }
 
           if (skippedByProtocol > 0) {
             let suffix;

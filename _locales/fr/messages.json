@@ -93,6 +93,7 @@
   "protocol_skipped_with_proto_suffix": { "message": " (Ignorés : {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (Échoués : {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Échec: {count} / {protocols})" },
+  "file_access_denied_suffix": { "message": " (Accès aux fichiers non autorisé : {count})" },
 
   "extra_section_title": { "message": "Formats de copie supplémentaires et raccourcis clavier" },
   "show_extra_copy_buttons": { "message": "Afficher les boutons de copie supplémentaires" },

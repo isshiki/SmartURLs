@@ -89,6 +89,7 @@
   "protocol_skipped_with_proto_suffix": { "message": " (Overgeslagen: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (Mislukt: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Mislukt: {count} / {protocols})" },
+  "file_access_denied_suffix": { "message": " (Bestandstoegang niet toegestaan: {count})" },
 
   "extra_section_title": { "message": "Extra kopieerformaten en sneltoetsen" },
   "show_extra_copy_buttons": { "message": "Extra kopieerknoppen weergeven" },

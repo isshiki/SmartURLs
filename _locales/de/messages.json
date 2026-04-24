@@ -93,6 +93,7 @@
   "protocol_skipped_with_proto_suffix": { "message": " (Übersprungen: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (Fehlgeschlagen: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Fehler: {count} / {protocols})" },
+  "file_access_denied_suffix": { "message": " (Dateizugriff nicht erlaubt: {count})" },
 
   "extra_section_title": { "message": "Zusätzliche Kopierformate und Tastaturkürzel" },
   "show_extra_copy_buttons": { "message": "Zusätzliche Kopierschaltflächen anzeigen" },

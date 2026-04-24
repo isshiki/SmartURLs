@@ -92,6 +92,7 @@ SmartURLs has multi-language documentation for both the **Custom Template System
 
 | Version | Date       | Notes                  |
 | ------- | ---------- | ---------------------- |
+| 1.7.0   | 2026-04-25 | Added optional file URL access and improved Smart URL boundary detection |
 | 1.6.0   | 2026-01-24 | Added current tab copy with keyboard shortcuts |
 | 1.5.1   | 2025-12-22 | Shortcut open confirmations via notifications |
 | 1.5.0   | 2025-12-19 | Protocol restrictions for copy/open with detailed status feedback |

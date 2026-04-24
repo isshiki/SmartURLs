@@ -91,6 +91,7 @@
   "protocol_skipped_with_proto_suffix": { "message": " (Dilewati: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (Gagal: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Gagal: {count} / {protocols})" },
+  "file_access_denied_suffix": { "message": " (Akses file tidak diizinkan: {count})" },
 
   "extra_section_title": { "message": "Format Salin Tambahan dan Pintasan Keyboard" },
   "show_extra_copy_buttons": { "message": "Tampilkan Tombol Salin Tambahan" },

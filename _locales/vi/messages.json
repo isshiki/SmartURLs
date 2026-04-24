@@ -91,6 +91,7 @@
   "protocol_skipped_with_proto_suffix": { "message": " (Đã bỏ qua: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (Thất bại: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Thất bại: {count} / {protocols})" },
+  "file_access_denied_suffix": { "message": " (Không được phép truy cập tệp: {count})" },
 
   "extra_section_title": { "message": "Định dạng sao chép bổ sung và phím tắt" },
   "show_extra_copy_buttons": { "message": "Hiển thị nút sao chép bổ sung" },

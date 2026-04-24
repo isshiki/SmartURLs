@@ -93,6 +93,7 @@
   "protocol_skipped_with_proto_suffix": { "message": " (Atlanan: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (Başarısız: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Başarısız: {count} / {protocols})" },
+  "file_access_denied_suffix": { "message": " (Dosya erişimine izin verilmedi: {count})" },
 
   "extra_section_title": { "message": "Ek Kopyalama Biçimleri ve Klavye Kısayolları" },
   "show_extra_copy_buttons": { "message": "Ek Kopyalama Düğmelerini Göster" },

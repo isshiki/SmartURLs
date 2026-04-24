@@ -93,6 +93,7 @@
   "protocol_skipped_with_proto_suffix": { "message": " (Пропущено: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (Не удалось: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Неудача: {count} / {protocols})" },
+  "file_access_denied_suffix": { "message": " (Доступ к файлам не разрешён: {count})" },
 
   "extra_section_title": { "message": "Дополнительные форматы копирования и горячие клавиши" },
   "show_extra_copy_buttons": { "message": "Показать дополнительные кнопки копирования" },

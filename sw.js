@@ -33,6 +33,13 @@ const pendingOpenConfirmations = new Map();
 function buildOpenStatusMessage(response, skippedByProtocol, skippedProtocols) {
   let message = chrome.i18n.getMessage('opened_n') + response.opened;
 
+  const rejectedByFileAccess = response.rejectedByFileAccess || 0;
+  if (rejectedByFileAccess > 0) {
+    const suffix = chrome.i18n.getMessage('file_access_denied_suffix')
+      .replace('{count}', rejectedByFileAccess);
+    message += suffix;
+  }
+
   if (skippedByProtocol > 0) {
     let suffix;
 
@@ -165,6 +172,7 @@ async function openUrlsInTabs(urls, limit = null, allowedProtocols = null) {
   // Apply security boundary based on allowlist
   let safeUrls;
   let rejectedBySecurityBoundary = 0;
+  let rejectedByFileAccess = 0;
 
   if (allowedProtocols && allowedProtocols.size > 0) {
     // Protocol restriction ON: Use allowlist-aware security gate
@@ -175,6 +183,12 @@ async function openUrlsInTabs(urls, limit = null, allowedProtocols = null) {
     // Chrome's security boundaries and permissions still apply during chrome.tabs.create()
     safeUrls = allUrls;
     rejectedBySecurityBoundary = 0;
+  }
+
+  if (safeUrls.some(isFileUrl) && !(await isFileSchemeAccessAllowed())) {
+    const beforeFileAccess = safeUrls.length;
+    safeUrls = safeUrls.filter(u => !isFileUrl(u));
+    rejectedByFileAccess = beforeFileAccess - safeUrls.length;
   }
 
   // Cap limit defensively
@@ -211,6 +225,7 @@ async function openUrlsInTabs(urls, limit = null, allowedProtocols = null) {
     ok: true,
     opened,
     rejectedBySecurityBoundary,
+    rejectedByFileAccess,
     failed,
     failedProtocols, // NEW: ["file", "http"] etc.
     requested: allUrls.length,

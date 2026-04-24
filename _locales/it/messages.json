@@ -91,6 +91,7 @@
   "protocol_skipped_with_proto_suffix": { "message": " (Saltati: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (Falliti: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Fallito: {count} / {protocols})" },
+  "file_access_denied_suffix": { "message": " (Accesso ai file non consentito: {count})" },
 
   "extra_section_title": { "message": "Formati di copia aggiuntivi e scorciatoie da tastiera" },
   "show_extra_copy_buttons": { "message": "Mostra pulsanti di copia aggiuntivi" },

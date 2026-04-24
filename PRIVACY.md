@@ -44,6 +44,10 @@ Used to confirm that keyboard shortcut actions (copy/open) completed successfull
 
 Required to handle clipboard operations when the extension popup is not open (e.g., when using keyboard shortcuts). The offscreen document runs locally in the background and never communicates with external servers. It only processes clipboard and tab data on your device.
 
+### Optional `file:///*` access
+
+SmartURLs may request optional access to local `file://` URLs only when you explicitly try to open a file URL. This permission is not required at install time. If granted, it is used only to ask Chrome to open the selected local file URL in a tab; the file contents are not read, collected, stored, or transmitted by SmartURLs.
+
 All actions occur **only after explicit user interaction** (button click or keyboard shortcut).
 
 ## Keyboard Shortcuts, Notifications, and Offscreen

@@ -91,6 +91,7 @@
   "protocol_skipped_with_proto_suffix": { "message": " (已跳过: {count} / {protocols})" },
   "protocol_failed_suffix":       { "message": " (失败: {count})" },
   "protocol_failed_with_proto_suffix": { "message": "（失败: {count} / {protocols}）" },
+  "file_access_denied_suffix": { "message": "（不允许访问文件: {count}）" },
 
   "extra_section_title": { "message": "额外复制格式和键盘快捷键" },
   "show_extra_copy_buttons": { "message": "显示额外复制按钮" },

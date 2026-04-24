@@ -14,6 +14,8 @@ const LIMITS = {
   customMaxMatches: 1000
 };
 
+const FILE_URL_ORIGIN = "file:///*";
+
 /* ===================== HTML Escaping ===================== */
 
 function escapeHtml(str) {
@@ -118,6 +120,64 @@ function isProtocolAllowed(url, allowedProtocols) {
   } catch {
     return false; // Invalid URL
   }
+}
+
+function isFileUrl(value) {
+  try {
+    return new URL(String(value)).protocol === 'file:';
+  } catch {
+    return false;
+  }
+}
+
+function isFileSchemeAccessAllowed() {
+  if (typeof chrome === 'undefined') return Promise.resolve(false);
+
+  if (chrome.extension?.isAllowedFileSchemeAccess) {
+    return new Promise((resolve) => {
+      try {
+        chrome.extension.isAllowedFileSchemeAccess((allowed) => {
+          resolve(Boolean(allowed));
+        });
+      } catch {
+        resolve(false);
+      }
+    });
+  }
+
+  if (chrome.permissions?.contains) {
+    return new Promise((resolve) => {
+      try {
+        chrome.permissions.contains({ origins: [FILE_URL_ORIGIN] }, (allowed) => {
+          resolve(Boolean(allowed));
+        });
+      } catch {
+        resolve(false);
+      }
+    });
+  }
+
+  return Promise.resolve(false);
+}
+
+function requestFileSchemeAccess() {
+  if (typeof chrome === 'undefined' || !chrome.permissions?.request) {
+    return Promise.resolve(false);
+  }
+
+  return new Promise((resolve) => {
+    try {
+      chrome.permissions.request({ origins: [FILE_URL_ORIGIN] }, (granted) => {
+        if (chrome.runtime?.lastError) {
+          console.warn('[actions] File URL permission request failed:', chrome.runtime.lastError.message);
+        }
+        resolve(Boolean(granted));
+      });
+    } catch (err) {
+      console.warn('[actions] File URL permission request failed:', err);
+      resolve(false);
+    }
+  });
 }
 
 async function fetchTabs(scope, { copyProtocolRestrict, copyProtocolAllowed, noPinned }) {
@@ -279,6 +339,30 @@ function utf8ByteLength(str) {
   return new TextEncoder().encode(str).length;
 }
 
+// Characters that commonly delimit bare URLs in prose but are valid enough for
+// URL parsers to percent-encode if we do not stop at them.
+const SMART_BARE_URL_BOUNDARY_CHARS = new Set([
+  '◆', '◇', '。', '、', '，', '．',
+  '」', '』', '）', '】', '〉', '》', '〕', '〗', '〙', '〛',
+  '｝', '］', '＞'
+]);
+
+function trimSmartBareUrl(url) {
+  let boundaryAt = -1;
+  for (let i = 0; i < url.length; i++) {
+    const cp = url.codePointAt(i);
+    const ch = String.fromCodePoint(cp);
+    if (SMART_BARE_URL_BOUNDARY_CHARS.has(ch)) {
+      boundaryAt = i;
+      break;
+    }
+    if (cp > 0xffff) i++;
+  }
+
+  const candidate = boundaryAt >= 0 ? url.slice(0, boundaryAt) : url;
+  return candidate.replace(/[),.>]+$/g, "");
+}
+
 function extractUrlsSmart(text) {
   const urls = new Set();
 
@@ -306,9 +390,8 @@ function extractUrlsSmart(text) {
   // 5) bare URLs (including bare view-source:...)
   const bare = new RegExp(`${protoPattern}[^\\s)\\]>]+`, 'gi');
   while ((m = bare.exec(text)) !== null) {
-    let u = m[0];
-    u = u.replace(/[),.>]+$/g, "");
-    urls.add(u);
+    const u = trimSmartBareUrl(m[0]);
+    if (u) urls.add(u);
   }
   return Array.from(urls);
 }
@@ -492,7 +575,12 @@ if (typeof module !== 'undefined' && module.exports) {
     formatLine,
     extractByFormat,
     extractUrlsSmart,
+    trimSmartBareUrl,
     parseProtocolAllowlist,
-    isProtocolAllowed
+    isProtocolAllowed,
+    isFileUrl,
+    isFileSchemeAccessAllowed,
+    requestFileSchemeAccess,
+    FILE_URL_ORIGIN
   };
 }
