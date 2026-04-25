@@ -91,6 +91,8 @@
   "protocol_failed_suffix":       { "message": " (Failed: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Failed: {count} / {protocols})" },
   "file_access_denied_suffix": { "message": " (File access not allowed: {count})" },
+  "file_access_help_label": { "message": "file: settings" },
+  "file_access_help_tooltip": { "message": "To open file:// URLs, turn on\n\"Allow access to file URLs\" in Chrome's extension settings." },
 
   "extra_section_title": { "message": "Extra copy formats and keyboard shortcuts" },
   "show_extra_copy_buttons": { "message": "Show extra copy buttons" },

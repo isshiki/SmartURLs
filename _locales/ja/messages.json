@@ -93,6 +93,8 @@
   "protocol_failed_suffix":       { "message": "（失敗: {count}）" },
   "protocol_failed_with_proto_suffix": { "message": "（失敗: {count} / {protocols}）" },
   "file_access_denied_suffix": { "message": "（ファイルURLアクセス未許可: {count}）" },
+  "file_access_help_label": { "message": "file: 許可設定" },
+  "file_access_help_tooltip": { "message": "file:// URL を開くには、Chrome の拡張機能設定で\n「ファイルの URL へのアクセスを許可する」をオンにしてください。" },
 
   "extra_section_title": { "message": "追加のコピー形式とキーボードショートカット" },
   "show_extra_copy_buttons": { "message": "追加のコピーボタンを表示する" },

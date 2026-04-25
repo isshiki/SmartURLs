@@ -183,7 +183,7 @@ Uses `chrome.storage.sync` API for all settings. The `defaults` object in action
 
 **Locale File Requirements:**
 - Must be valid UTF-8 encoded JSON
-- Must contain the same keys as the English locale (currently 82 keys; run `.\validate-locales.ps1` for the authoritative count)
+- Must contain the same keys as the English locale (currently 84 keys; run `.\validate-locales.ps1` for the authoritative count)
 - Each key must have a `message` property with non-empty string value
 - Use `$$` to represent a literal `$` character (Chrome i18n escaping convention)
 
@@ -216,7 +216,7 @@ Keyboard shortcuts are defined in manifest.json and can be tested:
 - **storage**: Required for saving user preferences
 - **notifications**: Required for keyboard shortcut feedback (especially on Linux)
 - **offscreen**: Required for clipboard operations in MV3 service worker
-- **optional_host_permissions (`file:///*`)**: Requested at runtime only when the user opens `file:` URLs, avoiding an install-time required permission prompt
+- **optional_host_permissions (`file:///*`)**: Exposes Chrome's per-extension file URL access setting; SmartURLs checks it at runtime and does not call `chrome.permissions.request()` for `file:` URLs
 
 ## Testing Checklist
 

@@ -156,15 +156,55 @@ function updateFaqLink() {
 /* ===================== UI helpers ===================== */
 const $ = (sel) => document.querySelector(sel);
 
-const toast = (msg, ok = true) => {
+function getExtensionSettingsUrl() {
+  const id = chrome.runtime?.id;
+  return id ? `chrome://extensions/?id=${id}` : "chrome://extensions/";
+}
+
+function openExtensionSettingsPage() {
+  chrome.tabs.create({ url: getExtensionSettingsUrl() });
+}
+
+function fileAccessHelpTooltip() {
+  return t(
+    "file_access_help_tooltip",
+    "To open file:// URLs, turn on\n\"Allow access to file URLs\" in Chrome's extension settings."
+  );
+}
+
+function fileAccessHelpToastOptions() {
+  return {
+    title: fileAccessHelpTooltip(),
+    onClick: openExtensionSettingsPage
+  };
+}
+
+function resetToastAction(el) {
+  el.classList.remove("actionable");
+  el.onclick = null;
+  el.removeAttribute("title");
+}
+
+const toast = (msg, ok = true, options = {}) => {
   const el = $("#toast");
+  resetToastAction(el);
   el.classList.remove("ok","err");
   el.classList.add(ok ? "ok" : "err", "show");
   el.textContent = msg;
+
+  if (options.title) {
+    el.title = options.title;
+  }
+  if (typeof options.onClick === "function") {
+    el.onclick = options.onClick;
+    el.classList.add("actionable");
+  }
+
   setTimeout(() => {
     if (el.textContent === msg) {
       el.classList.remove("show","ok","err");
       el.textContent = "";
+      resetToastAction(el);
     }
   }, 60000); // 60s
 };
@@ -569,6 +609,11 @@ async function init() {
     });
   }
 
+  const fileAccessHelpBtn = $("#fileAccessHelp");
+  if (fileAccessHelpBtn) {
+    fileAccessHelpBtn.addEventListener("click", openExtensionSettingsPage);
+  }
+
   // Add click handlers for extra shortcut configure buttons
   const tab1ConfigureBtn = $("#tab1ShortcutConfigure");
   const tab2ConfigureBtn = $("#tab2ShortcutConfigure");
@@ -921,18 +966,13 @@ function fileAccessDeniedSuffix(count) {
     .replace("{count}", count);
 }
 
-async function filterFileUrlsWithPermissionRequest(urls) {
+async function filterFileUrlsByFileAccess(urls) {
   const fileUrls = urls.filter(isFileUrl);
   if (fileUrls.length === 0) {
     return { urls, rejectedByFileAccess: 0 };
   }
 
   if (await isFileSchemeAccessAllowed()) {
-    return { urls, rejectedByFileAccess: 0 };
-  }
-
-  const granted = await requestFileSchemeAccess();
-  if (granted) {
     return { urls, rejectedByFileAccess: 0 };
   }
 
@@ -1020,9 +1060,13 @@ $("#btnOpen").addEventListener("click", async () => {
       if (!confirm(`${t("confirm_many","Open many tabs?")} ${count}`)) return;
     }
 
-    const fileAccess = await filterFileUrlsWithPermissionRequest(urls);
+    const fileAccess = await filterFileUrlsByFileAccess(urls);
     if (fileAccess.urls.length === 0) {
-      toast(t("opened_n","Opened ") + "0" + fileAccessDeniedSuffix(fileAccess.rejectedByFileAccess), false);
+      toast(
+        t("opened_n","Opened ") + "0" + fileAccessDeniedSuffix(fileAccess.rejectedByFileAccess),
+        false,
+        fileAccessHelpToastOptions()
+      );
       return;
     }
 
@@ -1082,7 +1126,11 @@ $("#btnOpen").addEventListener("click", async () => {
             message += suffix;
           }
 
-          toast(message);
+          toast(
+            message,
+            true,
+            rejectedByFileAccess > 0 ? fileAccessHelpToastOptions() : {}
+          );
         } else {
           const error = res?.error || "Unknown error";
           toast(t("open_failed","Open failed") + ": " + error, false);

@@ -90,6 +90,8 @@
   "protocol_failed_suffix":       { "message": " (Mislukt: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Mislukt: {count} / {protocols})" },
   "file_access_denied_suffix": { "message": " (Bestandstoegang niet toegestaan: {count})" },
+  "file_access_help_label": { "message": "file: toegang" },
+  "file_access_help_tooltip": { "message": "Schakel in de Chrome-extensie-instellingen\n\"Toegang tot bestands-URL's toestaan\" in om file://-URL's te openen." },
 
   "extra_section_title": { "message": "Extra kopieerformaten en sneltoetsen" },
   "show_extra_copy_buttons": { "message": "Extra kopieerknoppen weergeven" },

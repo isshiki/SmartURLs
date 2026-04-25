@@ -92,6 +92,8 @@
   "protocol_failed_suffix":       { "message": " (Gagal: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Gagal: {count} / {protocols})" },
   "file_access_denied_suffix": { "message": " (Akses file tidak diizinkan: {count})" },
+  "file_access_help_label": { "message": "file: akses" },
+  "file_access_help_tooltip": { "message": "Untuk membuka URL file://, aktifkan di setelan ekstensi Chrome\n\"Izinkan akses ke URL file\"." },
 
   "extra_section_title": { "message": "Format Salin Tambahan dan Pintasan Keyboard" },
   "show_extra_copy_buttons": { "message": "Tampilkan Tombol Salin Tambahan" },

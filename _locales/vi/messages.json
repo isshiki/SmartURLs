@@ -92,6 +92,8 @@
   "protocol_failed_suffix":       { "message": " (Thất bại: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Thất bại: {count} / {protocols})" },
   "file_access_denied_suffix": { "message": " (Không được phép truy cập tệp: {count})" },
+  "file_access_help_label": { "message": "file: quyền" },
+  "file_access_help_tooltip": { "message": "Để mở URL file://, hãy bật trong phần cài đặt tiện ích Chrome\n\"Cho phép truy cập URL tệp\"." },
 
   "extra_section_title": { "message": "Định dạng sao chép bổ sung và phím tắt" },
   "show_extra_copy_buttons": { "message": "Hiển thị nút sao chép bổ sung" },

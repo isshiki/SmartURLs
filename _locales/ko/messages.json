@@ -90,6 +90,8 @@
   "protocol_failed_suffix":       { "message": " (실패: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (실패: {count} / {protocols})" },
   "file_access_denied_suffix": { "message": " (파일 액세스가 허용되지 않음: {count})" },
+  "file_access_help_label": { "message": "file: 설정" },
+  "file_access_help_tooltip": { "message": "file:// URL을 열려면 Chrome 확장 프로그램 설정에서\n\"파일 URL에 대한 액세스 허용\"을 켜세요." },
 
   "extra_section_title": { "message": "추가 복사 형식 및 키보드 단축키" },
   "show_extra_copy_buttons": { "message": "추가 복사 버튼 표시" },

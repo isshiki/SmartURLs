@@ -94,6 +94,8 @@
   "protocol_failed_suffix":       { "message": " (Nie udało się: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Niepowodzenie: {count} / {protocols})" },
   "file_access_denied_suffix": { "message": " (Dostęp do plików niedozwolony: {count})" },
+  "file_access_help_label": { "message": "file: dostęp" },
+  "file_access_help_tooltip": { "message": "Aby otwierać adresy file://, włącz w ustawieniach rozszerzenia Chrome\n\"Zezwalaj na dostęp do adresów URL plików\"." },
 
   "extra_section_title": { "message": "Dodatkowe formaty kopiowania i skróty klawiaturowe" },
   "show_extra_copy_buttons": { "message": "Pokaż dodatkowe przyciski kopiowania" },

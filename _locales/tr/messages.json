@@ -94,6 +94,8 @@
   "protocol_failed_suffix":       { "message": " (Başarısız: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Başarısız: {count} / {protocols})" },
   "file_access_denied_suffix": { "message": " (Dosya erişimine izin verilmedi: {count})" },
+  "file_access_help_label": { "message": "file: erişim" },
+  "file_access_help_tooltip": { "message": "file:// URL'lerini açmak için Chrome uzantı ayarlarında\n\"Dosya URL'lerine erişime izin ver\" seçeneğini açın." },
 
   "extra_section_title": { "message": "Ek Kopyalama Biçimleri ve Klavye Kısayolları" },
   "show_extra_copy_buttons": { "message": "Ek Kopyalama Düğmelerini Göster" },

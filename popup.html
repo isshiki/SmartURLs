@@ -303,10 +303,19 @@
 
         <div class="field">
           <label class="label" data-i18n="filters_title">Filters</label>
-          <label class="row">
-            <input type="checkbox" id="chkOpenProtocolRestrict" checked />
-            <span data-i18n="protocol_restrict_label">Restrict protocols</span><span id="openProtocolAllowed-warning"></span>
-          </label>
+          <div class="row open-protocol-restrict-row">
+            <label class="inline">
+              <input type="checkbox" id="chkOpenProtocolRestrict" checked />
+              <span><span data-i18n="protocol_restrict_label">Restrict protocols</span><span id="openProtocolAllowed-warning"></span></span>
+            </label>
+            <button
+              type="button"
+              id="fileAccessHelp"
+              class="file-access-help"
+              data-i18n="file_access_help_label"
+              data-i18n-title="file_access_help_tooltip"
+              title="To open file:// URLs, turn on&#10;&quot;Allow access to file URLs&quot; in Chrome's extension settings.">file: settings</button>
+          </div>
           <div style="display: flex; align-items: center; margin: 6px 0 6px 1.5em; gap: 4px;">
             <span data-i18n="protocol_allowed_label" style="white-space: nowrap;">Allowed:</span>
             <input

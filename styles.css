@@ -232,6 +232,37 @@ textarea{ min-height:72px; resize:vertical; }
 .scope{ display:flex; gap:14px; margin:6px 0 10px; flex-wrap:wrap; }
 .radios{ display:flex; gap:14px; flex-wrap:wrap; }
 .inline{ display:inline-flex; align-items:center; gap:6px; }
+.open-protocol-restrict-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.file-access-help{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  cursor:pointer;
+  font:inherit;
+  font-size:12px;
+  font-weight:600;
+  line-height:1.2;
+  padding:0 2px;
+  white-space:nowrap;
+  text-decoration:underline;
+  text-underline-offset:2px;
+  opacity:.85;
+}
+.file-access-help:hover,
+.file-access-help:focus-visible{
+  color:var(--focus);
+  opacity:1;
+}
+.file-access-help:focus-visible{
+  outline:2px solid var(--focus);
+  outline-offset:2px;
+  border-radius:4px;
+}
 .hint{ color:var(--muted); font-size:12px; margin-top:4px; line-height:1.35; }
 .shortcut-note{ opacity:0.7; margin-top:8px; }
 .shortcut-note-link{ color:inherit; margin-left:4px; }
@@ -488,6 +519,7 @@ html[data-theme="light"] input[type="radio"]:focus-visible{
 #toast.show{ opacity:1; pointer-events:auto; transform:translateY(0); }
 #toast.ok { background:rgba(34,197,94,.18); }
 #toast.err{ background:rgba(239,68,68,.18); }
+#toast.actionable{ cursor:pointer; }
 
 /* Hover/focus on language selector or bug-report link → hide toast */
 .footer:has(.lang-selector:hover) #toast,

@@ -92,6 +92,8 @@
   "protocol_failed_suffix":       { "message": " (Falliti: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Fallito: {count} / {protocols})" },
   "file_access_denied_suffix": { "message": " (Accesso ai file non consentito: {count})" },
+  "file_access_help_label": { "message": "file: accesso" },
+  "file_access_help_tooltip": { "message": "Per aprire URL file://, attiva nelle impostazioni dell'estensione Chrome\n\"Consenti accesso agli URL file\"." },
 
   "extra_section_title": { "message": "Formati di copia aggiuntivi e scorciatoie da tastiera" },
   "show_extra_copy_buttons": { "message": "Mostra pulsanti di copia aggiuntivi" },

@@ -94,6 +94,8 @@
   "protocol_failed_suffix":       { "message": " (Не удалось: {count})" },
   "protocol_failed_with_proto_suffix": { "message": " (Неудача: {count} / {protocols})" },
   "file_access_denied_suffix": { "message": " (Доступ к файлам не разрешён: {count})" },
+  "file_access_help_label": { "message": "file: доступ" },
+  "file_access_help_tooltip": { "message": "Чтобы открывать URL file://, включите в настройках расширения Chrome\n\"Разрешить доступ к URL файлов\"." },
 
   "extra_section_title": { "message": "Дополнительные форматы копирования и горячие клавиши" },
   "show_extra_copy_buttons": { "message": "Показать дополнительные кнопки копирования" },

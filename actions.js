@@ -160,26 +160,6 @@ function isFileSchemeAccessAllowed() {
   return Promise.resolve(false);
 }
 
-function requestFileSchemeAccess() {
-  if (typeof chrome === 'undefined' || !chrome.permissions?.request) {
-    return Promise.resolve(false);
-  }
-
-  return new Promise((resolve) => {
-    try {
-      chrome.permissions.request({ origins: [FILE_URL_ORIGIN] }, (granted) => {
-        if (chrome.runtime?.lastError) {
-          console.warn('[actions] File URL permission request failed:', chrome.runtime.lastError.message);
-        }
-        resolve(Boolean(granted));
-      });
-    } catch (err) {
-      console.warn('[actions] File URL permission request failed:', err);
-      resolve(false);
-    }
-  });
-}
-
 async function fetchTabs(scope, { copyProtocolRestrict, copyProtocolAllowed, noPinned }) {
   let tabs = [];
   if (scope === "all") {
@@ -580,7 +560,6 @@ if (typeof module !== 'undefined' && module.exports) {
     isProtocolAllowed,
     isFileUrl,
     isFileSchemeAccessAllowed,
-    requestFileSchemeAccess,
     FILE_URL_ORIGIN
   };
 }

@@ -92,6 +92,8 @@
   "protocol_failed_suffix":       { "message": " (失敗: {count})" },
   "protocol_failed_with_proto_suffix": { "message": "（失敗：{count} / {protocols}）" },
   "file_access_denied_suffix": { "message": "（不允許存取檔案: {count}）" },
+  "file_access_help_label": { "message": "file: 權限" },
+  "file_access_help_tooltip": { "message": "若要開啟 file:// URL，請在 Chrome 擴充功能設定中開啟\n「允許存取檔案網址」。" },
 
   "extra_section_title": { "message": "額外複製格式和鍵盤快捷鍵" },
   "show_extra_copy_buttons": { "message": "顯示額外複製按鈕" },

@@ -92,6 +92,8 @@
   "protocol_failed_suffix":       { "message": " (失败: {count})" },
   "protocol_failed_with_proto_suffix": { "message": "（失败: {count} / {protocols}）" },
   "file_access_denied_suffix": { "message": "（不允许访问文件: {count}）" },
+  "file_access_help_label": { "message": "file: 权限" },
+  "file_access_help_tooltip": { "message": "要打开 file:// URL，请在 Chrome 扩展程序设置中开启\n“允许访问文件网址”。" },
 
   "extra_section_title": { "message": "额外复制格式和键盘快捷键" },
   "show_extra_copy_buttons": { "message": "显示额外复制按钮" },
