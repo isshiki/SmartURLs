@@ -3,7 +3,7 @@
 SmartURLs is a Chrome extension that helps you **copy**, **manage**, and **open** URLs easily and flexibly.
 Copy all tab URLs in multiple formats, or open URLs directly from text or your clipboard — all in one click.
 
-[![Chrome Web Store](https://img.shields.io/badge/Chrome-Web%20Store-blue.svg)](https://chrome.google.com/webstore/detail/smarturls/your-extension-id)
+[![Chrome Web Store](https://img.shields.io/badge/Chrome-Web%20Store-blue.svg)](https://chrome.google.com/webstore/detail/smarturls-copy-and-open-u/ekeecbnnlnmjimahpjnfdognobmabbfb)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 
 ---
