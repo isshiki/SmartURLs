@@ -47,6 +47,7 @@
 
   "confirm_label":  { "message": "N개 이상의 탭인 경우 확인" },
   "textarea_label": { "message": "텍스트 붙여넣기" },
+  "open_reverse_order": { "message": "URL 목록을 역순으로 열기" },
 
   "copied_n":       { "message": "복사됨 " },  "copied_current_tab_fmt1": { "message": "현재 탭을 복사했습니다 (형식 1)" },
   "copied_current_tab_fmt2": { "message": "현재 탭을 복사했습니다 (형식 2)" },  "copy_failed":    { "message": "복사 실패" },

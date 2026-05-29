@@ -49,6 +49,7 @@
 
   "confirm_label":  { "message": "Подтверждать при N+ вкладках" },
   "textarea_label": { "message": "Вставить текст" },
+  "open_reverse_order": { "message": "Открывать список URL в обратном порядке" },
 
   "copied_n":       { "message": "Скопировано " },
   "copied_current_tab_fmt1": { "message": "Текущая вкладка скопирована (Формат 1)" },

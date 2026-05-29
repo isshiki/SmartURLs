@@ -280,6 +280,7 @@ async function load() {
   $("#sort").value = cfg.sort;
   $("#desc").checked = cfg.desc;
   $("#openLimit").value = cfg.openLimit;
+  $("#chkOpenReverseOrder").checked = Boolean(cfg.openReverseOrder);
 
   $("#chkOpenProtocolRestrict").checked = cfg.openProtocolRestrict;
   $("#openProtocolAllowed").value = cfg.openProtocolAllowed;
@@ -530,6 +531,7 @@ async function init() {
   [["chkDedup","dedup"],["chkNoPinned","noPinned"],["desc","desc"],
    ["chkCopyProtocolRestrict","copyProtocolRestrict"],
    ["chkOpenProtocolRestrict","openProtocolRestrict"],
+   ["chkOpenReverseOrder","openReverseOrder"],
    ["chkShowExtraCopyBtns","showExtraCopyBtns"]]
     .forEach(([id,key]) => $("#" + id).addEventListener("change", e => save({[key]: e.target.checked})));
   ["excludeList","copyProtocolAllowed","openProtocolAllowed"].forEach(id => $("#" + id).addEventListener("change", e => save({[id]: e.target.value})));

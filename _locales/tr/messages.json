@@ -49,6 +49,7 @@
 
   "confirm_label":  { "message": "N+ sekme için onayla" },
   "textarea_label": { "message": "Metin yapıştır" },
+  "open_reverse_order": { "message": "URL listesini ters sırayla aç" },
 
   "copied_n":       { "message": "Kopyalandı " },
   "copied_current_tab_fmt1": { "message": "Geçerli sekme kopyalandı (Format 1)" },

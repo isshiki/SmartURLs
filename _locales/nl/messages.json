@@ -47,6 +47,7 @@
 
   "confirm_label":  { "message": "Bevestigen bij N+ tabbladen" },
   "textarea_label": { "message": "Tekst plakken" },
+  "open_reverse_order": { "message": "URL-lijst in omgekeerde volgorde openen" },
 
   "copied_n":       { "message": "Gekopieerd " },  "copied_current_tab_fmt1": { "message": "Huidige tabblad gekopiëerd (Formaat 1)" },
   "copied_current_tab_fmt2": { "message": "Huidige tabblad gekopiëerd (Formaat 2)" },  "copy_failed":    { "message": "Kopiëren mislukt" },

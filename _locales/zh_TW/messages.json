@@ -47,6 +47,7 @@
 
   "confirm_label":  { "message": "如果超過 N 個分頁則確認" },
   "textarea_label": { "message": "貼上文字" },
+  "open_reverse_order": { "message": "以相反順序開啟 URL 清單" },
 
   "copied_n":       { "message": "已複製 " },
   "copied_current_tab_fmt1": { "message": "已複製目前分頁（格式1）" },

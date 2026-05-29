@@ -49,6 +49,7 @@
 
   "confirm_label":  { "message": "Confirmar si hay más de N pestañas" },
   "textarea_label": { "message": "Pegar texto" },
+  "open_reverse_order": { "message": "Abrir lista de URL en orden inverso" },
 
   "copied_n":       { "message": "Copiado " },
   "copied_current_tab_fmt1": { "message": "Pestaña actual copiada (Formato 1)" },

@@ -36,6 +36,7 @@ Copy all tab URLs in multiple formats, or open URLs directly from text or your c
 * Supports various formats (Markdown, HTML, JSON, TSV, plain text, etc.)
 * Automatically detects text format
 * Optional confirmation before opening many tabs
+* Optional reverse order opening for URL lists
 * **Protocol restrictions**: Safety-first filtering for opened URLs
 * Status feedback distinguishes skipped vs. failed URLs with protocol names
 
@@ -92,6 +93,7 @@ SmartURLs has multi-language documentation for both the **Custom Template System
 
 | Version | Date       | Notes                  |
 | ------- | ---------- | ---------------------- |
+| 1.8.0   | 2026-05-29 | Added an option to open URL lists in reverse order |
 | 1.7.0   | 2026-04-25 | Added optional file URL access and improved Smart URL boundary detection |
 | 1.6.0   | 2026-01-24 | Added current tab copy with keyboard shortcuts |
 | 1.5.1   | 2025-12-22 | Shortcut open confirmations via notifications |

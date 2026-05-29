@@ -49,6 +49,7 @@
 
   "confirm_label":  { "message": "Potwierdź przy N+ kartach" },
   "textarea_label": { "message": "Wklej tekst" },
+  "open_reverse_order": { "message": "Otwieraj listę URL w odwrotnej kolejności" },
 
   "copied_n":       { "message": "Skopiowano " },
   "copied_current_tab_fmt1": { "message": "Skopiowano bieżącą kartę (Format 1)" },

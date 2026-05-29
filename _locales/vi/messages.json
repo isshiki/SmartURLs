@@ -47,6 +47,7 @@
 
   "confirm_label":  { "message": "Xác nhận cho N+ tab" },
   "textarea_label": { "message": "Dán văn bản" },
+  "open_reverse_order": { "message": "Mở danh sách URL theo thứ tự ngược" },
 
   "copied_n":       { "message": "Đã sao chép " },
   "copied_current_tab_fmt1": { "message": "Đã sao chép tab hiện tại (Định dạng 1)" },

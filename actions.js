@@ -51,6 +51,7 @@ const defaults = {
   excludeList: "",
   sort: "natural",
   desc: false,
+  openReverseOrder: false,
   openLimit: 30,
   theme: "system",
   lang: "AutoLang"
@@ -534,6 +535,7 @@ async function prepareOpenUrls(text, config = null) {
   }
 
   if (cfg.dedup) urls = Array.from(new Set(urls));
+  if (cfg.openReverseOrder) urls = [...urls].reverse();
 
   const skippedProtocols = Array.from(skippedProtocolsSet).sort();
 

@@ -49,6 +49,7 @@
 
   "confirm_label":  { "message": "Confirmar se mais de N abas" },
   "textarea_label": { "message": "Colar texto" },
+  "open_reverse_order": { "message": "Abrir lista de URLs em ordem inversa" },
 
   "copied_n":       { "message": "Copiado " },
   "copied_current_tab_fmt1": { "message": "Aba atual copiada (Formato 1)" },

@@ -47,6 +47,7 @@
 
   "confirm_label":  { "message": "Konfirmasi untuk N+ tab" },
   "textarea_label": { "message": "Tempel teks" },
+  "open_reverse_order": { "message": "Buka daftar URL dalam urutan terbalik" },
 
   "copied_n":       { "message": "Disalin " },
   "copied_current_tab_fmt1": { "message": "Tab saat ini disalin (Format 1)" },

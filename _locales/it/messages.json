@@ -49,6 +49,7 @@
 
   "confirm_label":  { "message": "Conferma per N+ schede" },
   "textarea_label": { "message": "Incolla testo" },
+  "open_reverse_order": { "message": "Apri elenco URL in ordine inverso" },
 
   "copied_n":       { "message": "Copiato " },
   "copied_current_tab_fmt1": { "message": "Scheda corrente copiata (Formato 1)" },

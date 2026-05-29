@@ -84,6 +84,7 @@ Before publishing to the Chrome Web Store:
 3. `prepareOpenUrls()` in actions.js:
    - Parses text using `extractByFormat()` based on selected format (smart auto-detect, Markdown, HTML, TSV, JSON Lines, or custom template)
    - Applies filters (protocol allowlist, deduplication, exclusion patterns)
+   - Applies `openReverseOrder` after filtering so final URL-list tab creation order can be bottom-to-top
 4. Service worker's `openUrlsInTabs()` creates tabs:
    - Validates URLs against the configured protocol allowlist when protocol restriction is enabled
    - Enforces a defensive hard cap (MAX_OPEN_TABS = 999)
@@ -151,6 +152,7 @@ Uses `chrome.storage.sync` API for all settings. The `defaults` object in action
   copyProtocolAllowed: "http,https,file",
   openProtocolRestrict: true,        // Filter opened URLs by protocol allowlist
   openProtocolAllowed: "http,https,file",
+  openReverseOrder: false,           // Open parsed URL list from bottom to top
   noPinned: false,                   // Exclude pinned tabs
   excludeList: "",                   // Newline-separated wildcard patterns
   sort: "natural",                   // Sort order exposed in UI: natural, url, title
@@ -183,7 +185,7 @@ Uses `chrome.storage.sync` API for all settings. The `defaults` object in action
 
 **Locale File Requirements:**
 - Must be valid UTF-8 encoded JSON
-- Must contain the same keys as the English locale (currently 84 keys; run `.\validate-locales.ps1` for the authoritative count)
+- Must contain the same keys as the English locale (currently 85 keys; run `.\validate-locales.ps1` for the authoritative count)
 - Each key must have a `message` property with non-empty string value
 - Use `$$` to represent a literal `$` character (Chrome i18n escaping convention)
 

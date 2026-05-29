@@ -49,6 +49,7 @@
 
   "confirm_label":  { "message": "Confirm if more than N tabs" },
   "textarea_label": { "message": "Paste text" },
+  "open_reverse_order": { "message": "Open URL list in reverse order" },
 
   "copied_n":       { "message": "Copied " },  "copied_current_tab_fmt1": { "message": "Copied current tab (Format 1)" },
   "copied_current_tab_fmt2": { "message": "Copied current tab (Format 2)" },  "copy_failed":    { "message": "Copy failed" },
