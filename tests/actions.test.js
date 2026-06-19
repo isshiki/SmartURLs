@@ -37,6 +37,25 @@ async function test(name, fn) {
     assert.deepStrictEqual(urls, ['https://sasaki-inc.co.jp/recruit/']);
   });
 
+  await test('smart bare URL stops at non-ASCII opening delimiters used for notes', () => {
+    const delimiters = ['（', '【', '「', '『', '〈', '《', '〔', '〖', '〘', '〚', '｛', '［', '＜', '«', '“', '‘'];
+    for (const delimiter of delimiters) {
+      const urls = extractUrlsSmart(`https://example.com/page${delimiter}note`);
+      assert.deepStrictEqual(urls, ['https://example.com/page'], `delimiter: ${delimiter}`);
+    }
+  });
+
+  await test('smart bare URL preserves ASCII parentheses and percent-encoded fullwidth parentheses', () => {
+    assert.deepStrictEqual(
+      extractUrlsSmart('https://example.com/wiki/Foo_(bar)'),
+      ['https://example.com/wiki/Foo_(bar)']
+    );
+    assert.deepStrictEqual(
+      extractUrlsSmart('https://example.com/path%EF%BC%88official%EF%BC%89'),
+      ['https://example.com/path%EF%BC%88official%EF%BC%89']
+    );
+  });
+
   await test('smart bare URL treats pipe and double quote as hard boundaries', () => {
     assert.deepStrictEqual(
       extractUrlsSmart('http://ex.com/p|http://ex.com/q'),
