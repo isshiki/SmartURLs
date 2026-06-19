@@ -94,6 +94,15 @@
   "file_access_help_label": { "message": "file: toegang" },
   "file_access_help_tooltip": { "message": "Schakel in de Chrome-extensie-instellingen\n\"Toegang tot bestands-URL's toestaan\" in om file://-URL's te openen." },
 
+  "context_menu_parent": { "message": "SmartURLs" },
+  "context_copy_selected_links": { "message": "Links in selectie kopiëren" },
+  "context_open_selected_links": { "message": "Links in selectie openen" },
+  "context_copy_selected_text_urls": { "message": "URL's in geselecteerde tekst kopiëren" },
+  "context_open_selected_text_urls": { "message": "URL's in geselecteerde tekst openen" },
+  "context_no_selection_links": { "message": "Geen links gevonden in de selectie." },
+  "context_no_selection_urls": { "message": "Geen URL's gevonden in de geselecteerde tekst." },
+  "context_script_injection_failed": { "message": "SmartURLs kan deze pagina niet lezen." },
+
   "extra_section_title": { "message": "Extra kopieerformaten en sneltoetsen" },
   "show_extra_copy_buttons": { "message": "Extra kopieerknoppen weergeven" },
   "extra_copy_tab1_title": { "message": "Bereik: Alleen huidige tabblad (Formaat 1)" },

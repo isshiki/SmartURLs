@@ -97,6 +97,15 @@
   "file_access_help_label": { "message": "file: 許可設定" },
   "file_access_help_tooltip": { "message": "file:// URL を開くには、Chrome の拡張機能設定で\n「ファイルの URL へのアクセスを許可する」をオンにしてください。" },
 
+  "context_menu_parent": { "message": "SmartURLs" },
+  "context_copy_selected_links": { "message": "選択範囲内のリンク先をコピー" },
+  "context_open_selected_links": { "message": "選択範囲内のリンク先を開く" },
+  "context_copy_selected_text_urls": { "message": "選択範囲内のテキストのURLをコピー" },
+  "context_open_selected_text_urls": { "message": "選択範囲内のテキストのURLを開く" },
+  "context_no_selection_links": { "message": "選択範囲内にリンク先が見つかりません。" },
+  "context_no_selection_urls": { "message": "選択テキスト内にURLが見つかりません。" },
+  "context_script_injection_failed": { "message": "このページをSmartURLsで読み取れません。" },
+
   "extra_section_title": { "message": "追加のコピー形式とキーボードショートカット" },
   "show_extra_copy_buttons": { "message": "追加のコピーボタンを表示する" },
   "extra_copy_tab1_title": { "message": "対象：現在のタブのみ（形式1）" },

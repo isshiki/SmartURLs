@@ -94,6 +94,15 @@
   "file_access_help_label": { "message": "file: 설정" },
   "file_access_help_tooltip": { "message": "file:// URL을 열려면 Chrome 확장 프로그램 설정에서\n\"파일 URL에 대한 액세스 허용\"을 켜세요." },
 
+  "context_menu_parent": { "message": "SmartURLs" },
+  "context_copy_selected_links": { "message": "선택 범위의 링크 복사" },
+  "context_open_selected_links": { "message": "선택 범위의 링크 열기" },
+  "context_copy_selected_text_urls": { "message": "선택한 텍스트의 URL 복사" },
+  "context_open_selected_text_urls": { "message": "선택한 텍스트의 URL 열기" },
+  "context_no_selection_links": { "message": "선택 범위에서 링크를 찾을 수 없습니다." },
+  "context_no_selection_urls": { "message": "선택한 텍스트에서 URL을 찾을 수 없습니다." },
+  "context_script_injection_failed": { "message": "SmartURLs에서 이 페이지를 읽을 수 없습니다." },
+
   "extra_section_title": { "message": "추가 복사 형식 및 키보드 단축키" },
   "show_extra_copy_buttons": { "message": "추가 복사 버튼 표시" },
   "extra_copy_tab1_title": { "message": "범위: 현재 탭만 (형식 1)" },

@@ -96,6 +96,15 @@
   "file_access_help_label": { "message": "file: akses" },
   "file_access_help_tooltip": { "message": "Untuk membuka URL file://, aktifkan di setelan ekstensi Chrome\n\"Izinkan akses ke URL file\"." },
 
+  "context_menu_parent": { "message": "SmartURLs" },
+  "context_copy_selected_links": { "message": "Salin tautan dalam pilihan" },
+  "context_open_selected_links": { "message": "Buka tautan dalam pilihan" },
+  "context_copy_selected_text_urls": { "message": "Salin URL dalam teks yang dipilih" },
+  "context_open_selected_text_urls": { "message": "Buka URL dalam teks yang dipilih" },
+  "context_no_selection_links": { "message": "Tidak ada tautan yang ditemukan dalam pilihan." },
+  "context_no_selection_urls": { "message": "Tidak ada URL yang ditemukan dalam teks yang dipilih." },
+  "context_script_injection_failed": { "message": "SmartURLs tidak dapat membaca halaman ini." },
+
   "extra_section_title": { "message": "Format Salin Tambahan dan Pintasan Keyboard" },
   "show_extra_copy_buttons": { "message": "Tampilkan Tombol Salin Tambahan" },
   "extra_copy_tab1_title": { "message": "Cakupan: Hanya tab saat ini (Format 1)" },

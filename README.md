@@ -93,6 +93,7 @@ SmartURLs has multi-language documentation for both the **Custom Template System
 
 | Version | Date       | Notes                  |
 | ------- | ---------- | ---------------------- |
+| 1.9.0   | 2026-06-19 | Added context menu actions for URLs and links in selected text |
 | 1.8.1   | 2026-06-19 | Improved Smart URL extraction for table and delimited text |
 | 1.8.0   | 2026-05-29 | Added an option to open URL lists in reverse order |
 | 1.7.0   | 2026-04-25 | Added optional file URL access and improved Smart URL boundary detection |

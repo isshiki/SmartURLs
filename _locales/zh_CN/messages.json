@@ -96,6 +96,15 @@
   "file_access_help_label": { "message": "file: 权限" },
   "file_access_help_tooltip": { "message": "要打开 file:// URL，请在 Chrome 扩展程序设置中开启\n“允许访问文件网址”。" },
 
+  "context_menu_parent": { "message": "SmartURLs" },
+  "context_copy_selected_links": { "message": "复制选区内的链接" },
+  "context_open_selected_links": { "message": "打开选区内的链接" },
+  "context_copy_selected_text_urls": { "message": "复制选中文本中的 URL" },
+  "context_open_selected_text_urls": { "message": "打开选中文本中的 URL" },
+  "context_no_selection_links": { "message": "在选区中未找到链接。" },
+  "context_no_selection_urls": { "message": "在选中文本中未找到 URL。" },
+  "context_script_injection_failed": { "message": "SmartURLs 无法读取此页面。" },
+
   "extra_section_title": { "message": "额外复制格式和键盘快捷键" },
   "show_extra_copy_buttons": { "message": "显示额外复制按钮" },
   "extra_copy_tab1_title": { "message": "范围：仅当前标签页（格式1）" },

@@ -96,6 +96,15 @@
   "file_access_help_label": { "message": "file: quyền" },
   "file_access_help_tooltip": { "message": "Để mở URL file://, hãy bật trong phần cài đặt tiện ích Chrome\n\"Cho phép truy cập URL tệp\"." },
 
+  "context_menu_parent": { "message": "SmartURLs" },
+  "context_copy_selected_links": { "message": "Sao chép liên kết trong vùng chọn" },
+  "context_open_selected_links": { "message": "Mở liên kết trong vùng chọn" },
+  "context_copy_selected_text_urls": { "message": "Sao chép URL trong văn bản đã chọn" },
+  "context_open_selected_text_urls": { "message": "Mở URL trong văn bản đã chọn" },
+  "context_no_selection_links": { "message": "Không tìm thấy liên kết trong vùng chọn." },
+  "context_no_selection_urls": { "message": "Không tìm thấy URL trong văn bản đã chọn." },
+  "context_script_injection_failed": { "message": "SmartURLs không thể đọc trang này." },
+
   "extra_section_title": { "message": "Định dạng sao chép bổ sung và phím tắt" },
   "show_extra_copy_buttons": { "message": "Hiển thị nút sao chép bổ sung" },
   "extra_copy_tab1_title": { "message": "Phạm vi: Chỉ tab hiện tại (Định dạng 1)" },

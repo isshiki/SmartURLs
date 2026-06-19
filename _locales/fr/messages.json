@@ -98,6 +98,15 @@
   "file_access_help_label": { "message": "file: accès" },
   "file_access_help_tooltip": { "message": "Pour ouvrir les URL file://, activez dans les paramètres d'extension de Chrome\n\"Autoriser l'accès aux URL de fichier\"." },
 
+  "context_menu_parent": { "message": "SmartURLs" },
+  "context_copy_selected_links": { "message": "Copier les liens de la sélection" },
+  "context_open_selected_links": { "message": "Ouvrir les liens de la sélection" },
+  "context_copy_selected_text_urls": { "message": "Copier les URL du texte sélectionné" },
+  "context_open_selected_text_urls": { "message": "Ouvrir les URL du texte sélectionné" },
+  "context_no_selection_links": { "message": "Aucun lien trouvé dans la sélection." },
+  "context_no_selection_urls": { "message": "Aucune URL trouvée dans le texte sélectionné." },
+  "context_script_injection_failed": { "message": "SmartURLs ne peut pas lire cette page." },
+
   "extra_section_title": { "message": "Formats de copie supplémentaires et raccourcis clavier" },
   "show_extra_copy_buttons": { "message": "Afficher les boutons de copie supplémentaires" },
   "extra_copy_tab1_title": { "message": "Portée: Onglet actuel uniquement (Format 1)" },

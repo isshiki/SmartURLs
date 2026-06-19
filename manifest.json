@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "__MSG_app_name__",
   "short_name": "SmartURLs",
-  "version": "1.8.1",
+  "version": "1.9.0",
   "description": "__MSG_app_desc__",
   "default_locale": "en",
   "action": {
@@ -40,7 +40,7 @@
       "description": "__MSG_commands_open_from_clipboard__"
     }
   },
-  "permissions": ["tabs", "clipboardRead", "clipboardWrite", "storage", "notifications", "offscreen"],
+  "permissions": ["tabs", "clipboardRead", "clipboardWrite", "storage", "notifications", "offscreen", "contextMenus", "activeTab", "scripting"],
   "optional_host_permissions": ["file:///*"],
   "icons": {
     "16": "icons/icon16.png",

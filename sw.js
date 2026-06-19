@@ -30,6 +30,18 @@ const OPEN_DELAY_MS = 60;
 /** Track pending open confirmations triggered by keyboard shortcuts. */
 const pendingOpenConfirmations = new Map();
 
+const CONTEXT_MENU_PARENT_ID = 'smarturls-selection';
+const CONTEXT_MENU_IDS = {
+  copyLinks: 'smarturls-copy-selected-links',
+  openLinks: 'smarturls-open-selected-links',
+  copyTextUrls: 'smarturls-copy-selected-text-urls',
+  openTextUrls: 'smarturls-open-selected-text-urls'
+};
+
+function msg(key, fallback = '') {
+  return chrome.i18n.getMessage(key) || fallback;
+}
+
 function buildOpenStatusMessage(response, skippedByProtocol, skippedProtocols) {
   let message = chrome.i18n.getMessage('opened_n') + response.opened;
 
@@ -109,6 +121,255 @@ async function createOpenConfirmationNotification(pending) {
     ]
   });
 }
+
+function buildCopyStatusMessage(count, skippedByProtocol, skippedProtocols) {
+  let message = msg('copied_n', 'Copied ') + count;
+
+  if (skippedByProtocol > 0) {
+    let suffix;
+
+    if (skippedProtocols && skippedProtocols.length > 0) {
+      suffix = msg('protocol_skipped_with_proto_suffix', ' (Skipped: {count} / {protocols})')
+        .replace('{count}', skippedByProtocol)
+        .replace('{protocols}', skippedProtocols.join(','));
+    } else {
+      suffix = msg('protocol_skipped_suffix', ' (Skipped: {count} / protocol filtered)')
+        .replace('{count}', skippedByProtocol);
+    }
+
+    message += suffix;
+  }
+
+  return message;
+}
+
+async function notifyBasic(id, title, message, priority = 1) {
+  await chrome.notifications.create(id, {
+    type: 'basic',
+    iconUrl: 'icons/icon128.png',
+    title,
+    message,
+    priority
+  });
+}
+
+function initializeContextMenus() {
+  if (!chrome.contextMenus) return;
+
+  chrome.contextMenus.removeAll(() => {
+    if (chrome.runtime.lastError) {
+      console.warn('[SW] Failed to reset context menus:', chrome.runtime.lastError.message);
+      return;
+    }
+
+    chrome.contextMenus.create({
+      id: CONTEXT_MENU_PARENT_ID,
+      title: msg('context_menu_parent', 'SmartURLs'),
+      contexts: ['selection']
+    });
+
+    chrome.contextMenus.create({
+      id: CONTEXT_MENU_IDS.copyLinks,
+      parentId: CONTEXT_MENU_PARENT_ID,
+      title: msg('context_copy_selected_links', 'Copy links in selection'),
+      contexts: ['selection']
+    });
+
+    chrome.contextMenus.create({
+      id: CONTEXT_MENU_IDS.openLinks,
+      parentId: CONTEXT_MENU_PARENT_ID,
+      title: msg('context_open_selected_links', 'Open links in selection'),
+      contexts: ['selection']
+    });
+
+    chrome.contextMenus.create({
+      id: CONTEXT_MENU_IDS.copyTextUrls,
+      parentId: CONTEXT_MENU_PARENT_ID,
+      title: msg('context_copy_selected_text_urls', 'Copy URLs in selected text'),
+      contexts: ['selection']
+    });
+
+    chrome.contextMenus.create({
+      id: CONTEXT_MENU_IDS.openTextUrls,
+      parentId: CONTEXT_MENU_PARENT_ID,
+      title: msg('context_open_selected_text_urls', 'Open URLs in selected text'),
+      contexts: ['selection']
+    });
+  });
+}
+
+chrome.runtime.onInstalled.addListener(() => {
+  initializeContextMenus();
+});
+
+function collectSelectedLinksInPage() {
+  const selection = window.getSelection();
+  if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
+    return [];
+  }
+
+  const ranges = [];
+  for (let i = 0; i < selection.rangeCount; i++) {
+    ranges.push(selection.getRangeAt(i));
+  }
+
+  const records = [];
+  for (const anchor of document.querySelectorAll('a[href]')) {
+    const intersects = ranges.some((range) => {
+      try {
+        return range.intersectsNode(anchor);
+      } catch {
+        return false;
+      }
+    });
+
+    if (!intersects) continue;
+
+    const rawHref = anchor.getAttribute('href');
+    if (!rawHref) continue;
+
+    try {
+      records.push({
+        href: new URL(rawHref, document.baseURI).href,
+        title: anchor.getAttribute('title') || '',
+        text: anchor.textContent || ''
+      });
+    } catch {
+      // Ignore href values the browser cannot resolve.
+    }
+  }
+
+  return records;
+}
+
+async function getSelectedLinkRecords(tab) {
+  if (!tab?.id) return [];
+
+  try {
+    const results = await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: collectSelectedLinksInPage
+    });
+
+    const rawLinks = results.flatMap(result => Array.isArray(result.result) ? result.result : []);
+    return normalizeSelectionLinkRecords(rawLinks, tab.url || '');
+  } catch (err) {
+    console.warn('[SW] Failed to collect selected links:', err?.message || err);
+    throw new Error(msg('context_script_injection_failed', 'SmartURLs cannot read this page.'));
+  }
+}
+
+async function loadConfig() {
+  return Object.assign({}, defaults, await chrome.storage.sync.get(Object.keys(defaults)));
+}
+
+async function notifyNoContextItems(messageKey, fallback) {
+  await notifyBasic('context-empty', 'SmartURLs', msg(messageKey, fallback), 1);
+}
+
+async function handleContextCopyResult(result, emptyKey, emptyFallback) {
+  if (result.count === 0) {
+    await notifyNoContextItems(emptyKey, emptyFallback);
+    return;
+  }
+
+  await copyToClipboard(result.text);
+  await notifyBasic(
+    'context-copy-success',
+    'SmartURLs - Copy',
+    buildCopyStatusMessage(result.count, result.skippedByProtocol, result.skippedProtocols),
+    1
+  );
+}
+
+async function handleContextOpenResult(result, emptyKey, emptyFallback) {
+  if (result.count === 0) {
+    await notifyNoContextItems(emptyKey, emptyFallback);
+    return;
+  }
+
+  const cfg = await loadConfig();
+  const confirmThreshold = Number(cfg.openLimit) || 30;
+  if (result.count > confirmThreshold) {
+    await createOpenConfirmationNotification({
+      urls: result.urls,
+      count: result.count,
+      limit: result.urls.length,
+      allowedProtocols: result.allowedProtocols,
+      skippedByProtocol: result.skippedByProtocol,
+      skippedProtocols: result.skippedProtocols
+    });
+    return;
+  }
+
+  const response = await openUrlsInTabs(result.urls, result.urls.length, result.allowedProtocols);
+  if (response?.ok) {
+    await notifyOpenResult(response, result.skippedByProtocol, result.skippedProtocols);
+  } else {
+    throw new Error('Failed to open tabs');
+  }
+}
+
+async function handleContextMenuClick(info, tab) {
+  const cfg = await loadConfig();
+
+  if (info.menuItemId === CONTEXT_MENU_IDS.copyLinks) {
+    const records = await getSelectedLinkRecords(tab);
+    if (records.length === 0) {
+      await notifyNoContextItems('context_no_selection_links', 'No links found in the selection.');
+      return;
+    }
+    await handleContextCopyResult(
+      await prepareCopyFromUrlRecords(records, cfg),
+      'context_no_selection_links',
+      'No links found in the selection.'
+    );
+    return;
+  }
+
+  if (info.menuItemId === CONTEXT_MENU_IDS.openLinks) {
+    const records = await getSelectedLinkRecords(tab);
+    if (records.length === 0) {
+      await notifyNoContextItems('context_no_selection_links', 'No links found in the selection.');
+      return;
+    }
+    await handleContextOpenResult(
+      await prepareOpenUrlList(records.map(record => record.url), cfg),
+      'context_no_selection_links',
+      'No links found in the selection.'
+    );
+    return;
+  }
+
+  if (info.menuItemId === CONTEXT_MENU_IDS.copyTextUrls) {
+    await handleContextCopyResult(
+      await prepareSelectionTextCopyData(info.selectionText || '', cfg),
+      'context_no_selection_urls',
+      'No URLs found in the selected text.'
+    );
+    return;
+  }
+
+  if (info.menuItemId === CONTEXT_MENU_IDS.openTextUrls) {
+    await handleContextOpenResult(
+      await prepareOpenUrls(info.selectionText || '', cfg),
+      'context_no_selection_urls',
+      'No URLs found in the selected text.'
+    );
+  }
+}
+
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  handleContextMenuClick(info, tab).catch(async (err) => {
+    console.error('[SW] Context menu action failed:', err);
+    await notifyBasic(
+      'context-error',
+      'SmartURLs',
+      err.message || msg('err_unknown', 'Unknown error'),
+      2
+    );
+  });
+});
 
 /** Validate URL is well-formed and limited to http/https to avoid scheme abuse. */
 function isSafeHttpUrl(value) {

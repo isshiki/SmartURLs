@@ -98,6 +98,15 @@
   "file_access_help_label": { "message": "file: доступ" },
   "file_access_help_tooltip": { "message": "Чтобы открывать URL file://, включите в настройках расширения Chrome\n\"Разрешить доступ к URL файлов\"." },
 
+  "context_menu_parent": { "message": "SmartURLs" },
+  "context_copy_selected_links": { "message": "Копировать ссылки в выделении" },
+  "context_open_selected_links": { "message": "Открыть ссылки в выделении" },
+  "context_copy_selected_text_urls": { "message": "Копировать URL из выделенного текста" },
+  "context_open_selected_text_urls": { "message": "Открыть URL из выделенного текста" },
+  "context_no_selection_links": { "message": "В выделении не найдены ссылки." },
+  "context_no_selection_urls": { "message": "В выделенном тексте не найдены URL." },
+  "context_script_injection_failed": { "message": "SmartURLs не может прочитать эту страницу." },
+
   "extra_section_title": { "message": "Дополнительные форматы копирования и горячие клавиши" },
   "show_extra_copy_buttons": { "message": "Показать дополнительные кнопки копирования" },
   "extra_copy_tab1_title": { "message": "Область: Только текущая вкладка (Формат 1)" },

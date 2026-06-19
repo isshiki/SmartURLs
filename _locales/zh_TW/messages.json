@@ -96,6 +96,15 @@
   "file_access_help_label": { "message": "file: 權限" },
   "file_access_help_tooltip": { "message": "若要開啟 file:// URL，請在 Chrome 擴充功能設定中開啟\n「允許存取檔案網址」。" },
 
+  "context_menu_parent": { "message": "SmartURLs" },
+  "context_copy_selected_links": { "message": "複製選取範圍內的連結" },
+  "context_open_selected_links": { "message": "開啟選取範圍內的連結" },
+  "context_copy_selected_text_urls": { "message": "複製選取文字中的 URL" },
+  "context_open_selected_text_urls": { "message": "開啟選取文字中的 URL" },
+  "context_no_selection_links": { "message": "在選取範圍中找不到連結。" },
+  "context_no_selection_urls": { "message": "在選取文字中找不到 URL。" },
+  "context_script_injection_failed": { "message": "SmartURLs 無法讀取此頁面。" },
+
   "extra_section_title": { "message": "額外複製格式和鍵盤快捷鍵" },
   "show_extra_copy_buttons": { "message": "顯示額外複製按鈕" },
   "extra_copy_tab1_title": { "message": "範圍：僅目前分頁（格式1）" },

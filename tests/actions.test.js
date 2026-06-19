@@ -3,6 +3,9 @@ const {
   defaults,
   extractByFormat,
   extractUrlsSmart,
+  normalizeSelectionLinkRecords,
+  prepareCopyFromUrlRecords,
+  prepareOpenUrlList,
   prepareOpenUrls
 } = require('../actions.js');
 
@@ -162,6 +165,72 @@ async function test(name, fn) {
       'https://example.com/two',
       'https://example.com/one'
     ]);
+  });
+
+  await test('selection links resolve relative URLs against document base URI', () => {
+    const records = normalizeSelectionLinkRecords([
+      { href: '#section-2', text: 'Section 2' },
+      { href: '../guide/page.html?tab=api#part', text: 'Guide' },
+      { href: '//cdn.example.net/file.txt', text: 'Protocol relative' },
+      { href: '#:~:text=TOP%20STORIES', text: 'Text fragment' },
+      { href: 'http://[', text: 'Invalid' }
+    ], 'https://example.com/docs/current/index.html');
+
+    assert.deepStrictEqual(records, [
+      { title: 'Section 2', url: 'https://example.com/docs/current/index.html#section-2' },
+      { title: 'Guide', url: 'https://example.com/docs/guide/page.html?tab=api#part' },
+      { title: 'Protocol relative', url: 'https://cdn.example.net/file.txt' },
+      { title: 'Text fragment', url: 'https://example.com/docs/current/index.html#:~:text=TOP%20STORIES' }
+    ]);
+  });
+
+  await test('selection copy data reuses copy formatting and protocol filtering', async () => {
+    const result = await prepareCopyFromUrlRecords([
+      { title: 'Example', url: 'https://example.com/a' },
+      { title: 'Duplicate', url: 'https://example.com/a' },
+      { title: 'Mail', url: 'mailto:test@example.com' }
+    ], {
+      ...defaults,
+      fmt: 'md',
+      tpl: '- [$title]($url)',
+      dedup: true,
+      sort: 'natural',
+      desc: false,
+      excludeList: '',
+      copyProtocolRestrict: true,
+      copyProtocolAllowed: 'https'
+    });
+
+    assert.deepStrictEqual(result, {
+      text: '[Example](https://example.com/a)',
+      count: 1,
+      skippedByProtocol: 1,
+      skippedProtocols: ['mailto']
+    });
+  });
+
+  await test('direct URL list opening reuses open filters and reverse order', async () => {
+    const result = await prepareOpenUrlList([
+      'https://example.com/one',
+      'mailto:test@example.com',
+      'https://example.com/two',
+      'https://example.com/one'
+    ], {
+      ...defaults,
+      dedup: true,
+      openProtocolRestrict: true,
+      openProtocolAllowed: 'https',
+      excludeList: '',
+      openReverseOrder: true
+    });
+
+    assert.deepStrictEqual(result.urls, [
+      'https://example.com/two',
+      'https://example.com/one'
+    ]);
+    assert.strictEqual(result.count, 2);
+    assert.strictEqual(result.skippedByProtocol, 1);
+    assert.deepStrictEqual(result.skippedProtocols, ['mailto']);
   });
 })().catch((err) => {
   console.error(err);

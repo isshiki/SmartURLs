@@ -98,6 +98,15 @@
   "file_access_help_label": { "message": "file: Zugriff" },
   "file_access_help_tooltip": { "message": "Um file://-URLs zu öffnen, aktivieren Sie in den Chrome-Erweiterungseinstellungen\n\"Zugriff auf Datei-URLs zulassen\"." },
 
+  "context_menu_parent": { "message": "SmartURLs" },
+  "context_copy_selected_links": { "message": "Links in Auswahl kopieren" },
+  "context_open_selected_links": { "message": "Links in Auswahl öffnen" },
+  "context_copy_selected_text_urls": { "message": "URLs im ausgewählten Text kopieren" },
+  "context_open_selected_text_urls": { "message": "URLs im ausgewählten Text öffnen" },
+  "context_no_selection_links": { "message": "Keine Links in der Auswahl gefunden." },
+  "context_no_selection_urls": { "message": "Keine URLs im ausgewählten Text gefunden." },
+  "context_script_injection_failed": { "message": "SmartURLs kann diese Seite nicht lesen." },
+
   "extra_section_title": { "message": "Zusätzliche Kopierformate und Tastaturkürzel" },
   "show_extra_copy_buttons": { "message": "Zusätzliche Kopierschaltflächen anzeigen" },
   "extra_copy_tab1_title": { "message": "Bereich: Nur aktueller Tab (Format 1)" },

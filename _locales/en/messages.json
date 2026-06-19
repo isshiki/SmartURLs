@@ -95,6 +95,15 @@
   "file_access_help_label": { "message": "file: settings" },
   "file_access_help_tooltip": { "message": "To open file:// URLs, turn on\n\"Allow access to file URLs\" in Chrome's extension settings." },
 
+  "context_menu_parent": { "message": "SmartURLs" },
+  "context_copy_selected_links": { "message": "Copy links in selection" },
+  "context_open_selected_links": { "message": "Open links in selection" },
+  "context_copy_selected_text_urls": { "message": "Copy URLs in selected text" },
+  "context_open_selected_text_urls": { "message": "Open URLs in selected text" },
+  "context_no_selection_links": { "message": "No links found in the selection." },
+  "context_no_selection_urls": { "message": "No URLs found in the selected text." },
+  "context_script_injection_failed": { "message": "SmartURLs cannot read this page." },
+
   "extra_section_title": { "message": "Extra copy formats and keyboard shortcuts" },
   "show_extra_copy_buttons": { "message": "Show extra copy buttons" },
 

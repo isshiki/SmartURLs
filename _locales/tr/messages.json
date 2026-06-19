@@ -98,6 +98,15 @@
   "file_access_help_label": { "message": "file: erişim" },
   "file_access_help_tooltip": { "message": "file:// URL'lerini açmak için Chrome uzantı ayarlarında\n\"Dosya URL'lerine erişime izin ver\" seçeneğini açın." },
 
+  "context_menu_parent": { "message": "SmartURLs" },
+  "context_copy_selected_links": { "message": "Seçimdeki bağlantıları kopyala" },
+  "context_open_selected_links": { "message": "Seçimdeki bağlantıları aç" },
+  "context_copy_selected_text_urls": { "message": "Seçili metindeki URL'leri kopyala" },
+  "context_open_selected_text_urls": { "message": "Seçili metindeki URL'leri aç" },
+  "context_no_selection_links": { "message": "Seçimde bağlantı bulunamadı." },
+  "context_no_selection_urls": { "message": "Seçili metinde URL bulunamadı." },
+  "context_script_injection_failed": { "message": "SmartURLs bu sayfayı okuyamıyor." },
+
   "extra_section_title": { "message": "Ek Kopyalama Biçimleri ve Klavye Kısayolları" },
   "show_extra_copy_buttons": { "message": "Ek Kopyalama Düğmelerini Göster" },
   "extra_copy_tab1_title": { "message": "Kapsam: Yalnızca geçerli sekme (Biçim 1)" },

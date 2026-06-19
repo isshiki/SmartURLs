@@ -537,7 +537,7 @@ function addConservativeDsvGroupUrls(group, delimiter, cells) {
     const lineCells = splitDelimitedLine(line.text, delimiter, line.start);
     lineCells.forEach((cell, index) => {
       if (isConservativeDsvUrlCell(lineCells, index, delimiter)) {
-          cells.push(cell);
+        cells.push(cell);
       }
     });
   }
@@ -683,6 +683,101 @@ function extractByFormat(fmt, text, tpl) {
 
 /* ===================== Core Actions ===================== */
 
+function normalizeSelectionTitle(value) {
+  return String(value || '').replace(/\s+/g, ' ').trim();
+}
+
+function normalizeSelectionLinkRecords(rawLinks, baseUrl) {
+  if (!Array.isArray(rawLinks)) return [];
+
+  const records = [];
+  for (const link of rawLinks) {
+    const rawHref = link?.href ?? link?.url ?? '';
+    if (!rawHref) continue;
+
+    try {
+      const url = new URL(String(rawHref), baseUrl || undefined).href;
+      const title = normalizeSelectionTitle(link?.title)
+        || normalizeSelectionTitle(link?.text)
+        || url;
+      records.push({ title, url });
+    } catch {
+      // Ignore malformed href values. Browser-resolvable relative URLs are kept.
+    }
+  }
+
+  return records;
+}
+
+function recordsFromUrls(urls) {
+  return (Array.isArray(urls) ? urls : [])
+    .map(String)
+    .filter(Boolean)
+    .map(url => ({ title: url, url }));
+}
+
+function filterCopyRecordsByProtocol(records, cfg) {
+  if (!cfg.copyProtocolRestrict) {
+    return {
+      records,
+      skippedByProtocol: 0,
+      skippedProtocols: []
+    };
+  }
+
+  const allowed = parseProtocolAllowlist(cfg.copyProtocolAllowed);
+  const skippedProtocolsSet = new Set();
+  const filtered = records.filter(record => {
+    const allowedProtocol = isProtocolAllowed(record.url, allowed);
+    if (!allowedProtocol) {
+      try {
+        skippedProtocolsSet.add(new URL(record.url).protocol.replace(':', ''));
+      } catch {}
+    }
+    return allowedProtocol;
+  });
+
+  return {
+    records: filtered,
+    skippedByProtocol: records.length - filtered.length,
+    skippedProtocols: Array.from(skippedProtocolsSet).sort()
+  };
+}
+
+async function prepareCopyFromUrlRecords(recordsRaw, config = null) {
+  const cfg = config || Object.assign({}, defaults, await chrome.storage.sync.get(Object.keys(defaults)));
+  let records = Array.isArray(recordsRaw)
+    ? recordsRaw
+        .filter(record => record?.url)
+        .map(record => ({
+          title: normalizeSelectionTitle(record.title) || record.url,
+          url: String(record.url)
+        }))
+    : [];
+
+  const protocolResult = filterCopyRecordsByProtocol(records, cfg);
+  records = protocolResult.records;
+
+  if (cfg.dedup) records = uniqueByUrl(records);
+  records = sortTabs(records, cfg.sort, cfg.desc);
+
+  const ex = (cfg.excludeList || "").trim();
+  if (ex) records = records.filter(t => !excludeFilter(t.url, ex));
+
+  const lines = records.map((t, i) => formatLine(t, cfg, i));
+
+  return {
+    text: lines.join("\n"),
+    count: lines.length,
+    skippedByProtocol: protocolResult.skippedByProtocol,
+    skippedProtocols: protocolResult.skippedProtocols
+  };
+}
+
+async function prepareSelectionTextCopyData(text, config = null) {
+  return prepareCopyFromUrlRecords(recordsFromUrls(extractUrlsSmart(text || '')), config);
+}
+
 /**
  * Prepare copy data (fetch tabs and format)
  * Returns { text: string, count: number, skippedByProtocol: number, skippedProtocols: string[] } or throws error
@@ -709,20 +804,11 @@ async function prepareCopyData(config = null) {
   return { text, count: lines.length, skippedByProtocol, skippedProtocols };
 }
 
-/**
- * Prepare open URLs (parse text and filter)
- * Returns { urls: string[], count: number } or throws error
- */
-async function prepareOpenUrls(text, config = null) {
+async function prepareOpenUrlList(urls0, config = null) {
   const cfg = config || Object.assign({}, defaults, await chrome.storage.sync.get(Object.keys(defaults)));
-
-  // Parse URLs
-  const openTpl = (cfg.openFmt === "custom2") ? (cfg.openTpl2 || cfg.openTpl) : cfg.openTpl;
-  const urls0 = extractByFormat(cfg.openFmt, text, openTpl);
-  let urls = urls0;
+  let urls = (Array.isArray(urls0) ? urls0 : []).map(String).filter(Boolean);
   let skippedByProtocol = 0;
 
-  // Apply filters
   const ex = (cfg.excludeList || "").trim();
   if (ex) urls = urls.filter(u => !excludeFilter(u, ex));
 
@@ -733,7 +819,6 @@ async function prepareOpenUrls(text, config = null) {
     allowedProtocols = parseProtocolAllowlist(cfg.openProtocolAllowed);
     const beforeCount = urls.length;
 
-    // Filter and collect skipped protocols
     urls = urls.filter(u => {
       const allowed = isProtocolAllowed(u, allowedProtocols);
       if (!allowed) {
@@ -751,9 +836,26 @@ async function prepareOpenUrls(text, config = null) {
   if (cfg.dedup) urls = Array.from(new Set(urls));
   if (cfg.openReverseOrder) urls = [...urls].reverse();
 
-  const skippedProtocols = Array.from(skippedProtocolsSet).sort();
+  return {
+    urls,
+    count: urls.length,
+    skippedByProtocol,
+    skippedProtocols: Array.from(skippedProtocolsSet).sort(),
+    allowedProtocols
+  };
+}
 
-  return { urls, count: urls.length, skippedByProtocol, skippedProtocols, allowedProtocols };
+/**
+ * Prepare open URLs (parse text and filter)
+ * Returns { urls: string[], count: number } or throws error
+ */
+async function prepareOpenUrls(text, config = null) {
+  const cfg = config || Object.assign({}, defaults, await chrome.storage.sync.get(Object.keys(defaults)));
+
+  // Parse URLs
+  const openTpl = (cfg.openFmt === "custom2") ? (cfg.openTpl2 || cfg.openTpl) : cfg.openTpl;
+  const urls0 = extractByFormat(cfg.openFmt, text, openTpl);
+  return prepareOpenUrlList(urls0, cfg);
 }
 
 /* ===================== Exports ===================== */
@@ -763,12 +865,16 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     defaults,
     prepareCopyData,
+    prepareCopyFromUrlRecords,
+    prepareSelectionTextCopyData,
+    prepareOpenUrlList,
     prepareOpenUrls,
     fetchTabs,
     sortTabs,
     uniqueByUrl,
     excludeFilter,
     formatLine,
+    normalizeSelectionLinkRecords,
     extractByFormat,
     extractUrlsSmart,
     trimSmartBareUrl,
