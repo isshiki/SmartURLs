@@ -1,34 +1,25 @@
-const assert = require('assert');
-const {
-  defaults,
-  extractByFormat,
-  extractUrlsSmart,
-  prepareOpenUrls
-} = require('../actions.js');
+# Smart URL DSV Boundaries Implementation Plan
 
-async function test(name, fn) {
-  try {
-    await fn();
-    console.log(`ok - ${name}`);
-  } catch (err) {
-    console.error(`not ok - ${name}`);
-    throw err;
-  }
-}
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-(async () => {
-  await test('smart bare URL trims decorative diamond suffix', () => {
-    const urls = extractUrlsSmart("◆Fact◇https://www.normaltech.ai/p/fact-checking-moravecs-paradox◆");
-    assert.deepStrictEqual(urls, [
-      'https://www.normaltech.ai/p/fact-checking-moravecs-paradox'
-    ]);
-  });
+**Goal:** Improve Smart-mode bare URL extraction so safe hard delimiters and clear table/DSV structures do not get included in opened URLs, while ambiguous valid URL characters remain intact.
 
-  await test('smart bare URL stops at Japanese sentence punctuation', () => {
-    const urls = extractUrlsSmart('https://example.com/a。次');
-    assert.deepStrictEqual(urls, ['https://example.com/a']);
-  });
+**Architecture:** Keep the change inside `actions.js` because Smart extraction is already shared from that file. Add small helper functions used only by `extractUrlsSmart()`: one for hard-boundary token trimming and one for conservative structured row extraction. Do not change Markdown, HTML, JSON Lines, TSV, or custom-template extraction paths.
 
+**Tech Stack:** Chrome extension Manifest V3, plain JavaScript, Node-based regression tests.
+
+---
+
+### Task 1: Add Regression Tests First
+
+**Files:**
+- Modify: `tests/actions.test.js`
+
+- [ ] **Step 1: Add failing tests**
+
+Add tests covering safe hard delimiters, conservative single-line comma/semicolon behavior, structured multiline DSV splitting, and protected valid URL characters.
+
+```js
   await test('smart bare URL treats pipe and double quote as hard boundaries', () => {
     assert.deepStrictEqual(
       extractUrlsSmart('http://ex.com/p|http://ex.com/q'),
@@ -129,41 +120,134 @@ async function test(name, fn) {
       'https://maps.google.com/maps/@35.681,139.767,15z'
     ]);
   });
+```
 
-  await test('smart Markdown keeps file URL extraction unchanged', () => {
-    const urls = extractUrlsSmart('[image](file:///C:/Projects-GitHub/SmartURLs/image.png)');
-    assert.deepStrictEqual(urls, ['file:///C:/Projects-GitHub/SmartURLs/image.png']);
-  });
+- [ ] **Step 2: Run test to verify RED**
 
-  await test('custom template uses explicit trailing delimiter', () => {
-    const urls = extractByFormat(
-      'custom1',
-      "・◆Fact checking Moravec's paradox - by Arvind Narayanan◇https://www.normaltech.ai/p/fact-checking-moravecs-paradox◆",
-      '◆$title◇$url◆'
-    );
-    assert.deepStrictEqual(urls, [
-      'https://www.normaltech.ai/p/fact-checking-moravecs-paradox'
-    ]);
-  });
+Run:
 
-  await test('open reverse order reverses final URL list', async () => {
-    const result = await prepareOpenUrls(
-      'https://example.com/one\nhttps://example.com/two\nhttps://example.com/three',
-      {
-        ...defaults,
-        openFmt: 'url',
-        openProtocolRestrict: false,
-        openReverseOrder: true
-      }
-    );
+```powershell
+node tests/actions.test.js
+```
 
-    assert.deepStrictEqual(result.urls, [
-      'https://example.com/three',
-      'https://example.com/two',
-      'https://example.com/one'
-    ]);
-  });
-})().catch((err) => {
-  console.error(err);
-  process.exitCode = 1;
-});
+Expected: at least one new test fails because current Smart extraction includes `|`, `"`, and DSV suffix text.
+
+### Task 2: Implement Smart-Only Extraction Helpers
+
+**Files:**
+- Modify: `actions.js`
+
+- [ ] **Step 1: Add hard-boundary and trim helpers**
+
+Replace `trimSmartBareUrl(url)` with a helper that:
+- stops at existing Japanese/decorative boundary characters;
+- stops at raw hard URL delimiters `"`, `` ` ``, `|`, `<`, `>`, `{`, `}`, `\`, `^`;
+- trims trailing punctuation only at the end;
+- removes only unbalanced trailing closing brackets.
+
+Keep commas and semicolons inside tokens unless they are trailing punctuation.
+
+- [ ] **Step 2: Add conservative structured extraction**
+
+Inside `extractUrlsSmart(text)`, before bare URL extraction:
+- run a cheap precheck: skip structured extraction unless text contains `://` and one of `,`, `;`, `|`, or `"`;
+- extract Markdown table cells for lines shaped like `| ... |`;
+- extract multiline comma/semicolon DSV cells only when at least two non-empty rows share the same delimiter count and each row has at least two cells;
+- add only cells that are exact URL tokens after trimming.
+
+- [ ] **Step 3: Keep existing explicit-format extraction unchanged**
+
+Do not modify the Markdown, angle-bracket, HTML `href`, JSON Lines, TSV, or custom-template branches.
+
+- [ ] **Step 4: Run test to verify GREEN**
+
+Run:
+
+```powershell
+node tests/actions.test.js
+```
+
+Expected: all tests pass.
+
+### Task 3: Version and Release Notes
+
+**Files:**
+- Modify: `manifest.json`
+- Modify: `README.md`
+
+- [ ] **Step 1: Bump manifest version**
+
+Change:
+
+```json
+"version": "1.8.0"
+```
+
+to:
+
+```json
+"version": "1.8.1"
+```
+
+- [ ] **Step 2: Add README version history row**
+
+Add a `1.8.1` row above `1.8.0`:
+
+```markdown
+| 1.8.1   | 2026-06-19 | Improved Smart URL extraction for table and delimited text |
+```
+
+### Task 4: Verification and Build
+
+**Files:**
+- Verify all modified files.
+
+- [ ] **Step 1: Syntax checks**
+
+Run:
+
+```powershell
+node --check actions.js popup.js sw.js offscreen.js tests\actions.test.js
+```
+
+Expected: exit code 0.
+
+- [ ] **Step 2: Unit tests**
+
+Run:
+
+```powershell
+node tests/actions.test.js
+```
+
+Expected: all tests print `ok - ...` and exit code 0.
+
+- [ ] **Step 3: Locale validation**
+
+Run:
+
+```powershell
+.\validate-locales.ps1
+```
+
+Expected: all locales valid. No locale key count change is expected.
+
+- [ ] **Step 4: Whitespace check**
+
+Run:
+
+```powershell
+git diff --check
+```
+
+Expected: no whitespace errors.
+
+- [ ] **Step 5: Build package**
+
+Run:
+
+```powershell
+.\build.ps1
+```
+
+Expected: a `dist\smarturls-1.8.1-*.zip` package is created.

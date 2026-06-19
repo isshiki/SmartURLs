@@ -327,21 +327,224 @@ const SMART_BARE_URL_BOUNDARY_CHARS = new Set([
   '」', '』', '）', '】', '〉', '》', '〕', '〗', '〙', '〛',
   '｝', '］', '＞'
 ]);
+const SMART_URL_PROTO_PATTERN = '(?:view-source:)?[a-z][a-z0-9+.-]*:\\/\\/';
+const SMART_URL_PROTO_RE = /^(?:view-source:)?[a-z][a-z0-9+.-]*:\/\//i;
+const SMART_BARE_URL_HARD_BOUNDARY_RE = /["`|<>{}\\^]/;
+const SMART_TRAILING_PUNCTUATION_RE = /[.,;:!?'"]+$/g;
 
 function trimSmartBareUrl(url) {
   let boundaryAt = -1;
   for (let i = 0; i < url.length; i++) {
     const cp = url.codePointAt(i);
     const ch = String.fromCodePoint(cp);
-    if (SMART_BARE_URL_BOUNDARY_CHARS.has(ch)) {
+    if (SMART_BARE_URL_BOUNDARY_CHARS.has(ch) || SMART_BARE_URL_HARD_BOUNDARY_RE.test(ch)) {
       boundaryAt = i;
       break;
     }
     if (cp > 0xffff) i++;
   }
 
-  const candidate = boundaryAt >= 0 ? url.slice(0, boundaryAt) : url;
-  return candidate.replace(/[),.>]+$/g, "");
+  let candidate = boundaryAt >= 0 ? url.slice(0, boundaryAt) : url;
+  candidate = candidate.replace(SMART_TRAILING_PUNCTUATION_RE, "");
+
+  while (/[)\]}]$/.test(candidate) && hasUnbalancedTrailingCloser(candidate)) {
+    candidate = candidate.slice(0, -1);
+  }
+
+  return candidate;
+}
+
+function hasUnbalancedTrailingCloser(value) {
+  const pairs = {
+    ')': '(',
+    ']': '[',
+    '}': '{'
+  };
+  const close = value[value.length - 1];
+  const open = pairs[close];
+  if (!open) return false;
+
+  let opens = 0;
+  let closes = 0;
+  for (const ch of value) {
+    if (ch === open) opens++;
+    else if (ch === close) closes++;
+  }
+  return closes > opens;
+}
+
+function isValidSmartUrl(value) {
+  if (!value || !SMART_URL_PROTO_RE.test(value)) return false;
+  try {
+    new URL(value);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function countDelimiterOutsideQuotes(line, delimiter) {
+  let count = 0;
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') {
+      if (inQuotes && line[i + 1] === '"') {
+        i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (ch === delimiter && !inQuotes) {
+      count++;
+    }
+  }
+  return count;
+}
+
+function splitDelimitedLine(line, delimiter, lineStart) {
+  const cells = [];
+  let inQuotes = false;
+  let start = 0;
+
+  for (let i = 0; i <= line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') {
+      if (inQuotes && line[i + 1] === '"') {
+        i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    }
+
+    if (i === line.length || (ch === delimiter && !inQuotes)) {
+      cells.push(normalizeDelimitedCell(line, start, i, lineStart));
+      start = i + 1;
+    }
+  }
+
+  return cells;
+}
+
+function normalizeDelimitedCell(line, start, end, lineStart) {
+  let trimmedStart = start;
+  let trimmedEnd = end;
+  while (trimmedStart < trimmedEnd && /\s/.test(line[trimmedStart])) trimmedStart++;
+  while (trimmedEnd > trimmedStart && /\s/.test(line[trimmedEnd - 1])) trimmedEnd--;
+
+  let text = line.slice(trimmedStart, trimmedEnd);
+  if (text.length >= 2 && text[0] === '"' && text[text.length - 1] === '"') {
+    trimmedStart++;
+    trimmedEnd--;
+    text = line.slice(trimmedStart, trimmedEnd).replace(/""/g, '"');
+  }
+
+  return {
+    text,
+    start: lineStart + trimmedStart,
+    end: lineStart + trimmedEnd
+  };
+}
+
+function isPlainDsvLabelCell(cellText) {
+  const text = cellText.trim();
+  if (!text || text.length > 120) return false;
+  if (SMART_URL_PROTO_RE.test(text)) return false;
+  if (/[/?#=]/.test(text)) return false;
+  if (/^[+-]?\d+(?:\.\d+)?[a-zA-Z%]*$/.test(text)) return false;
+  return true;
+}
+
+function isConservativeDsvUrlCell(cells, index, delimiter) {
+  const url = cells[index].text;
+  if (!isValidSmartUrl(url)) return false;
+
+  if ((delimiter === ',' || delimiter === ';') && /[?#]/.test(url)) {
+    return false;
+  }
+
+  return cells.some((cell, cellIndex) => {
+    return cellIndex !== index && isPlainDsvLabelCell(cell.text);
+  });
+}
+
+function getLineRecords(text) {
+  const records = [];
+  const re = /.*(?:\r\n|\n|\r|$)/g;
+  let match;
+  while ((match = re.exec(text)) !== null) {
+    const raw = match[0];
+    if (!raw) break;
+    const line = raw.replace(/\r\n|\n|\r$/, '');
+    records.push({ text: line, start: match.index });
+  }
+  return records;
+}
+
+function extractStructuredSmartUrlCells(text) {
+  if (!text.includes('://') || !/[,;|"]/.test(text)) return [];
+
+  const cells = [];
+  const lines = getLineRecords(text);
+
+  for (const line of lines) {
+    const trimmed = line.text.trim();
+    if (trimmed.startsWith('|') && trimmed.includes('|', 1)) {
+      for (const cell of splitDelimitedLine(line.text, '|', line.start)) {
+        if (isValidSmartUrl(cell.text)) cells.push(cell);
+      }
+    }
+  }
+
+  for (const delimiter of [',', ';']) {
+    const candidateLines = lines
+      .map((line, index) => ({
+        ...line,
+        index,
+        count: countDelimiterOutsideQuotes(line.text, delimiter),
+        hasQuotedUrl: new RegExp(`"[^"]*${SMART_URL_PROTO_PATTERN}[^"]*"`, 'i').test(line.text)
+      }))
+      .filter((line) => line.count > 0 && line.text.includes('://'));
+
+    for (const line of candidateLines) {
+      if (!line.hasQuotedUrl) continue;
+
+      const lineCells = splitDelimitedLine(line.text, delimiter, line.start);
+      lineCells.forEach((cell) => {
+        if (isValidSmartUrl(cell.text)) cells.push(cell);
+      });
+    }
+
+    let group = [];
+    for (const line of candidateLines.filter((candidate) => !candidate.hasQuotedUrl)) {
+      const previous = group[group.length - 1];
+      if (!previous || (line.index === previous.index + 1 && line.count === previous.count)) {
+        group.push(line);
+      } else {
+        addConservativeDsvGroupUrls(group, delimiter, cells);
+        group = [line];
+      }
+    }
+    addConservativeDsvGroupUrls(group, delimiter, cells);
+  }
+
+  return cells.sort((a, b) => a.start - b.start);
+}
+
+function addConservativeDsvGroupUrls(group, delimiter, cells) {
+  if (group.length < 2) return;
+
+  for (const line of group) {
+    const lineCells = splitDelimitedLine(line.text, delimiter, line.start);
+    lineCells.forEach((cell, index) => {
+      if (isConservativeDsvUrlCell(lineCells, index, delimiter)) {
+          cells.push(cell);
+      }
+    });
+  }
+}
+
+function findStructuredCellAt(cells, index) {
+  return cells.find((cell) => index >= cell.start && index < cell.end);
 }
 
 function extractUrlsSmart(text) {
@@ -349,7 +552,8 @@ function extractUrlsSmart(text) {
 
   // Protocol-agnostic patterns (support file://, chrome://, view-source:, etc.)
   // Matches: scheme:// OR view-source:scheme://
-  const protoPattern = '(?:view-source:)?[a-z][a-z0-9+.-]*:\\/\\/';
+  const protoPattern = SMART_URL_PROTO_PATTERN;
+  const structuredCells = extractStructuredSmartUrlCells(text);
 
   // 1) Markdown [title](url)
   const md = new RegExp(`\\[[^\\]]+\\]\\((${protoPattern}[^\\s)]+)\\)`, 'gi');
@@ -369,10 +573,20 @@ function extractUrlsSmart(text) {
   while ((m = jsonl.exec(text)) !== null) urls.add(m[1]);
 
   // 5) bare URLs (including bare view-source:...)
-  const bare = new RegExp(`${protoPattern}[^\\s)\\]>]+`, 'gi');
+  const bare = new RegExp(`${protoPattern}\\S+`, 'gi');
   while ((m = bare.exec(text)) !== null) {
+    const structuredCell = findStructuredCellAt(structuredCells, m.index);
+    if (structuredCell) {
+      urls.add(structuredCell.text);
+      bare.lastIndex = Math.max(m.index + 1, structuredCell.end);
+      continue;
+    }
+
     const u = trimSmartBareUrl(m[0]);
-    if (u) urls.add(u);
+    if (isValidSmartUrl(u)) urls.add(u);
+    if (u.length > 0 && u.length < m[0].length) {
+      bare.lastIndex = Math.max(m.index + 1, m.index + u.length);
+    }
   }
   return Array.from(urls);
 }
