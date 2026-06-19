@@ -324,6 +324,7 @@ function utf8ByteLength(str) {
 // URL parsers to percent-encode if we do not stop at them.
 const SMART_BARE_URL_BOUNDARY_CHARS = new Set([
   '◆', '◇', '。', '、', '，', '．',
+  '（',
   '」', '』', '）', '】', '〉', '》', '〕', '〗', '〙', '〛',
   '｝', '］', '＞'
 ]);

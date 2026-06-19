@@ -32,6 +32,11 @@ async function test(name, fn) {
     assert.deepStrictEqual(urls, ['https://example.com/a']);
   });
 
+  await test('smart bare URL stops at Japanese fullwidth opening parenthesis', () => {
+    const urls = extractUrlsSmart('https://sasaki-inc.co.jp/recruit/（制作：制作会社リーピー）');
+    assert.deepStrictEqual(urls, ['https://sasaki-inc.co.jp/recruit/']);
+  });
+
   await test('smart bare URL treats pipe and double quote as hard boundaries', () => {
     assert.deepStrictEqual(
       extractUrlsSmart('http://ex.com/p|http://ex.com/q'),
