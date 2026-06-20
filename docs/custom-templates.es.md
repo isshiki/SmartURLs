@@ -3,7 +3,7 @@
 Esta guía explica cómo usar la función de plantilla personalizada de SmartURLs.
 Las plantillas se escriben en un **campo de entrada de una sola línea**, pero pueden producir salida de varias líneas usando el token `$nl`.
 
-SmartURLs es intencionalmente ligero. **Nunca lee el contenido de la página web** y funciona **solo con la URL y la información de la pestaña del navegador**.
+La función de plantilla personalizada es intencionalmente ligera. No lee el contenido del cuerpo de la página ni metadatos HTML, y funciona con la URL y la información de la pestaña del navegador.
 
 ## 1. Tokens básicos
 
@@ -322,17 +322,17 @@ www.youtube.com
 
 ## 5. Limitaciones
 
-SmartURLs se mantiene intencionalmente simple.
+La función de plantilla personalizada se mantiene intencionalmente simple.
 
-❌ SmartURLs `NO`:
+❌ La función de plantilla personalizada `NO`:
 
-* Analiza contenido de páginas web (SmartURLs NO tiene permiso para acceder o leer páginas HTML)
-* Lee metadatos o miniaturas
-* Ejecuta JavaScript en la página
+* Analiza el contenido del cuerpo de la página o metadatos HTML
+* Lee metadatos o miniaturas desde la página
+* Ejecuta JavaScript arbitrario en las plantillas
 * Extrae etiquetas OG, autores o descripciones
 * Soporta condicionales anidados o `else`
 
-✔️ SmartURLs `SOLO` usa:
+✔️ La función de plantilla personalizada `SOLO` usa:
 
 * Título de la pestaña
 * Componentes de URL

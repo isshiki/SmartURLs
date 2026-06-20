@@ -3,7 +3,7 @@
 Ten przewodnik wyjaśnia, jak korzystać z funkcji niestandardowych szablonów SmartURLs.
 Szablony są zapisywane w **jednowierszowym polu wprowadzania**, ale mogą generować wielowierszowe dane wyjściowe za pomocą tokena `$nl`.
 
-SmartURLs jest celowo lekki. **Nigdy nie odczytuje zawartości strony internetowej** i działa **tylko z adresem URL i informacjami o karcie przeglądarki**.
+Funkcja szablonów niestandardowych jest celowo lekka. Nie odczytuje treści strony ani metadanych HTML i działa z adresem URL oraz informacjami o karcie przeglądarki.
 
 ## 1. Podstawowe tokeny
 
@@ -322,17 +322,17 @@ www.youtube.com
 
 ## 5. Ograniczenia
 
-SmartURLs celowo pozostaje prosty.
+Funkcja szablonów niestandardowych celowo pozostaje prosta.
 
-❌ SmartURLs `NIE`:
+❌ Funkcja szablonów niestandardowych `NIE`:
 
-* Analizuje zawartości stron internetowych (SmartURLs NIE ma uprawnień do dostępu ani odczytu stron HTML)
-* Czyta metadanych ani miniatur
-* Wykonuje JavaScript na stronie
+* Analizuje treści strony ani metadanych HTML
+* Czyta metadanych ani miniatur ze strony
+* Wykonuje dowolnego JavaScriptu w szablonach
 * Wyodrębnia tagów OG, autorów ani opisów
 * Obsługuje zagnieżdżonych warunków ani `else`
 
-✔️ SmartURLs `TYLKO` używa:
+✔️ Funkcja szablonów niestandardowych `TYLKO` używa:
 
 * Tytułu karty
 * Składników URL

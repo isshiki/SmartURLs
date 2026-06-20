@@ -3,7 +3,7 @@
 Diese Anleitung erklärt, wie Sie die benutzerdefinierte Vorlagenfunktion von SmartURLs verwenden.
 Vorlagen werden in einem **einzeiligen Eingabefeld** geschrieben, können aber mit dem `$nl`-Token mehrzeilige Ausgaben erzeugen.
 
-SmartURLs ist absichtlich leichtgewichtig. Es **liest niemals Webseiteninhalte** und funktioniert **nur mit der URL und Browser-Tab-Informationen**.
+Die benutzerdefinierte Vorlagenfunktion ist absichtlich leichtgewichtig. Sie liest keine Seiteninhalte oder HTML-Metadaten und arbeitet mit der URL und Browser-Tab-Informationen.
 
 ## 1. Basis-Tokens
 
@@ -322,17 +322,17 @@ www.youtube.com
 
 ## 5. Einschränkungen
 
-SmartURLs bleibt absichtlich einfach.
+Die benutzerdefinierte Vorlagenfunktion bleibt absichtlich einfach.
 
-❌ SmartURLs macht `NICHT`:
+❌ Die benutzerdefinierte Vorlagenfunktion macht `NICHT`:
 
-* Webseiteninhalte parsen (SmartURLs hat KEINE Berechtigung, auf HTML-Seiten zuzugreifen oder diese zu lesen)
-* Metadaten oder Thumbnails lesen
-* JavaScript auf der Seite ausführen
+* Seiteninhalte oder HTML-Metadaten parsen
+* Metadaten oder Thumbnails von der Seite lesen
+* Beliebiges JavaScript in Vorlagen ausführen
 * OG-Tags, Autoren oder Beschreibungen extrahieren
 * Verschachtelte Bedingungen oder `else` unterstützen
 
-✔️ SmartURLs verwendet `NUR`:
+✔️ Die benutzerdefinierte Vorlagenfunktion verwendet `NUR`:
 
 * Tab-Titel
 * URL-Komponenten

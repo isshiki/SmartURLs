@@ -3,7 +3,7 @@
 Panduan ini menjelaskan cara menggunakan fitur template kustom SmartURLs.
 Template ditulis dalam **field input satu baris**, tetapi dapat menghasilkan output multi-baris menggunakan token `$nl`.
 
-SmartURLs sengaja dibuat ringan. Ini **tidak pernah membaca konten halaman web** dan hanya bekerja **dengan URL dan informasi tab browser**.
+Fitur template kustom sengaja dibuat ringan. Fitur ini tidak membaca isi halaman atau metadata HTML, dan bekerja dengan URL serta informasi tab browser.
 
 ## 1. Token Dasar
 
@@ -322,17 +322,17 @@ www.youtube.com
 
 ## 5. Keterbatasan
 
-SmartURLs sengaja tetap sederhana.
+Fitur template kustom sengaja tetap sederhana.
 
-❌ SmartURLs `TIDAK`:
+❌ Fitur template kustom `TIDAK`:
 
-* Mengurai konten halaman web (SmartURLs TIDAK memiliki izin untuk mengakses atau membaca halaman HTML)
-* Membaca metadata atau thumbnail
-* Menjalankan JavaScript di halaman
+* Mengurai isi halaman atau metadata HTML
+* Membaca metadata atau thumbnail dari halaman
+* Menjalankan JavaScript arbitrer dalam template
 * Mengekstrak tag OG, penulis, atau deskripsi
 * Mendukung kondisional bersarang atau `else`
 
-✔️ SmartURLs `HANYA` menggunakan:
+✔️ Fitur template kustom `HANYA` menggunakan:
 
 * Judul tab
 * Komponen URL

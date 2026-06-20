@@ -3,7 +3,7 @@
 Deze handleiding legt uit hoe u de aangepaste sjabloonfunctie van SmartURLs gebruikt.
 Sjablonen worden geschreven in een **invoerveld van één regel**, maar kunnen uitvoer met meerdere regels produceren met behulp van het `$nl`-token.
 
-SmartURLs is opzettelijk lichtgewicht. Het **leest nooit webpagina-inhoud** en werkt **alleen met de URL en browserTab-informatie**.
+De aangepaste sjabloonfunctie is opzettelijk lichtgewicht. Deze leest geen pagina-inhoud of HTML-metadata en werkt met de URL en browserTab-informatie.
 
 ## 1. Basis-tokens
 
@@ -324,17 +324,17 @@ www.youtube.com
 
 ## 5. Beperkingen
 
-SmartURLs blijft opzettelijk eenvoudig.
+De aangepaste sjabloonfunctie blijft opzettelijk eenvoudig.
 
-❌ SmartURLs doet `NIET`:
+❌ De aangepaste sjabloonfunctie doet `NIET`:
 
-* Webpagina-inhoud parseren (SmartURLs heeft GEEN toestemming om HTML-pagina's te openen of te lezen)
-* Metadata of thumbnails lezen
-* JavaScript op de pagina uitvoeren
+* Pagina-inhoud of HTML-metadata parseren
+* Metadata of thumbnails van de pagina lezen
+* Willekeurige JavaScript in sjablonen uitvoeren
 * OG-tags, auteurs of beschrijvingen extraheren
 * Geneste voorwaarden of `else` ondersteunen
 
-✔️ SmartURLs gebruikt `ALLEEN`:
+✔️ De aangepaste sjabloonfunctie gebruikt `ALLEEN`:
 
 * Tabtitel
 * URL-componenten

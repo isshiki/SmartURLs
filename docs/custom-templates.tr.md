@@ -3,7 +3,7 @@
 Bu kılavuz, SmartURLs'nin özel şablon özelliğinin nasıl kullanılacağını açıklar.
 Şablonlar **tek satırlık bir giriş alanında** yazılır, ancak `$nl` belirteci kullanılarak çok satırlı çıktı üretebilir.
 
-SmartURLs kasıtlı olarak hafiftir. **Web sayfası içeriğini asla okumaz** ve **yalnızca URL ve tarayıcı sekmesi bilgileriyle** çalışır.
+Özel şablon özelliği kasıtlı olarak hafiftir. Sayfa içeriğini veya HTML meta verilerini okumaz; URL ve tarayıcı sekmesi bilgileriyle çalışır.
 
 ## 1. Temel Belirteçler
 
@@ -324,17 +324,17 @@ www.youtube.com
 
 ## 5. Sınırlamalar
 
-SmartURLs kasıtlı olarak basit kalır.
+Özel şablon özelliği kasıtlı olarak basit kalır.
 
-❌ SmartURLs `YAPMAZ`:
+❌ Özel şablon özelliği `YAPMAZ`:
 
-* Web sayfası içeriğini ayrıştırma (SmartURLs'nin HTML sayfalarına erişme veya okuma izni YOKTUR)
-* Meta verileri veya küçük resimleri okuma
-* Sayfada JavaScript yürütme
+* Sayfa içeriğini veya HTML meta verilerini ayrıştırma
+* Sayfadaki meta verileri veya küçük resimleri okuma
+* Şablonlarda rastgele JavaScript yürütme
 * OG etiketlerini, yazarları veya açıklamaları çıkarma
 * İç içe koşulları veya `else`'i destekleme
 
-✔️ SmartURLs `YALNIZCA` şunları kullanır:
+✔️ Özel şablon özelliği `YALNIZCA` şunları kullanır:
 
 * Sekme başlığı
 * URL bileşenleri

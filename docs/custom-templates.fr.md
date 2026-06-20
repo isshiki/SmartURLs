@@ -3,7 +3,7 @@
 Ce guide explique comment utiliser la fonction de modèle personnalisé de SmartURLs.
 Les modèles sont écrits dans un **champ de saisie d'une seule ligne**, mais peuvent produire une sortie multiligne en utilisant le token `$nl`.
 
-SmartURLs est intentionnellement léger. Il **ne lit jamais le contenu des pages web** et fonctionne **uniquement avec l'URL et les informations de l'onglet du navigateur**.
+La fonction de modèle personnalisé est intentionnellement légère. Elle ne lit pas le contenu de la page ni les métadonnées HTML, et fonctionne avec l'URL et les informations de l'onglet du navigateur.
 
 ## 1. Tokens de base
 
@@ -322,17 +322,17 @@ www.youtube.com
 
 ## 5. Limitations
 
-SmartURLs reste intentionnellement simple.
+La fonction de modèle personnalisé reste intentionnellement simple.
 
-❌ SmartURLs ne fait `PAS` :
+❌ La fonction de modèle personnalisé ne fait `PAS` :
 
-* Analyser le contenu des pages web (SmartURLs n'a PAS la permission d'accéder ou de lire les pages HTML)
-* Lire les métadonnées ou les vignettes
-* Exécuter JavaScript sur la page
+* Analyser le contenu de la page ou les métadonnées HTML
+* Lire les métadonnées ou les vignettes depuis la page
+* Exécuter du JavaScript arbitraire dans les modèles
 * Extraire les balises OG, auteurs ou descriptions
 * Prendre en charge les conditionnels imbriqués ou `else`
 
-✔️ SmartURLs utilise `UNIQUEMENT` :
+✔️ La fonction de modèle personnalisé utilise `UNIQUEMENT` :
 
 * Titre de l'onglet
 * Composants d'URL

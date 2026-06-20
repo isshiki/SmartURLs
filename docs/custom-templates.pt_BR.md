@@ -3,7 +3,7 @@
 Este guia explica como usar o recurso de modelo personalizado do SmartURLs.
 Os modelos são escritos em um **campo de entrada de linha única**, mas podem produzir saída de várias linhas usando o token `$nl`.
 
-O SmartURLs é intencionalmente leve. Ele **nunca lê o conteúdo da página web** e funciona **apenas com a URL e as informações da guia do navegador**.
+O recurso de modelo personalizado é intencionalmente leve. Ele não lê o conteúdo da página nem metadados HTML, e funciona com a URL e as informações da guia do navegador.
 
 ## 1. Tokens básicos
 
@@ -322,17 +322,17 @@ www.youtube.com
 
 ## 5. Limitações
 
-O SmartURLs permanece intencionalmente simples.
+O recurso de modelo personalizado permanece intencionalmente simples.
 
-❌ O SmartURLs `NÃO`:
+❌ O recurso de modelo personalizado `NÃO`:
 
-* Analisa conteúdo de páginas web (O SmartURLs NÃO tem permissão para acessar ou ler páginas HTML)
-* Lê metadados ou miniaturas
-* Executa JavaScript na página
+* Analisa o conteúdo da página ou metadados HTML
+* Lê metadados ou miniaturas da página
+* Executa JavaScript arbitrário nos modelos
 * Extrai tags OG, autores ou descrições
 * Suporta condicionais aninhados ou `else`
 
-✔️ O SmartURLs usa `APENAS`:
+✔️ O recurso de modelo personalizado usa `APENAS`:
 
 * Título da guia
 * Componentes de URL

@@ -3,7 +3,7 @@
 Hướng dẫn này giải thích cách sử dụng tính năng mẫu tùy chỉnh của SmartURLs.
 Các mẫu được viết trong **trường nhập một dòng**, nhưng có thể tạo ra đầu ra nhiều dòng bằng cách sử dụng token `$nl`.
 
-SmartURLs cố tình nhẹ. Nó **không bao giờ đọc nội dung trang web** và chỉ hoạt động **với URL và thông tin tab trình duyệt**.
+Tính năng mẫu tùy chỉnh cố tình nhẹ. Tính năng này không đọc nội dung trang hoặc siêu dữ liệu HTML, và hoạt động với URL cùng thông tin tab trình duyệt.
 
 ## 1. Token cơ bản
 
@@ -324,17 +324,17 @@ www.youtube.com
 
 ## 5. Giới hạn
 
-SmartURLs cố tình giữ đơn giản.
+Tính năng mẫu tùy chỉnh cố tình giữ đơn giản.
 
-❌ SmartURLs `KHÔNG`:
+❌ Tính năng mẫu tùy chỉnh `KHÔNG`:
 
-* Phân tích nội dung trang web (SmartURLs KHÔNG có quyền truy cập hoặc đọc trang HTML)
-* Đọc siêu dữ liệu hoặc hình thu nhỏ
-* Thực thi JavaScript trên trang
+* Phân tích nội dung trang hoặc siêu dữ liệu HTML
+* Đọc siêu dữ liệu hoặc hình thu nhỏ từ trang
+* Thực thi JavaScript tùy ý trong mẫu
 * Trích xuất thẻ OG, tác giả hoặc mô tả
 * Hỗ trợ điều kiện lồng nhau hoặc `else`
 
-✔️ SmartURLs `CHỈ` sử dụng:
+✔️ Tính năng mẫu tùy chỉnh `CHỈ` sử dụng:
 
 * Tiêu đề tab
 * Thành phần URL

@@ -3,7 +3,7 @@
 This guide explains how to use the custom template feature of SmartURLs.
 Templates are written in a **single-line input field**, but can produce multi-line output using the `$nl` token.
 
-SmartURLs is intentionally lightweight. It **never reads webpage contents** and works **only with the URL and browser tab information**.
+The custom template feature is intentionally lightweight. It does not read page body content or HTML metadata, and works with the URL and browser tab information.
 
 ## 1. Basic Tokens
 
@@ -322,17 +322,17 @@ www.youtube.com
 
 ## 5. Limitations
 
-SmartURLs intentionally stays simple.
+The custom template feature intentionally stays simple.
 
-❌ SmartURLs `DOES NOT`:
+❌ The custom template feature `DOES NOT`:
 
-* Parse webpage content (SmartURLs does NOT have permission to access or read HTML pages)
-* Read metadata or thumbnails
-* Execute JavaScript on the page
+* Parse page body content or HTML metadata
+* Read metadata or thumbnails from the page
+* Execute arbitrary JavaScript in templates
 * Extract OG tags, authors, or descriptions
 * Support nested conditionals or `else`
 
-✔️ SmartURLs `ONLY` uses:
+✔️ The custom template feature `ONLY` uses:
 
 * Tab title
 * URL components
