@@ -8,7 +8,7 @@ All processing happens **locally** in your browser. No information ever leaves y
 
 ## Data Usage
 
-- The extension processes URLs, tab titles, and clipboard text **only locally** within your browser
+- The extension processes URLs, tab titles, clipboard text, selected text, and links in selected page areas **only locally** within your browser
 - No data is sent to external servers or third parties
 - No analytics, tracking, or advertising is used
 - No accounts or login required
@@ -44,11 +44,23 @@ Used to confirm that keyboard shortcut actions (copy/open) completed successfull
 
 Required to handle clipboard operations when the extension popup is not open (e.g., when using keyboard shortcuts). The offscreen document runs locally in the background and never communicates with external servers. It only processes clipboard and tab data on your device.
 
+### `contextMenus`
+
+Required to add SmartURLs actions to Chrome's right-click menu when you select text on a page. These actions let you copy or open links in the selected area, or copy or open URLs found in the selected text.
+
+### `activeTab`
+
+Required to temporarily access the current tab only after you choose a SmartURLs action from the right-click menu. This access is user-initiated and limited to the active tab.
+
+### `scripting`
+
+Required to run a small script in the current tab after you choose a SmartURLs right-click menu action. The script reads only the current selection and links contained within that selection. It does not run automatically, and no page data is transmitted or stored.
+
 ### Optional `file:///*` access
 
 SmartURLs can open local `file://` URLs only when Chrome's per-extension "Allow access to file URLs" setting is enabled. This permission is not required at install time. If enabled, it is used only to ask Chrome to open the selected local file URL in a tab; the file contents are not read, collected, stored, or transmitted by SmartURLs.
 
-All actions occur **only after explicit user interaction** (button click or keyboard shortcut).
+All actions occur **only after explicit user interaction** (button click, keyboard shortcut, or right-click menu command).
 
 ## Keyboard Shortcuts, Notifications, and Offscreen
 
